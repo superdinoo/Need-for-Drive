@@ -1,0 +1,53 @@
+@import "../../../../index.scss";
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logoText {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 30px;
+  line-height: 35.16px;
+  text-align: left;
+  color: #0ec261;
+  cursor: pointer;
+}
+
+.city {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+.cityIcon {
+  color: $primery-gray;
+  font-size: 22px;
+}
+.cityText {
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  color: $primery-gray;
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .header {
+    margin-right: 26px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  .logoText {
+    font-size: 80px;
+    margin-bottom: auto;
+  }
+  .cityIcon {
+    font-size: 60px;
+  }
+  .cityText {
+    font-size: 50px;
+  }
+}
