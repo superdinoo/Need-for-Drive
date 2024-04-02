@@ -1,4 +1,4 @@
-@import "../../../../index.scss";
+@import '../../../../index.scss';
 
 .center {
   display: flex;
@@ -8,7 +8,7 @@
   margin-bottom: 40px;
 }
 .titleText {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 70px;
   line-height: 65.63px;
   text-align: left;
@@ -16,7 +16,7 @@
   color: $primery-black;
 }
 .titleText2 {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: 700;
   font-style: normal;
   font-size: 70px;
@@ -27,7 +27,7 @@
 }
 
 .textCenterText {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   margin-bottom: 100px;
   font-size: 26px;
   line-height: 30.47px;
@@ -36,7 +36,7 @@
 }
 
 .btnCenterText {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   background: $primery-color;
   width: 250px;
   height: 48px;
@@ -54,35 +54,45 @@
   }
 }
 
-@media screen and (min-width: 320px) and (max-width: 767px) {
+@media screen and (max-width: 320px) and (max-width: 767px) {
   .center {
-    margin-bottom: 200px;
-    flex-grow: none;
+    margin: 0;
   }
   .title {
     display: flex;
     flex-direction: column;
-    gap: 30px;
-    margin-left: 56px;
-    margin-top: 42px;
+    gap: 0;
+    margin: 0;
   }
   .titleText {
-    font-size: 100px;
+    font-size: 32px;
+    margin: 0 10px;
+    line-height: normal;
   }
   .titleText2 {
-    font-size: 100px;
+    font-size: 32px;
+    margin: 0 10px;
+    line-height: normal;
   }
   .textCenter {
-    margin-left: 56px;
-    margin-top: 42px;
+    height: 43px;
+    margin-left: 0;
+    margin-top: 10px;
+    margin-bottom: 48px;
   }
   .textCenterText {
-    font-size: 50px;
-    margin-bottom: 106px;
+    font-size: 19px;
+    margin: 0 10px;
+    line-height: normal;
+  }
+  .btnCenter {
+    width: 320px;
+    height: 50px;
+    margin-bottom: 147px;
   }
   .btnCenterText {
-    font-size: 50px;
-    height: 133px;
+    font-size: 18px;
+    border-radius: 0;
     width: 100%;
   }
 }

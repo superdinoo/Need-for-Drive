@@ -1,4 +1,4 @@
-@import "../../../../index.scss";
+@import '../../../../index.scss';
 
 .footer {
   width: 674px;
@@ -10,11 +10,11 @@
   margin-bottom: 20px;
 }
 .footerTextText {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   color: $primery-gray;
 }
 .numberFooterText {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   color: $primery-black;
 }
 
@@ -39,15 +39,38 @@
     margin-right: 14px;
   }
 }
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .footer {
+    width: 320px;
+    height: 72px;
+  }
+  .footerText {
+    height: 29vw;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  .footerTextText {
+    font-size: 13px;
+    margin: 0;
+    margin-right: 10px;
+  }
+  .numberFooterText {
+    font-size: 13px;
+    margin-right: 10px;
+  }
+}
+
 @media screen and (min-width: 768px) and (max-width: 1023px) {
   .footer {
-    width: 792px;
+    width: 79vw;
   }
 }
 
 @media screen and (min-width: 1024px) and (max-width: 1439px) and (max-height: 811px) {
   .footer {
-    width: 500px;
+    width: 51vw;
   }
 }
 

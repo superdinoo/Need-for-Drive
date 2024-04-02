@@ -47,7 +47,7 @@
   margin-left: 120px;
 }
 .menuContentListText {
-  font-family: "Roboto";
+  font-family: 'Roboto';
   font-size: 32px;
   font-weight: 500;
   line-height: 37.5px;
@@ -71,6 +71,22 @@
     path {
       fill: #0ec261;
     }
+  }
+}
+
+@media screen and (max-width: 320px) and (max-width: 767px) {
+  .menuContent {
+    width: 200%;
+    display: block;
+  }
+  .mainMenu {
+    gap: 7px;
+    margin: 65px 22px;
+    gap: 40px;
+  }
+  .menuContentListText {
+    font-size: 22px;
+    margin: 5px 0;
   }
 }
 

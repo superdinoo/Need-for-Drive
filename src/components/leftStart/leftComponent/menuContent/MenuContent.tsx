@@ -1,13 +1,13 @@
-import React from "react";
-import "./MenuContent.scss";
+import React from 'react'
+import './MenuContent.scss'
 
 interface MenuContentProps {
-  showMenu: boolean;
+  showMenu: boolean
 }
 
 const MenuContent: React.FC<MenuContentProps> = ({ showMenu }) => {
   return (
-    <div className={`menuContent ${showMenu ? "show" : ""}`}>
+    <div className={`menuContent ${showMenu ? 'show' : ''}`}>
       <div className="mainMenu">
         <ul className="menuContentList">
           <li className="menuContentListText">Парковка</li>
@@ -74,7 +74,7 @@ const MenuContent: React.FC<MenuContentProps> = ({ showMenu }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default MenuContent;
+export default MenuContent

@@ -1,14 +1,15 @@
-import React, { useState } from "react";
-import "./Hamburger.scss";
-import { RxHamburgerMenu } from "react-icons/rx";
-import MenuContent from "../menuContent/MenuContent";
+import React, { useState } from 'react'
+import './Hamburger.scss'
+
+import { RxHamburgerMenu } from 'react-icons/rx'
+import MenuContent from '../menuContent/MenuContent'
 
 const Hamburger: React.FC = () => {
-  const [clickHamburger, setClickHamburger] = useState(false);
+  const [clickHamburger, setClickHamburger] = useState(false)
 
   const handleClickHamburger = () => {
-    setClickHamburger(!clickHamburger);
-  };
+    setClickHamburger(!clickHamburger)
+  }
 
   return (
     <>
@@ -36,7 +37,7 @@ const Hamburger: React.FC = () => {
       </div>
       <MenuContent showMenu={clickHamburger} />
     </>
-  );
-};
+  )
+}
 
-export default Hamburger;
+export default Hamburger
