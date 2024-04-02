@@ -1,16 +1,15 @@
-import React from "react";
-import "./Start.scss";
+import React from 'react'
+import './Start.scss'
+import LeftStart from '../../leftStart/LeftStart'
+import Slider from '../../slider/Slider'
 
-import LeftStart from "../../leftStart/LeftStart";
-import Slider from "../../slider/Slider";
-
-const Start React.FC = () => {
+const Start: React.FC = () => {
   return (
     <div className="start">
       <LeftStart />
       <Slider />
     </div>
-  );
-};
+  )
+}
 
-export default Start;
+export default Start
