@@ -4,7 +4,7 @@ import "./Start.scss";
 import LeftStart from "../../leftStart/LeftStart";
 import Slider from "../../slider/Slider";
 
-const Start: React.FC = () => {
+const Start React.FC = () => {
   return (
     <div className="start">
       <LeftStart />
