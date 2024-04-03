@@ -51,6 +51,21 @@
   .language {
     display: none;
   }
+  .languageMenu {
+    z-index: 10;
+    margin-left: 20px;
+    margin-top: auto;
+  }
+  .eng {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 13px;
+    line-height: 15.23px;
+    text-align: left;
+    color: #0ec261;
+    cursor: pointer;
+  }
 }
 @media screen and (min-width: 768px) and (max-width: 1023px) {
   .hamburger {

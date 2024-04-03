@@ -36,6 +36,11 @@ const Hamburger: React.FC = () => {
         )}
       </div>
       <MenuContent showMenu={clickHamburger} />
+      {clickHamburger ? (
+        <div className="languageMenu">
+          <p className="eng">Eng</p>
+        </div>
+      ) : null}
     </>
   )
 }
