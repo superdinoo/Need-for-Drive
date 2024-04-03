@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import './Hamburger.scss'
 
-import { RxHamburgerMenu } from 'react-icons/rx'
 import MenuContent from '../menuContent/MenuContent'
+import MenuIcon from './menuIcon/MenuIcon'
 
 const Hamburger: React.FC = () => {
   const [clickHamburger, setClickHamburger] = useState(false)
@@ -15,19 +15,10 @@ const Hamburger: React.FC = () => {
     <>
       <div className="hamburger">
         <div className="menu">
-          {clickHamburger ? (
-            <img
-              src="../../../img/menu_btn.png"
-              alt="cross"
-              className="menuIcon"
-              onClick={handleClickHamburger}
-            />
-          ) : (
-            <RxHamburgerMenu
-              className="menuIcon"
-              onClick={handleClickHamburger}
-            />
-          )}
+          <MenuIcon
+            isShowMenuIcon={clickHamburger}
+            handleClick={handleClickHamburger}
+          />
         </div>
         {clickHamburger ? null : (
           <div className="language">
@@ -36,11 +27,6 @@ const Hamburger: React.FC = () => {
         )}
       </div>
       <MenuContent showMenu={clickHamburger} />
-      {clickHamburger ? (
-        <div className="languageMenu">
-          <p className="eng">Eng</p>
-        </div>
-      ) : null}
     </>
   )
 }

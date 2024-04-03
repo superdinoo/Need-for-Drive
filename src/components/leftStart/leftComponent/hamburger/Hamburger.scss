@@ -43,6 +43,7 @@
     height: 33.45px;
     margin-top: 16px;
     margin-left: 66px;
+    position: relative;
   }
   .menuIcon {
     color: black;
@@ -51,11 +52,7 @@
   .language {
     display: none;
   }
-  .languageMenu {
-    z-index: 10;
-    margin-left: 20px;
-    margin-top: auto;
-  }
+
   .eng {
     font-family: 'Roboto', sans-serif;
     font-weight: 700;

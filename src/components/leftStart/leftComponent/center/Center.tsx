@@ -1,5 +1,5 @@
-import React from "react";
-import "./Center.scss";
+import React from 'react'
+import './Center.scss'
 
 const Center: React.FC = () => {
   return (
@@ -12,10 +12,12 @@ const Center: React.FC = () => {
         <p className="textCenterText">Поминутная аренда авто твоего города</p>
       </div>
       <div className="btnCenter">
-        <button className="btnCenterText">Забронировать</button>
+        <button type="button" className="btnCenterText">
+          Забронировать
+        </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Center;
+export default Center

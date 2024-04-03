@@ -28,6 +28,8 @@
   align-items: center;
   cursor: pointer;
   transition: all 0.3s ease;
+  background: transparent;
+  border: none;
   &:hover {
     background-color: #0ec261;
     background-color: rgba(14, 194, 97, 0.2);
@@ -95,6 +97,8 @@
   justify-content: flex-end;
   cursor: pointer;
   transition: all 0.3s ease;
+  background: transparent;
+  border: none;
   &:hover {
     background-color: #0ec261;
     background-color: rgba(14, 194, 97, 0.2);
