@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/Simbirsoft/static/css/main.d3df63a0.css",
-    "main.js": "/Simbirsoft/static/js/main.e95858a5.js",
+    "main.js": "/Simbirsoft/static/js/main.b5a4208c.js",
     "static/media/insta.svg": "/Simbirsoft/static/media/insta.0efde67dbca9308bec1e99ebd9baca89.svg",
     "static/media/telega.svg": "/Simbirsoft/static/media/telega.f3c467cdf7c1eb1e2a571d8375b3a90e.svg",
     "static/media/facebook.svg": "/Simbirsoft/static/media/facebook.cbc2ceea921e42793677c4d772dd37ed.svg",
     "index.html": "/Simbirsoft/index.html",
     "main.d3df63a0.css.map": "/Simbirsoft/static/css/main.d3df63a0.css.map",
-    "main.e95858a5.js.map": "/Simbirsoft/static/js/main.e95858a5.js.map"
+    "main.b5a4208c.js.map": "/Simbirsoft/static/js/main.b5a4208c.js.map"
   },
   "entrypoints": [
     "static/css/main.d3df63a0.css",
-    "static/js/main.e95858a5.js"
+    "static/js/main.b5a4208c.js"
   ]
 }
