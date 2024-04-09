@@ -16,7 +16,7 @@ const Hamburger: React.FC = () => {
       <div className="hamburger">
         <div className="menu">
           <MenuIcon
-            isShowMenuIcon={clickHamburger}
+            name={clickHamburger ? 'cross' : 'menu'}
             handleClick={handleClickHamburger}
           />
         </div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './Slider.scss'
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io'
-import { dataSlider } from './dataSlider'
+import dataSlider from './dataSlider'
 
 const Slider: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0)

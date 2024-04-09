@@ -1,4 +1,4 @@
-export const dataSlider = [
+const dataSlider = [
   {
     id: 1,
     img: '/img/slider1.png',
@@ -28,3 +28,4 @@ export const dataSlider = [
     colorBtn: ' linear-gradient(90deg, #281349 0%, #720C7B 100%)',
   },
 ]
+export default dataSlider

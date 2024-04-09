@@ -1,6 +1,7 @@
 import React from 'react'
 import './MenuContent.scss'
-import { Facebook, Insta, Telega } from '../../../../assets'
+
+import { Telega, Facebook, Insta } from '../../../../assets/svg'
 
 interface MenuContentProps {
   showMenu: boolean
@@ -17,9 +18,9 @@ const MenuContent: React.FC<MenuContentProps> = ({ showMenu }) => {
           <li className="menuContentListText">Обслуживание</li>
         </ul>
         <div className="menuSocial">
-          <Telega />
-          <Facebook />
-          <Insta />
+          <Telega className="menuSocialImg" />
+          <Facebook className="menuSocialImg" />
+          <Insta className="menuSocialImg" />
         </div>
       </div>
     </div>
