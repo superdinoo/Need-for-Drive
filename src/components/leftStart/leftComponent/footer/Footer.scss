@@ -1,0 +1,81 @@
+@import '../../../../index.scss';
+
+.footer {
+  width: 674px;
+}
+
+.footerText {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.footerTextText {
+  font-family: 'Roboto', sans-serif;
+  color: $primery-gray;
+}
+.numberFooterText {
+  font-family: 'Roboto', sans-serif;
+  color: $primery-black;
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .footer {
+    width: auto;
+    height: 10vh;
+  }
+  .footerText {
+    background-color: #151b1f;
+    height: 10vh;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-end;
+  }
+  .numberFooter {
+    display: flex;
+  }
+  .numberFooterText {
+    color: #0ec261;
+    font-size: 35px;
+    margin-right: 14px;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .footer {
+    width: 320px;
+    height: 72px;
+  }
+  .footerText {
+    height: 29vw;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  .footerTextText {
+    font-size: 13px;
+    margin: 0;
+    margin-right: 10px;
+  }
+  .numberFooterText {
+    font-size: 13px;
+    margin-right: 10px;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .footer {
+    width: 79vw;
+  }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1439px) and (max-height: 811px) {
+  .footer {
+    width: 51vw;
+  }
+}
+
+@media screen and (min-width: 1440px) and (max-width: 1600px) and (max-height: 811px) {
+  .footer {
+    width: 578px;
+  }
+}
