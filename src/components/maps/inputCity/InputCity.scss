@@ -1,0 +1,79 @@
+.inputCityContainerMain {
+  width: 70%;
+  margin-left: 80px;
+}
+.inputCityContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+  margin-top: 30px;
+  align-items: flex-end;
+}
+.inputWrapper {
+  display: flex;
+  gap: 9px;
+  align-items: center;
+  font-family: 'Roboto';
+  font-size: 14px;
+  line-height: 16px;
+  text-align: left;
+  color: #121212;
+  position: relative;
+}
+.inputCity {
+  border: none;
+  border-bottom: 1px solid #999999;
+  outline: none;
+  font-family: 'Roboto';
+  font-size: 14px;
+  line-height: 16px;
+  text-align: left;
+  width: 224px;
+  &::-webkit-calendar-picker-indicator {
+    display: none !important;
+  }
+}
+
+.inputCity::placeholder {
+  color: #999999;
+}
+
+.rxCrossIcon {
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .inputWrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .inputCityContainer {
+    width: 50%;
+  }
+  .inputCityContainerMain {
+    margin-left: 30px;
+  }
+  .mapCityContainer {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .inputCityContainerMain {
+    margin-left: 30px;
+  }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1439px) and (max-height: 811px) {
+  .inputCityContainerMain {
+    margin-left: 30px;
+  }
+}

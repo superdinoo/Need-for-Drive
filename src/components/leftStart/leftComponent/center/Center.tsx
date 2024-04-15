@@ -1,5 +1,6 @@
 import React from 'react'
 import './Center.scss'
+import { Link } from 'react-router-dom'
 
 const Center: React.FC = () => {
   return (
@@ -12,9 +13,11 @@ const Center: React.FC = () => {
         <p className="textCenterText">Поминутная аренда авто твоего города</p>
       </div>
       <div className="btnCenter">
-        <button type="button" className="btnCenterText">
-          Забронировать
-        </button>
+        <Link to="/maps">
+          <button type="button" className="btnCenterText">
+            Забронировать
+          </button>
+        </Link>
       </div>
     </div>
   )

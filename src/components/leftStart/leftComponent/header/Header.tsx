@@ -1,20 +1,25 @@
-import React from "react";
-import "./Header.scss";
+import React from 'react'
+import './Header.scss'
 
-import { CiLocationOn } from "react-icons/ci";
+import { CiLocationOn } from 'react-icons/ci'
+import { Link } from 'react-router-dom'
 
 const Header: React.FC = () => {
   return (
     <div className="header">
       <div className="logo">
-        <h3 className="logoText">Need for drive</h3>
+        <Link to="/Simbirsoft">
+          <h3 className="logoText">Need for drive</h3>
+        </Link>
       </div>
-      <div className="city">
-        <CiLocationOn className="cityIcon" />
-        <p className="cityText">Ульяновск</p>
-      </div>
+      <Link to="/maps">
+        <div className="city">
+          <CiLocationOn className="cityIcon" />
+          <p className="cityText">Ульяновск</p>
+        </div>
+      </Link>
     </div>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header
