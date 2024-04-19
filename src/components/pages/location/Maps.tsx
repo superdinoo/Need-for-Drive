@@ -1,27 +1,30 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import './Maps.scss'
+import { useDispatch } from 'react-redux'
 import { Hamburger, Header } from '../../leftStart/leftComponent'
 import BreadCramb from '../../maps/breadCramb/BreadCramb'
 import Order from '../../maps/order/Order'
 import InputCity from '../../maps/inputCity/InputCity'
 
-const Maps: React.FC = () => {
-  const [location, setLocation] = useState({ city: '', point: '' })
+import changePage from '../../redux/actions/PageAction'
 
-  const handleLocationChange = (city: string, point: string) => {
-    setLocation({ city, point })
-  }
+const Maps: React.FC = () => {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(changePage('location'))
+  }, [dispatch])
 
   return (
-    <div className="mapContainer">
+    <div className="mapContainer ">
       <div className="mapWrapperContainer">
         <div className="setHeader">
           <Header />
         </div>
         <BreadCramb />
         <div className="settingOrderInput">
-          <Order city={location.city} point={location.point} />
-          <InputCity onLocationChange={handleLocationChange} />
+          <Order />
+          <InputCity />
         </div>
       </div>
       <div className="hmContainer">

@@ -1,24 +1,10 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './ApiMap.scss'
 import { YMaps, Map, Placemark } from '@pbe/react-yandex-maps'
+import fetchData from './api'
+import { GeoData } from './GeoDataInterface'
+import { InputCityProps } from '../../../interface/Interface'
 
-interface InputCityProps {
-  city: string
-  point: string
-}
-interface GeoData {
-  response: {
-    GeoObjectCollection: {
-      featureMember: {
-        GeoObject: {
-          Point: {
-            pos: string
-          }
-        }
-      }[]
-    }
-  }
-}
 const ApiMap: React.FC<InputCityProps> = ({ city, point }) => {
   const [mapCenter, setMapCenter] = useState<[number, number]>([0, 0])
   const [mapPoint, setMapPoint] = useState<[number, number] | null>(null)
@@ -33,24 +19,23 @@ const ApiMap: React.FC<InputCityProps> = ({ city, point }) => {
     return [54.313201387022815, 48.3490699991779]
   }
 
-  const location = useMemo(async () => {
-    try {
-      const url = `https://geocode-maps.yandex.ru/1.x?geocode=${city}+${point}&apikey=027a4a64-58cd-4305-9094-19f87e203671&sco=longlat&format=json`
-      const response = await fetch(url)
-      const data: GeoData = await response.json()
-      return coordinatesFromResponse(data)
-    } catch (error) {
-      console.log('Ошибка при получении координат', error)
-      return [54.313201387022815, 48.3490699991779] as [number, number]
+  useEffect(() => {
+    const fetchDataFromApi = async () => {
+      try {
+        const data = await fetchData(city, point)
+        const result = coordinatesFromResponse(data)
+        setMapCenter(result)
+        setMapPoint(result)
+      } catch (error) {
+        console.log('Ошибка при получении координат', error)
+        setMapCenter([54.313201387022815, 48.3490699991779])
+        setMapPoint(null)
+      }
     }
+
+    fetchDataFromApi()
   }, [city, point])
 
-  useEffect(() => {
-    location.then((result) => {
-      setMapCenter(result)
-      setMapPoint(result)
-    })
-  }, [location])
   return (
     <YMaps>
       <div className="mapY">

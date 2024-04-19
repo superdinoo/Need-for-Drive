@@ -1,19 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import './Order.scss'
+import { useSelector } from 'react-redux'
+import { InputCityProps } from '../../../interface/Interface'
 
-interface OrderProps {
-  city: string
-  point: string
-}
-
-const Order: React.FC<OrderProps> = ({ city, point }) => {
-  const [currentCity, setCurrentCity] = useState('')
-  const [currentPoint, setCurrentPoint] = useState('')
-
-  useEffect(() => {
-    setCurrentCity(city)
-    setCurrentPoint(point)
-  }, [city, point])
+const Order: React.FC = () => {
+  const { city, point } = useSelector(
+    (state: { location: InputCityProps }) => state.location,
+  )
 
   return (
     <div className="orderContainer">
@@ -24,8 +17,8 @@ const Order: React.FC<OrderProps> = ({ city, point }) => {
         <div className="textOrderContainer">
           <p className="txtOrder">Пункт выдачи</p>
           <div className="adressOrder">
-            <p className="cityOrder">{currentCity} </p>
-            <p className="streetOrder"> {currentPoint}</p>
+            <p className="cityOrder">{city} </p>
+            <p className="streetOrder"> {point}</p>
           </div>
         </div>
         {/* Поле для будущих блоков */}
@@ -40,7 +33,7 @@ const Order: React.FC<OrderProps> = ({ city, point }) => {
             className="btnOrder"
             style={{
               background:
-                currentCity.length > 0 && currentPoint.length > 0
+                city.length > 0 && point.length > 0
                   ? 'linear-gradient(90deg, #0ec261 2.61%, #039f67 112.6%)'
                   : '#EEEEEE',
             }}

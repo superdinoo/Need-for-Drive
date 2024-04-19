@@ -1,10 +1,6 @@
 import React from 'react'
 import * as iconRx from 'react-icons/rx'
-
-interface MenuIconsProps {
-  name: keyof typeof iconRx
-  handleClick: () => void
-}
+import { MenuIconsProps } from './MenuInterface'
 
 const MenuIcon: React.FC<MenuIconsProps> = ({ name, handleClick }) => {
   const icons: { [key: string]: JSX.Element } = {

@@ -8,11 +8,11 @@ const Header: React.FC = () => {
   return (
     <div className="header">
       <div className="logo">
-        <Link to="/Simbirsoft">
+        <Link to="/HomePage">
           <h3 className="logoText">Need for drive</h3>
         </Link>
       </div>
-      <Link to="/maps">
+      <Link to="/LocationPage">
         <div className="city">
           <CiLocationOn className="cityIcon" />
           <p className="cityText">Ульяновск</p>

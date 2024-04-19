@@ -1,14 +1,13 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useEffect, useState } from 'react'
 import './InputCity.scss'
+import { useDispatch } from 'react-redux'
 import ApiMap from '../apiMap/ApiMap'
 import InputField from './form/InputField'
+import setLocation from '../../redux/actions/LocationAction'
 
-interface InputCityProps {
-  onLocationChange: (city: string, point: string) => void
-}
-
-const InputCity: React.FC<InputCityProps> = ({ onLocationChange }) => {
+const InputCity: React.FC = () => {
+  const dispatch = useDispatch()
   const [inputValues, setInputValues] = useState({
     city: '',
     point: '',
@@ -18,12 +17,9 @@ const InputCity: React.FC<InputCityProps> = ({ onLocationChange }) => {
     setInputValues((prevState) => ({ ...prevState, [name]: value }))
   }
 
-  const handleReset = (name: string) => {
-    setInputValues((prevState) => ({ ...prevState, [name]: '' }))
-  }
   useEffect(() => {
-    onLocationChange(inputValues.city, inputValues.point)
-  }, [inputValues.city, inputValues.point])
+    dispatch(setLocation({ city: inputValues.city, point: inputValues.point }))
+  }, [inputValues.city, inputValues.point, dispatch])
 
   return (
     <div className="inputCityContainerMain">
@@ -34,7 +30,7 @@ const InputCity: React.FC<InputCityProps> = ({ onLocationChange }) => {
             onChange={(value) => handleInputChange('city', value)}
             name="city"
             placeholder="Начните вводить город"
-            onReset={() => handleReset('city')}
+            onReset={() => handleInputChange('city', '')}
             labels="Город"
             list="cities"
           />
@@ -49,7 +45,7 @@ const InputCity: React.FC<InputCityProps> = ({ onLocationChange }) => {
             onChange={(value) => handleInputChange('point', value)}
             name="point"
             placeholder="Начните вводить пункт выдачи"
-            onReset={() => handleReset('point')}
+            onReset={() => handleInputChange('point', '')}
             labels="Пункт выдачи"
             list="point"
           />

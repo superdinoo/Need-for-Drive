@@ -13,7 +13,7 @@ const Center: React.FC = () => {
         <p className="textCenterText">Поминутная аренда авто твоего города</p>
       </div>
       <div className="btnCenter">
-        <Link to="/maps">
+        <Link to="/LocationPage">
           <button type="button" className="btnCenterText">
             Забронировать
           </button>
