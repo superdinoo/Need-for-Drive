@@ -1,15 +1,13 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
 import './MenuContent.scss'
-import { useSelector } from 'react-redux'
 import { Telega, Facebook, Insta } from '../../../../assets/svg'
 import { MenuContentProps } from './MenuContentInterface'
 
-const MenuContent: React.FC<MenuContentProps> = ({ showMenu }) => {
-  const currentPage = useSelector((state: any) => state.currentPage)
-  console.log(currentPage)
-  const menuClasses = `menuContent ${showMenu ? 'show' : ''} ${currentPage === 'location' ? 'blackBackground' : 's'}`
-
+const MenuContent: React.FC<MenuContentProps> = ({
+  showMenu,
+  currentPages,
+}) => {
+  const menuClasses = `menuContent ${showMenu ? 'show' : ''} ${currentPages === 'location' ? 'blackBackground' : ''}`
   return (
     <div className={menuClasses}>
       <div className="mainMenu">

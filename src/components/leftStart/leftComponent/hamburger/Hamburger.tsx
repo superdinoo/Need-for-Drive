@@ -4,7 +4,7 @@ import './Hamburger.scss'
 import MenuContent from '../menuContent/MenuContent'
 import MenuIcon from './menuIcon/MenuIcon'
 
-const Hamburger: React.FC = () => {
+const Hamburger: React.FC<{ currentPages: string }> = ({ currentPages }) => {
   const [clickHamburger, setClickHamburger] = useState(false)
 
   const handleClickHamburger = () => {
@@ -26,7 +26,7 @@ const Hamburger: React.FC = () => {
           </div>
         )}
       </div>
-      <MenuContent showMenu={clickHamburger} />
+      <MenuContent showMenu={clickHamburger} currentPages={currentPages} />
     </>
   )
 }

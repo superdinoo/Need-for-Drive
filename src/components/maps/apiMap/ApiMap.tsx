@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import './ApiMap.scss'
+import { useDispatch } from 'react-redux'
 import { YMaps, Map, Placemark } from '@pbe/react-yandex-maps'
 import fetchData from './api'
 import { GeoData } from './GeoDataInterface'
 import { InputCityProps } from '../../../interface/Interface'
 
+import {
+  fetchDataFailure,
+  fetchDataSuccess,
+} from '../../redux/actions/ApiAction'
+
 const ApiMap: React.FC<InputCityProps> = ({ city, point }) => {
+  const dispatch = useDispatch()
   const [mapCenter, setMapCenter] = useState<[number, number]>([0, 0])
   const [mapPoint, setMapPoint] = useState<[number, number] | null>(null)
 
@@ -26,15 +33,17 @@ const ApiMap: React.FC<InputCityProps> = ({ city, point }) => {
         const result = coordinatesFromResponse(data)
         setMapCenter(result)
         setMapPoint(result)
+        dispatch(fetchDataSuccess(result))
       } catch (error) {
         console.log('Ошибка при получении координат', error)
         setMapCenter([54.313201387022815, 48.3490699991779])
         setMapPoint(null)
+        dispatch(fetchDataFailure(new Error('Ошибка при получении координат')))
       }
     }
 
     fetchDataFromApi()
-  }, [city, point])
+  }, [city, point, dispatch])
 
   return (
     <YMaps>

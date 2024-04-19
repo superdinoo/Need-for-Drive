@@ -1,19 +1,13 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import './Maps.scss'
-import { useDispatch } from 'react-redux'
+// import { useDispatch } from 'react-redux'
 import { Hamburger, Header } from '../../leftStart/leftComponent'
 import BreadCramb from '../../maps/breadCramb/BreadCramb'
 import Order from '../../maps/order/Order'
 import InputCity from '../../maps/inputCity/InputCity'
 
-import changePage from '../../redux/actions/PageAction'
-
 const Maps: React.FC = () => {
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(changePage('location'))
-  }, [dispatch])
+  const currentPages = 'location'
 
   return (
     <div className="mapContainer ">
@@ -28,7 +22,7 @@ const Maps: React.FC = () => {
         </div>
       </div>
       <div className="hmContainer">
-        <Hamburger />
+        <Hamburger currentPages={currentPages} />
       </div>
     </div>
   )
