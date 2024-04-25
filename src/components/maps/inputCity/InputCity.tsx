@@ -56,7 +56,7 @@ const InputCity: React.FC = () => {
           </datalist>
         </div>
         <div className="mapCityContainer">
-          <ApiMap city={inputValues.city} point={inputValues.point} />
+          <ApiMap city={inputValues.city} point={inputValues.point} option="" />
         </div>
       </div>
     </div>

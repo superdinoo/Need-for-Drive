@@ -1,12 +1,10 @@
 import React from 'react'
 import './Order.scss'
 import { useSelector } from 'react-redux'
-import { InputCityProps } from '../../../interface/Interface'
+import selectLocation from './Locationreducer'
 
 const Order: React.FC = () => {
-  const { city, point } = useSelector(
-    (state: { location: InputCityProps }) => state.location,
-  )
+  const { city, point } = useSelector(selectLocation)
 
   return (
     <div className="orderContainer">

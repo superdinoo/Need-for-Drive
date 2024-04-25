@@ -1,6 +1,7 @@
 export interface InputCityProps {
   city: string
   point: string
+  option: string
 }
 
 export interface ChangePageAction {

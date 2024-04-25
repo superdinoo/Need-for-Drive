@@ -1,18 +1,23 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   fetchDataRequest,
   fetchDataSuccess,
   fetchDataFailure,
 } from '../actions/ApiAction'
-import fetchData from '../../maps/apiMap/api'
+import { fetchData } from '../../../api/api'
 
 const fetchAndSaveData = (city: string, point: string) => {
-  return async (dispatch: any) => {
+  return async (dispatch: any, getState: any, extraArgument: any) => {
     dispatch(fetchDataRequest())
+    const options: RequestInit = {}
     try {
-      const data = await fetchData(city, point)
+      const currentState = getState()
+      const { fetchData: fetch } = extraArgument
+      const data = await fetch(city, point, options)
       dispatch(fetchDataSuccess(data))
     } catch (error) {
-      dispatch(fetchDataFailure(error))
+      dispatch(fetchDataFailure(error as Error))
     }
   }
 }

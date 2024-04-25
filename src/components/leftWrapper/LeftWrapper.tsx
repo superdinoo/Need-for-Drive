@@ -1,8 +1,8 @@
 import React from 'react'
-import './LeftStart.scss'
+import './LeftWrapper.scss'
 import { Hamburger, Header, Footer, Center } from './leftComponent'
 
-const LeftStart: React.FC = () => {
+const LeftWrapper: React.FC = () => {
   return (
     <div className="container">
       <div className="left">
@@ -17,4 +17,4 @@ const LeftStart: React.FC = () => {
   )
 }
 
-export default LeftStart
+export default LeftWrapper

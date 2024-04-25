@@ -1,5 +1,6 @@
 import React from 'react'
 import './MenuContent.scss'
+import classNames from 'classnames'
 import { Telega, Facebook, Insta } from '../../../../assets/svg'
 import { MenuContentProps } from './MenuContentInterface'
 
@@ -7,7 +8,11 @@ const MenuContent: React.FC<MenuContentProps> = ({
   showMenu,
   currentPages,
 }) => {
-  const menuClasses = `menuContent ${showMenu ? 'show' : ''} ${currentPages === 'location' ? 'blackBackground' : ''}`
+  const menuClasses = classNames('menuContent', {
+    show: showMenu,
+    blackBackground: currentPages === 'location',
+  })
+
   return (
     <div className={menuClasses}>
       <div className="mainMenu">

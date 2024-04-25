@@ -1,7 +1,6 @@
 import React from 'react'
 import './Maps.scss'
-// import { useDispatch } from 'react-redux'
-import { Hamburger, Header } from '../../leftStart/leftComponent'
+import { Hamburger, Header } from '../../leftWrapper/leftComponent/index'
 import BreadCramb from '../../maps/breadCramb/BreadCramb'
 import Order from '../../maps/order/Order'
 import InputCity from '../../maps/inputCity/InputCity'
