@@ -4,7 +4,7 @@ import './InputCity.scss'
 import { useDispatch } from 'react-redux'
 import ApiMap from '../apiMap/ApiMap'
 import InputField from './form/InputField'
-import setLocation from '../../redux/actions/LocationAction'
+import setLocation from '../../../redux/actions/setLocation '
 
 const InputCity: React.FC = () => {
   const dispatch = useDispatch()
@@ -18,7 +18,13 @@ const InputCity: React.FC = () => {
   }
 
   useEffect(() => {
-    dispatch(setLocation({ city: inputValues.city, point: inputValues.point }))
+    dispatch(
+      setLocation({
+        city: inputValues.city,
+        point: inputValues.point,
+        option: '',
+      }),
+    )
   }, [inputValues.city, inputValues.point, dispatch])
 
   return (

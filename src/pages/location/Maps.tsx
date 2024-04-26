@@ -1,9 +1,9 @@
 import React from 'react'
 import './Maps.scss'
-import { Hamburger, Header } from '../../leftWrapper/leftComponent/index'
-import BreadCramb from '../../maps/breadCramb/BreadCramb'
-import Order from '../../maps/order/Order'
-import InputCity from '../../maps/inputCity/InputCity'
+import { Hamburger, Header } from '../../components/leftWrapper/leftComponent'
+import BreadCramb from '../../components/maps/breadCramb/BreadCramb'
+import Order from '../../components/maps/order/Order'
+import InputCity from '../../components/maps/inputCity/InputCity'
 
 const Maps: React.FC = () => {
   const currentPages = 'location'

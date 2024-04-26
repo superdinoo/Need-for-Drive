@@ -1,6 +1,6 @@
 import React from 'react'
 import { Provider } from 'react-redux'
-import store from './components/redux/Store'
+import store from './redux/Store'
 import AppRoutes from './components/AppRoutes'
 
 const App: React.FC = () => {

@@ -4,8 +4,8 @@ import {
   fetchDataSuccess,
   fetchDataFailure,
   RootAction,
-} from '../actions/ApiAction'
-import { fetchData, coordinatesFromResponse } from '../../../api/api'
+} from './apiAction'
+import { fetchData, coordinatesFromResponse } from '../api/api'
 
 const fetchMapData = (city: string, point: string, option: RequestInit) => {
   return async (dispatch: Dispatch<RootAction>) => {

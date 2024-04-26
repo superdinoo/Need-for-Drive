@@ -1,12 +1,12 @@
 import { createReducer } from '@reduxjs/toolkit'
-import setLocation from '../actions/LocationAction'
+import setLocation from '../actions/setLocation '
 
 const initialState = {
   city: '',
   point: '',
 }
 
-const LocationReducer = createReducer(initialState, (builder) => {
+const locationReducer = createReducer(initialState, (builder) => {
   builder.addCase(setLocation, (state, action) => {
     return {
       ...state,
@@ -16,4 +16,4 @@ const LocationReducer = createReducer(initialState, (builder) => {
   })
 })
 
-export default LocationReducer
+export default locationReducer

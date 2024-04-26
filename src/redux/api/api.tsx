@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { GeoData } from '../components/maps/apiMap/GeoDataInterface'
+import { GeoData } from '../../components/maps/apiMap/geoDataInterface'
 import generateGeocodeUrl from './url'
 
 export const fetchData = async (

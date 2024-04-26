@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
-import Start from './pages/startScreen/Start'
-import Maps from './pages/location/Maps'
+import Start from '../pages/startScreen/Start'
+import Maps from '../pages/location/Maps'
 
 const AppRoutes: React.FC = () => {
   return (

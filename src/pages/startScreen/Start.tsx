@@ -1,7 +1,7 @@
 import React from 'react'
 import './Start.scss'
-import LeftWrapper from '../../leftWrapper/LeftWrapper'
-import Slider from '../../slider/Slider'
+import LeftWrapper from '../../components/leftWrapper/LeftWrapper'
+import Slider from '../../components/slider/Slider'
 
 const Start: React.FC = () => {
   return (

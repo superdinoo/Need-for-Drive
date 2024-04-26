@@ -1,7 +1,7 @@
 import React from 'react'
 import './Order.scss'
 import { useSelector } from 'react-redux'
-import selectLocation from './Locationreducer'
+import selectLocation from './selectLocation'
 
 const Order: React.FC = () => {
   const { city, point } = useSelector(selectLocation)

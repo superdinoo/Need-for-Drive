@@ -1,6 +1,6 @@
 export type MapState = {
   center: [number, number]
-  point: [number, number] | null
+  point: [number, number]
 }
 
 export type RootState = {
