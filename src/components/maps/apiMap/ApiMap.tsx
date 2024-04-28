@@ -22,9 +22,9 @@ const ApiMap: React.FC<InputCityProps> = ({ city, point }) => {
       <div className="mapY">
         <p className="mapYTitle">Выбрать на карте:</p>
         <Map
-          key={`${mapCenter?.[0]}_${mapCenter?.[1]}`}
+          key={`${mapCenter?.[0] ?? ''}_${mapCenter?.[1] ?? ''}`}
           defaultState={{
-            center: mapCenter || [0, 0],
+            center: mapCenter,
             zoom: 12,
           }}
           className="mapYSetting"

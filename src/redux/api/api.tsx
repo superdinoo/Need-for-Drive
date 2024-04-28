@@ -24,6 +24,7 @@ export const fetchData = async (
 export const coordinatesFromResponse = (data: GeoData): [number, number] => {
   const featureMember = data?.response?.GeoObjectCollection?.featureMember
   const pos = featureMember?.[0]?.GeoObject?.Point?.pos
+
   if (pos) {
     const [longitude, latitude] = pos.split(' ').map(Number)
     return [latitude, longitude]

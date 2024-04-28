@@ -4,7 +4,7 @@ export const FETCH_DATA_FAILURE = 'FETCH_DATA_FAILURE'
 
 export type RootAction =
   | { type: typeof FETCH_DATA_REQUEST }
-  | { type: typeof FETCH_DATA_SUCCESS; payload: Record<number, number> }
+  | { type: typeof FETCH_DATA_SUCCESS; payload: [number, number] }
   | { type: typeof FETCH_DATA_FAILURE; payload: Error }
 
 export const fetchDataRequest = (): RootAction => {

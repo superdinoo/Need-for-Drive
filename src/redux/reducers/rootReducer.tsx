@@ -1,10 +1,10 @@
 import { combineReducers } from '@reduxjs/toolkit'
-import fetchMapData from '../actions/fetchMapData'
-import LocationReducer from './locationReducer'
+import locationReducer from './locationReducer'
+import mapReducer from './mapReducer'
 
 const rootReducer = combineReducers({
-  location: LocationReducer,
-  map: fetchMapData,
+  location: locationReducer,
+  map: mapReducer,
 })
 
 export default rootReducer
