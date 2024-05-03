@@ -1,3 +1,4 @@
+/* eslint-disable default-param-last */
 import {
   RootAction,
   FETCH_DATA_REQUEST,
@@ -12,8 +13,8 @@ const initialState: MapState = {
 }
 
 const mapReducer = (
-  action: RootAction,
   state: MapState = initialState,
+  action: RootAction,
 ): MapState => {
   if (!action || !action.type) {
     return state

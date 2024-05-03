@@ -1,6 +1,6 @@
 .settingOrderInput {
   width: 100%;
-  height: 84%;
+  height: 84vh;
 }
 .mapContainer {
   width: 100%;
@@ -17,6 +17,7 @@
 }
 .hmContainer {
   display: flex;
+  height: 100vh;
 }
 
 @media screen and (min-width: 320px) and (max-width: 767px) {
@@ -29,7 +30,7 @@
     position: absolute;
   }
   .setHeader {
-    width: auto;
+    width: fit-content;
     margin: auto;
   }
 }
@@ -38,12 +39,16 @@
   .settingOrderInput {
     display: flex;
     flex-direction: column-reverse;
+    height: auto;
   }
   .mapContainer {
     flex-wrap: nowrap;
   }
   .setHeader {
     margin: 0 30px;
+  }
+  .hmContainer {
+    height: 120vh;
   }
 }
 

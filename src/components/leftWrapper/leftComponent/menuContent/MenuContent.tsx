@@ -10,7 +10,7 @@ const MenuContent: React.FC<MenuContentProps> = ({
 }) => {
   const menuClasses = classNames('menuContent', {
     show: showMenu,
-    blackBackground: currentPages === 'location',
+    blackBackground: currentPages === 'location' || currentPages === 'modelCar',
   })
 
   return (
