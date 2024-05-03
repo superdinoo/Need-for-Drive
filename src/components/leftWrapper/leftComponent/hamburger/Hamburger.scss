@@ -1,0 +1,80 @@
+.hamburger {
+  width: 64px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #151b1f;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.menu {
+  margin: 30px 0;
+  z-index: 5;
+}
+.menuIcon {
+  font-size: 32px;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+}
+
+.language {
+  margin: 25px 0;
+}
+.eng {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 13px;
+  line-height: 15.23px;
+  text-align: left;
+  color: #0ec261;
+  cursor: pointer;
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .hamburger {
+    background-color: transparent;
+    width: 0;
+    height: 0;
+  }
+  .menu {
+    width: 33.57px;
+    height: 33.45px;
+    margin-top: 16px;
+    margin-left: 66px;
+    position: relative;
+  }
+  .menuIcon {
+    color: black;
+    font-size: 30px;
+  }
+  .language {
+    display: none;
+  }
+
+  .eng {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 13px;
+    line-height: 15.23px;
+    text-align: left;
+    color: #0ec261;
+    cursor: pointer;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .hamburger {
+    width: 85px;
+  }
+  .menuIcon {
+    font-size: 42px;
+  }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1439px) and (max-height: 811px) {
+  .hamburger {
+    width: 64px;
+  }
+}

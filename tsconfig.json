@@ -14,10 +14,13 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-
     "sourceMap": true,
     "jsx": "react",
-    "types": ["node", "react", "react-dom"]
+    "types": ["node", "react", "react-dom"],
+    "baseUrl": "src",
+    "paths": {
+      "img/*": ["public/img/*"]
+    }
   },
   "include": ["src"]
 }
