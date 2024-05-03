@@ -1,0 +1,100 @@
+.modelCartWrapper {
+  margin-left: 80px;
+  margin-top: 40px;
+  width: 736px;
+}
+.allWraperCar {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 1fr 1fr;
+}
+.styleCart,
+.activeCart {
+  width: 368px;
+  height: 224px;
+  cursor: pointer;
+  border: 1px solid #eeeeee;
+  position: relative;
+  transition: 0.5s ease;
+  &:hover {
+    border: 1px solid #999999;
+  }
+}
+.activeCart {
+  border: 1px solid #0ec261;
+}
+.titleCar,
+.priceCar {
+  margin-left: 20px;
+}
+.txtTitle {
+  font-family: 'Roboto';
+  font-size: 18px;
+  line-height: 21.09px;
+  text-align: left;
+  margin-bottom: 3px;
+}
+.imgCar {
+  width: 256px;
+  height: 116px;
+  bottom: 0;
+  position: absolute;
+  right: 0;
+}
+.txtPrice {
+  font-family: 'Roboto';
+  font-size: 14px;
+  line-height: 16px;
+  text-align: left;
+  color: #999999;
+  margin-top: 0;
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .modelCartWrapper {
+    margin-left: 35px;
+  }
+  .styleCart,
+  .activeCart {
+    width: 250px;
+    height: 150px;
+  }
+  .imgCar {
+    width: 241px;
+    height: 115px;
+  }
+  .img {
+    width: 100%;
+    height: 100%;
+  }
+  .allWraperCar {
+    display: flex;
+    flex-direction: column;
+  }
+  .txtTitle {
+    font-size: 14px;
+  }
+  .txtPrice {
+    font-size: 12px;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .modelCartWrapper {
+    margin-left: 35px;
+    width: 616px;
+    margin-top: 20px;
+  }
+  .styleCart,
+  .activeCart {
+    width: 308px;
+    height: 164px;
+  }
+  .activeCart {
+    &:hover {
+      border: 1px solid #0ec261;
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1439px) and (max-height: 811px) {
+}

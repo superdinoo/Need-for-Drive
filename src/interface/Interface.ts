@@ -9,3 +9,10 @@ export interface ChangePageAction {
   payload: string
   [key: string]: string
 }
+
+export interface Car {
+  id: number
+  name: string
+  price: string
+  img: string
+}

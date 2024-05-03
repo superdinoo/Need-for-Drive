@@ -3,7 +3,7 @@ import './Order.scss'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import selectLocation from './selectLocation'
-import { selectActiveCar } from '../../../redux/reducers/carSlice'
+import { getCarInfo } from '../../cars/selectors'
 
 interface CarentPages {
   currentPages: string
@@ -11,7 +11,7 @@ interface CarentPages {
 
 const Order: React.FC<CarentPages> = ({ currentPages }) => {
   const { city, point } = useSelector(selectLocation)
-  const activeCar = useSelector(selectActiveCar)
+  const { activeCar } = useSelector(getCarInfo)
 
   return (
     <div className="orderContainer">
