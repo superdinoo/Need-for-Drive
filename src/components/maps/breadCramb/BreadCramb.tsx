@@ -50,7 +50,9 @@ const BreadCramb: React.FC = () => {
           </Link>
 
           <IoMdArrowDropright className="arrowIcon" />
-          <p className="breadIcon">Дополнительно</p>
+          <Link to="/Additionally">
+            <p className="breadIcon">Дополнительно</p>
+          </Link>
           <IoMdArrowDropright className="arrowIcon" />
           <p className="breadIcon">Итого</p>
         </div>

@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React from 'react'
 import './Order.scss'
 import { useSelector } from 'react-redux'
@@ -48,7 +49,9 @@ const Order: React.FC<CarentPages> = ({ currentPages }) => {
             to={
               city.length > 0 && point.length > 0
                 ? '/ModelCar'
-                : '/LocationPage'
+                : currentPages === 'additionally'
+                  ? '/Additionally'
+                  : '/LocationPage'
             }
             className="linkOrder"
           >

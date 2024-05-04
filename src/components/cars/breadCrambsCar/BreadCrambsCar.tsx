@@ -5,6 +5,7 @@ import './BreadCrambsCar.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { setActivePoint } from '../../../redux/reducers/carSlice'
 import { getCarInfo } from '../selectors'
+import BreadCrambSkelet from './BreadCrambSkelet'
 
 const BreadCrambsCar: React.FC = () => {
   const dispatch = useDispatch()
@@ -15,24 +16,18 @@ const BreadCrambsCar: React.FC = () => {
   }
 
   return (
-    <div className="breadCrambModelCar">
-      <div className="allModel" onClick={() => handleActivePoint('all')}>
-        <div className={activePoint.all ? 'activeCircle' : 'circle'} />
-        <p className={activePoint.all ? 'allTextBlack' : 'allText'}>
-          Все модели
-        </p>
-      </div>
-      <div className="allModel" onClick={() => handleActivePoint('eco')}>
-        <div className={activePoint.eco ? 'activeCircle' : 'circle'} />
-        <p className={activePoint.eco ? 'allTextBlack' : 'allText'}>Эконом</p>
-      </div>
-      <div className="allModel" onClick={() => handleActivePoint('premium')}>
-        <div className={activePoint.premium ? 'activeCircle' : 'circle'} />
-        <p className={activePoint.premium ? 'allTextBlack' : 'allText'}>
-          Премиум
-        </p>
-      </div>
-    </div>
+    <>
+      <BreadCrambSkelet
+        activePoint={activePoint}
+        title=""
+        handleActivePoint={handleActivePoint}
+        items={[
+          { text: 'Все модели', marker: 'all' },
+          { text: 'Эконом', marker: 'eco' },
+          { text: 'Премиум', marker: 'premium' },
+        ]}
+      />
+    </>
   )
 }
 
