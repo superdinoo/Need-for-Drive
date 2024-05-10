@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useEffect } from 'react'
 import './CarCard.scss'
 import { useDispatch, useSelector } from 'react-redux'
@@ -28,6 +27,8 @@ const CarCard: React.FC = () => {
         <div className="allWraperCar">
           {filterCar.map((car: Car) => (
             <div
+              role="button"
+              tabIndex={0}
               className={activeCar.id === car.id ? 'activeCart' : 'styleCart'}
               key={car.id}
               onClick={() => handleActiveCar(car.id, car.name, car.price)}

@@ -1,10 +1,13 @@
+/* eslint-disable no-unneeded-ternary */
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable no-else-return */
 /* eslint-disable no-nested-ternary */
 import React from 'react'
 import './Order.scss'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import selectLocation from './selectLocation'
-import { getCarInfo } from '../../cars/selectors'
+import { selectActiveCar } from '../../cars/selectors'
 
 interface CarentPages {
   currentPages: string
@@ -12,8 +15,8 @@ interface CarentPages {
 
 const Order: React.FC<CarentPages> = ({ currentPages }) => {
   const { city, point } = useSelector(selectLocation)
-  const { activeCar } = useSelector(getCarInfo)
-
+  const activeCar = useSelector(selectActiveCar)
+  console.log(activeCar.name > 0 ? true : false)
   return (
     <div className="orderContainer">
       <div className="orderContainerMain">
@@ -49,9 +52,9 @@ const Order: React.FC<CarentPages> = ({ currentPages }) => {
             to={
               city.length > 0 && point.length > 0
                 ? '/ModelCar'
-                : currentPages === 'additionally'
+                : activeCar.name.length > 0
                   ? '/Additionally'
-                  : '/LocationPage'
+                  : ''
             }
             className="linkOrder"
           >

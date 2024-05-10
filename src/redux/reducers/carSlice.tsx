@@ -1,9 +1,3 @@
-/* eslint-disable no-param-reassign */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable consistent-return */
-/* eslint-disable no-else-return */
-/* eslint-disable no-unused-expressions */
-
 import { createSlice } from '@reduxjs/toolkit'
 import dataCar from 'components/cars/dataCar'
 
@@ -24,6 +18,7 @@ const carSlice = createSlice({
   },
   reducers: {
     setActivePoint: (state, action) => {
+      const updateState = { ...state }
       if (action.payload === 'all') {
         return {
           ...state,
@@ -37,7 +32,8 @@ const carSlice = createSlice({
               ? state.filterCar
               : state.filterCar.filter((car) => car.type === action.payload),
         }
-      } else if (action.payload === 'eco') {
+      }
+      if (action.payload === 'eco') {
         return {
           ...state,
           activePoint: {
@@ -50,7 +46,8 @@ const carSlice = createSlice({
               ? state.filterCar
               : state.filterCar.filter((car) => car.type === action.payload),
         }
-      } else if (action.payload === 'premium') {
+      }
+      if (action.payload === 'premium') {
         return {
           ...state,
           activePoint: {
@@ -64,6 +61,7 @@ const carSlice = createSlice({
               : state.filterCar.filter((car) => car.type === action.payload),
         }
       }
+      return updateState
     },
     setFilterCar: (state) => {
       let filteredCars = dataCar
@@ -72,12 +70,12 @@ const carSlice = createSlice({
       } else if (state.activePoint.premium) {
         filteredCars = dataCar.filter((car) => car.type === 'premium')
       }
-      state.filterCar = filteredCars
+      return { ...state, filterCar: filteredCars }
     },
 
     setActiveCar: (state, action) => {
       const { id, name, price } = action.payload
-      state.activeCar = { id, name, price }
+      return { ...state, activeCar: { id, name, price } }
     },
   },
 })

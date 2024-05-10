@@ -18,13 +18,14 @@ const BreadCrambsCar: React.FC = () => {
   return (
     <>
       <BreadCrambSkelet
+        initialPath=""
         activePoint={activePoint}
         title=""
         handleActivePoint={handleActivePoint}
         items={[
-          { text: 'Все модели', marker: 'all' },
-          { text: 'Эконом', marker: 'eco' },
-          { text: 'Премиум', marker: 'premium' },
+          { text: 'Все модели', marker: 'all', id: 1 },
+          { text: 'Эконом', marker: 'eco', id: 2 },
+          { text: 'Премиум', marker: 'premium', id: 3 },
         ]}
       />
     </>
