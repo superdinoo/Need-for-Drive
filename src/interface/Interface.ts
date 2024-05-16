@@ -16,3 +16,11 @@ export interface Car {
   price: string
   img: string
 }
+
+export interface OrderProps {
+  currentPages: string
+  activeCar: {
+    name: string
+    price: string
+  }
+}

@@ -16,7 +16,7 @@ const Maps: React.FC = () => {
         </div>
         <BreadCramb />
         <div className="settingOrderInput">
-          <Order />
+          <Order currentPages={currentPages} />
           <InputCity />
         </div>
       </div>

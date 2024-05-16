@@ -32,6 +32,7 @@ const InputCity: React.FC = () => {
       <div className="inputCityContainer">
         <div className="inputContainer">
           <InputField
+            initialPages=""
             value={inputValues.city}
             onChange={(value) => handleInputChange('city', value)}
             name="city"
@@ -47,6 +48,7 @@ const InputCity: React.FC = () => {
             <option value="Самара" />
           </datalist>
           <InputField
+            initialPages=""
             value={inputValues.point}
             onChange={(value) => handleInputChange('point', value)}
             name="point"

@@ -18,7 +18,6 @@ const BreadCrambsCar: React.FC = () => {
   return (
     <>
       <BreadCrambSkelet
-        initialPath=""
         activePoint={activePoint}
         title=""
         handleActivePoint={handleActivePoint}

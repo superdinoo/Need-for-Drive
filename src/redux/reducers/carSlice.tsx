@@ -18,51 +18,31 @@ const carSlice = createSlice({
   },
   reducers: {
     setActivePoint: (state, action) => {
-      const updateState = { ...state }
       if (action.payload === 'all') {
         return {
           ...state,
           activePoint: {
-            all: !state.activePoint.all,
-            eco: false,
-            premium: false,
+            [action.payload]: true,
           },
-          filterCar:
-            action.payload === 'all'
-              ? state.filterCar
-              : state.filterCar.filter((car) => car.type === action.payload),
+          filterCar: state.filterCar,
         }
       }
-      if (action.payload === 'eco') {
+      if (action.payload === 'eco' || action.payload === 'premium') {
         return {
           ...state,
           activePoint: {
-            eco: !state.activePoint.eco,
-            all: false,
-            premium: false,
+            [action.payload]: true,
           },
           filterCar:
-            action.payload === 'eco'
-              ? state.filterCar
-              : state.filterCar.filter((car) => car.type === action.payload),
+            action.payload !== 'all'
+              ? state.filterCar.filter((car) => car.type === action.payload)
+              : state.filterCar,
         }
       }
-      if (action.payload === 'premium') {
-        return {
-          ...state,
-          activePoint: {
-            premium: !state.activePoint.premium,
-            eco: false,
-            all: false,
-          },
-          filterCar:
-            action.payload === 'premium'
-              ? state.filterCar
-              : state.filterCar.filter((car) => car.type === action.payload),
-        }
-      }
-      return updateState
+
+      return state
     },
+
     setFilterCar: (state) => {
       let filteredCars = dataCar
       if (state.activePoint.eco) {

@@ -1,4 +1,6 @@
+/* eslint-disable react/void-dom-elements-no-children */
 import React from 'react'
+
 import '../InputCity.scss'
 import { RxCross2 } from 'react-icons/rx'
 
@@ -32,6 +34,7 @@ const InputField: React.FC<InputProps> = ({
         placeholder={placeholder}
         list={list}
       />
+
       {value.length > 0 && (
         <RxCross2 className="rxCrossIcon" onClick={onReset} />
       )}

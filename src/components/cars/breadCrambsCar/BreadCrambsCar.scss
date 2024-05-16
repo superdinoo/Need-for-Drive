@@ -5,11 +5,13 @@
   gap: 40px;
 }
 
-.radioBtn {
+.radioBtn,
+.radioBtnBox {
   display: none;
 }
 
-.formRadio {
+.formRadio,
+.formRadioBox {
   display: flex;
   align-items: center;
   position: relative;
@@ -21,7 +23,6 @@
   content: '';
   position: absolute;
   left: 0;
-
   width: 12px;
   height: 12px;
   border: 1px solid #999999;
@@ -36,25 +37,31 @@
   border: 3px solid #0ec261;
 }
 
-// .box,
-// .activeBox {
-//   cursor: pointer;
-//   width: 13px;
-//   height: 13px;
-//   border: 1px solid #999999;
-// }
-// .activeBox {
-//   width: 8px;
-//   height: 8px;
-//   border: 3px solid #0ec261;
-// }
-.allModel {
-  display: flex;
-  gap: 10px;
+.formRadioBox .radioBtnBox + label::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  border: 1px solid #999999;
+  cursor: pointer;
 }
+.formRadioBox .radioBtnBox:checked + label::before {
+  width: 13px;
+  height: 13px;
+  background: url('../../../assets/svg/vector.svg');
+  background-repeat: no-repeat;
+  border: 1px solid #0ec261;
+}
+
 .containerAllModel {
   display: flex;
   gap: 20px;
+}
+.containerAllModelRate {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .allText,
