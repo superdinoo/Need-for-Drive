@@ -1,0 +1,93 @@
+.breadCrambModelCar {
+  display: flex;
+  margin-left: 80px;
+  margin-top: 20px;
+  gap: 40px;
+}
+
+.radioBtn,
+.radioBtnBox {
+  display: none;
+}
+
+.formRadio,
+.formRadioBox {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding-left: 20px;
+  cursor: pointer;
+}
+
+.formRadio .radioBtn + label::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  border: 1px solid #999999;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.formRadio .radioBtn:checked + label::before {
+  width: 8px;
+  height: 8px;
+  background-color: white;
+  border: 3px solid #0ec261;
+}
+
+.formRadioBox .radioBtnBox + label::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  border: 1px solid #999999;
+  cursor: pointer;
+}
+.formRadioBox .radioBtnBox:checked + label::before {
+  width: 13px;
+  height: 13px;
+  background: url('../../../assets/svg/vector.svg');
+  background-repeat: no-repeat;
+  border: 1px solid #0ec261;
+}
+
+.containerAllModel {
+  display: flex;
+  gap: 20px;
+}
+.containerAllModelRate {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.allText,
+.allTextBlack {
+  font-family: 'Roboto';
+  font-size: 14px;
+  line-height: 16px;
+  text-align: left;
+  color: #999999;
+  margin-top: 0;
+  cursor: pointer;
+}
+.allTextBlack {
+  color: #121212;
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .breadCrambModelCar {
+    display: block;
+    margin-left: 35px;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .breadCrambModelCar {
+    margin-left: 35px;
+  }
+}
+@media screen and (min-width: 1024px) and (max-width: 1439px) and (max-height: 811px) {
+}

@@ -1,13 +1,14 @@
 import React from 'react'
 import './BreadCramb.scss'
-
 import { IoMdArrowDropright } from 'react-icons/io'
 import { Link, useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import selectLocation from '../order/selectLocation'
+
+import { selectLocation } from '../order/selectorsOrder'
 
 const BreadCramb: React.FC = () => {
   const { city, point } = useSelector(selectLocation)
+
   const location = useLocation()
 
   return (
@@ -32,13 +33,7 @@ const BreadCramb: React.FC = () => {
             </p>
           </Link>
           <IoMdArrowDropright className="arrowIcon" />
-          <Link
-            to={
-              city.length > 0 && point.length > 0
-                ? '/ModelCar'
-                : '/LocationPage'
-            }
-          >
+          <Link to="/ModelCar">
             <p
               className="breadIcon"
               style={{
@@ -50,7 +45,9 @@ const BreadCramb: React.FC = () => {
           </Link>
 
           <IoMdArrowDropright className="arrowIcon" />
+
           <p className="breadIcon">Дополнительно</p>
+
           <IoMdArrowDropright className="arrowIcon" />
           <p className="breadIcon">Итого</p>
         </div>

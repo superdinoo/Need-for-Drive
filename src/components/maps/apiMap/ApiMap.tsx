@@ -6,6 +6,7 @@ import { YMaps, Map, Placemark } from '@pbe/react-yandex-maps'
 import { RootState } from '../../../redux/rootState'
 import { InputCityProps } from '../../../interface/Interface'
 import fetchMapData from '../../../redux/actions/fetchMapData'
+import getMapInfo from './selectorsMap'
 
 const ApiMap: React.FC<InputCityProps> = ({ city, point }) => {
   const dispatch: any = useDispatch()
@@ -14,9 +15,9 @@ const ApiMap: React.FC<InputCityProps> = ({ city, point }) => {
     dispatch(fetchMapData(city, point, {}))
   }, [city, point, dispatch])
 
-  const mapCenter = useSelector((state: RootState) => state.map.center)
-  const mapPoint = useSelector((state: RootState) => state.map.point)
-
+  const { mapCenter, mapPoint } = useSelector((state: RootState) =>
+    getMapInfo(state),
+  )
   return (
     <YMaps>
       <div className="mapY">
