@@ -1,42 +1,41 @@
 import { createSlice } from '@reduxjs/toolkit'
 import dataCar from 'components/cars/dataCar'
+import { InitialState } from 'interface/Interface'
+
+const initialState: InitialState = {
+  activePoint: {
+    all: false,
+    eco: false,
+    premium: false,
+  },
+  filterCar: dataCar,
+  activeCar: {
+    id: null,
+    name: '',
+    price: '',
+  },
+}
 
 const carSlice = createSlice({
   name: 'car',
-  initialState: {
-    activePoint: {
-      all: false,
-      eco: false,
-      premium: false,
-    },
-    filterCar: dataCar,
-    activeCar: {
-      id: null,
-      name: '',
-      price: '',
-    },
-  },
+  initialState,
   reducers: {
     setActivePoint: (state, action) => {
-      if (action.payload === 'all') {
+      if (
+        action.payload === 'all' ||
+        action.payload === 'eco' ||
+        action.payload === 'premium'
+      ) {
         return {
           ...state,
           activePoint: {
-            [action.payload]: true,
-          },
-          filterCar: state.filterCar,
-        }
-      }
-      if (action.payload === 'eco' || action.payload === 'premium') {
-        return {
-          ...state,
-          activePoint: {
-            [action.payload]: true,
+            ...initialState.activePoint,
+            [action.payload]: !state.activePoint[action.payload],
           },
           filterCar:
             action.payload !== 'all'
-              ? state.filterCar.filter((car) => car.type === action.payload)
-              : state.filterCar,
+              ? state.filterCar
+              : state.filterCar.filter((car) => car.type === action.payload),
         }
       }
 

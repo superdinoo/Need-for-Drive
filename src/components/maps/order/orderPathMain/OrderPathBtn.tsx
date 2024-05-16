@@ -6,10 +6,8 @@ import { OrderProps } from '../../../../interface/Interface'
 
 const OrderPathBtn: React.FC<OrderProps> = ({ currentPages }) => {
   const { city, point } = useSelector(selectLocation)
-  let toPath = '/LocationPage'
-  if (city.length > 0 && point.length > 0) {
-    toPath = '/ModelCar'
-  }
+  const cityPointLength = city.length > 0 && point.length > 0
+  const toPath = cityPointLength ? '/ModelCar' : '/LocationPage'
 
   const handleNameBtn = () => {
     switch (currentPages) {
@@ -29,13 +27,7 @@ const OrderPathBtn: React.FC<OrderProps> = ({ currentPages }) => {
       <Link to={toPath} className="linkOrder">
         <button
           type="button"
-          className="btnOrder"
-          style={{
-            background:
-              city.length > 0 && point.length > 0
-                ? 'linear-gradient(90deg, #0ec261 2.61%, #039f67 112.6%)'
-                : '#EEEEEE',
-          }}
+          className={cityPointLength ? 'btnOrderTrue' : 'btnOrder'}
         >
           {handleNameBtn()}
         </button>
