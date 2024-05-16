@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import dataCar from 'components/cars/dataCar'
 import { InitialState } from 'interface/Interface'
 
@@ -20,23 +20,17 @@ const carSlice = createSlice({
   name: 'car',
   initialState,
   reducers: {
-    setActivePoint: (state, action) => {
-      if (
-        action.payload === 'all' ||
-        action.payload === 'eco' ||
-        action.payload === 'premium'
-      ) {
-        return {
-          ...state,
-          activePoint: {
-            ...initialState.activePoint,
-            [action.payload]: !state.activePoint[action.payload],
-          },
-          filterCar:
-            action.payload !== 'all'
-              ? state.filterCar
-              : state.filterCar.filter((car) => car.type === action.payload),
-        }
+    setActivePoint: (state, action: PayloadAction<string>) => {
+      return {
+        ...state,
+        activePoint: {
+          ...initialState.activePoint,
+          [action.payload]: !state.activePoint[action.payload],
+        },
+        filterCar:
+          action.payload !== 'all'
+            ? state.filterCar
+            : state.filterCar.filter((car) => car.type === action.payload),
       }
 
       return state
