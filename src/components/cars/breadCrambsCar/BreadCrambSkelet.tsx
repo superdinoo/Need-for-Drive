@@ -5,6 +5,7 @@ interface BreadCrambsProps<T> {
   activePoint: T
   handleActivePoint: (marker: string) => void
   items: { text: string; marker: string; id: number }[]
+  initialPath: string
 }
 
 const BreadCrambSkelet = <T extends Record<string, boolean>>({
@@ -12,18 +13,37 @@ const BreadCrambSkelet = <T extends Record<string, boolean>>({
   handleActivePoint,
   items,
   title,
+  initialPath,
 }: BreadCrambsProps<T>) => {
+  const initialPathBread = () => {
+    switch (initialPath) {
+      case 'rate':
+      case 'options':
+        return 'containerAllModelRate'
+      case 'color':
+        return 'containerAllModelColor'
+      default:
+        return 'containerAllModel'
+    }
+  }
+  const breadCrambClass = initialPathBread()
   return (
     <div className="breadCrambModelCar">
       <div className="containerBreadCrambModelCar">
         <p className="titleBread">{title}</p>
-        <div className="containerAllModel">
+        <div className={breadCrambClass}>
           {items.map((item) => (
             <div key={item.id}>
-              <div className="formRadio">
+              <div
+                className={
+                  initialPath === 'options' ? 'formRadioBox' : 'formRadio'
+                }
+              >
                 <input
-                  className="radioBtn"
-                  type="radio"
+                  className={
+                    initialPath === 'options' ? 'radioBtnBox' : 'radioBtn'
+                  }
+                  type={initialPath === 'options' ? 'checkbox' : 'radio'}
                   id={`radio-${item.id}`}
                   checked={activePoint[item.marker]}
                   onChange={() => handleActivePoint(item.marker)}

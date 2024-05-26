@@ -4,10 +4,18 @@ import { Link } from 'react-router-dom'
 import { selectLocation } from '../selectorsOrder'
 import { OrderProps } from '../../../../interface/Interface'
 
-const OrderPathBtn: React.FC<OrderProps> = ({ currentPages }) => {
+const OrderPathBtn: React.FC<OrderProps> = ({ activeCar, currentPages }) => {
   const { city, point } = useSelector(selectLocation)
-  const cityPointLength = city.length > 0 && point.length > 0
-  const toPath = cityPointLength ? '/ModelCar' : '/LocationPage'
+  let toPath = '/LocationPage'
+
+  const cityAndPoint = city.length > 0 && point.length > 0
+
+  if (cityAndPoint) {
+    toPath = '/ModelCar'
+  }
+  if (activeCar.name.length > 0 && city.length > 0 && point.length > 0) {
+    toPath = '/Additionally'
+  }
 
   const handleNameBtn = () => {
     switch (currentPages) {
@@ -27,7 +35,7 @@ const OrderPathBtn: React.FC<OrderProps> = ({ currentPages }) => {
       <Link to={toPath} className="linkOrder">
         <button
           type="button"
-          className={cityPointLength ? 'btnOrderTrue' : 'btnOrder'}
+          className={cityAndPoint ? 'btnOrderTrue' : 'btnOrder'}
         >
           {handleNameBtn()}
         </button>

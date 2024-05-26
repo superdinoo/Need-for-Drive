@@ -32,7 +32,7 @@ export interface FilterCar {
   type: string
 }
 
-export interface InitialState {
+export interface InitialStateCar {
   activePoint: {
     all: boolean
     eco: boolean
@@ -43,5 +43,27 @@ export interface InitialState {
     id: number | null
     name: string
     price: string
+  }
+}
+
+export interface InputRatesDate {
+  start: string
+  end: string
+}
+
+export interface InitialStateAdditionally {
+  activePointColor: {
+    any: boolean
+    red: boolean
+    blue: boolean
+  }
+  activePointRate: {
+    everyMinute: boolean
+    forADay: boolean
+  }
+  activePointOptions: {
+    tank: boolean
+    seat: boolean
+    wheel: boolean
   }
 }

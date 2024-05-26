@@ -18,9 +18,10 @@
   display: flex;
   margin-top: 20px;
   margin-bottom: 20px;
+  justify-content: center;
+  justify-content: flex-end;
 }
 .titleOrder {
-  margin-left: auto;
   font-family: 'Roboto';
   font-size: 18px;
   line-height: 21.09px;
@@ -120,15 +121,18 @@
 @media screen and (min-width: 320px) and (max-width: 767px) {
   .orderContainerMain {
     width: 100%;
-
     flex-direction: column;
-    align-items: center;
-    margin-left: 40px;
   }
   .orderContainer {
+    width: 231px;
     margin-top: 20px;
     border-left: none;
     border-top: 1px solid #eeeeee;
+    float: none;
+    height: auto;
+  }
+  .headerOrder {
+    justify-content: center;
   }
 }
 
@@ -152,6 +156,9 @@
   }
   .textOrderContainer {
     gap: 50px;
+  }
+  .headerOrder {
+    justify-content: center;
   }
 }
 
