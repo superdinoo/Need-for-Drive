@@ -17,7 +17,7 @@ const BreadCrambsCar: React.FC = () => {
   return (
     <>
       <BreadCrambSkelet
-        initialPath=""
+        initialPath="car"
         activePoint={activePoint}
         title=""
         handleActivePoint={handleActivePoint}
@@ -26,6 +26,7 @@ const BreadCrambsCar: React.FC = () => {
           { text: 'Эконом', marker: 'eco', id: 2 },
           { text: 'Премиум', marker: 'premium', id: 3 },
         ]}
+        type="radio"
       />
     </>
   )

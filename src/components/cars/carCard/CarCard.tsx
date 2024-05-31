@@ -12,9 +12,21 @@ const CarCard: React.FC = () => {
   const handleActiveCar = (
     carID: number,
     carName: string,
-    carPrice: string,
+    carPrice: number,
+    carMarkNumber: string,
+    carImg: string,
+    carPriceCart: string,
   ) => {
-    dispatch(setActiveCar({ id: carID, name: carName, price: carPrice }))
+    dispatch(
+      setActiveCar({
+        id: carID,
+        name: carName,
+        price: carPrice,
+        markNumber: carMarkNumber,
+        img: carImg,
+        priceCart: carPriceCart,
+      }),
+    )
   }
 
   useEffect(() => {
@@ -31,13 +43,22 @@ const CarCard: React.FC = () => {
               tabIndex={0}
               className={activeCar.id === car.id ? 'activeCart' : 'styleCart'}
               key={car.id}
-              onClick={() => handleActiveCar(car.id, car.name, car.price)}
+              onClick={() =>
+                handleActiveCar(
+                  car.id,
+                  car.name,
+                  car.price,
+                  car.markNumber,
+                  car.img,
+                  car.priceCart,
+                )
+              }
             >
               <div className="titleCar">
                 <h3 className="txtTitle">{car.name}</h3>
               </div>
               <div className="priceCar">
-                <p className="txtPrice">{car.price}</p>
+                <p className="txtPrice">{car.priceCart}</p>
               </div>
               <div className="imgCar">
                 <img className="img" src={car.img} alt="oneCar" />

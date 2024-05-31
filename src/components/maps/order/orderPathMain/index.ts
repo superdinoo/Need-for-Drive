@@ -5,6 +5,7 @@ import OrderPathRate from './OrderPathRate'
 import OrderRatesDate from './OrderRatesDate'
 import OrderPathHeader from './OrderPathHeader'
 import OrderPathBtn from './OrderPathBtn'
+import OrderPathPrice from './OrderPathPrice'
 
 export {
   OrderPathColor,
@@ -14,4 +15,5 @@ export {
   OrderPathModel,
   OrderPathHeader,
   OrderPathBtn,
+  OrderPathPrice,
 }

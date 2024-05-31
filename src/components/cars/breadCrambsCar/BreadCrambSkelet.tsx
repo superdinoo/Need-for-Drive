@@ -1,11 +1,13 @@
-import React from 'react'
+import classNames from 'classnames'
+import React, { HTMLInputTypeAttribute } from 'react'
 
 interface BreadCrambsProps<T> {
   title: string
   activePoint: T
   handleActivePoint: (marker: string) => void
   items: { text: string; marker: string; id: number }[]
-  initialPath: string
+  initialPath: 'rate' | 'color' | 'options' | 'car'
+  type: HTMLInputTypeAttribute
 }
 
 const BreadCrambSkelet = <T extends Record<string, boolean>>({
@@ -14,19 +16,13 @@ const BreadCrambSkelet = <T extends Record<string, boolean>>({
   items,
   title,
   initialPath,
+  type,
 }: BreadCrambsProps<T>) => {
-  const initialPathBread = () => {
-    switch (initialPath) {
-      case 'rate':
-      case 'options':
-        return 'containerAllModelRate'
-      case 'color':
-        return 'containerAllModelColor'
-      default:
-        return 'containerAllModel'
-    }
-  }
-  const breadCrambClass = initialPathBread()
+  const breadCrambClass = classNames('containerAllModel', {
+    containerAllModelRate: initialPath === 'rate' || initialPath === 'options',
+    containerAllModelColor: initialPath === 'color',
+  })
+
   return (
     <div className="breadCrambModelCar">
       <div className="containerBreadCrambModelCar">
@@ -35,16 +31,19 @@ const BreadCrambSkelet = <T extends Record<string, boolean>>({
           {items.map((item) => (
             <div key={item.id}>
               <div
-                className={
-                  initialPath === 'options' ? 'formRadioBox' : 'formRadio'
-                }
+                className={classNames('formRadio', {
+                  formRadioBox: initialPath === 'options',
+                })}
               >
                 <input
-                  className={
-                    initialPath === 'options' ? 'radioBtnBox' : 'radioBtn'
-                  }
-                  type={initialPath === 'options' ? 'checkbox' : 'radio'}
-                  id={`radio-${item.id}`}
+                  className={classNames('radioBtnBox', {
+                    radioBtn:
+                      initialPath === 'rate' ||
+                      initialPath === 'color' ||
+                      initialPath === 'car',
+                  })}
+                  type={type}
+                  id={`${initialPath}-${item.id}`}
                   checked={activePoint[item.marker]}
                   onChange={() => handleActivePoint(item.marker)}
                 />
@@ -52,7 +51,7 @@ const BreadCrambSkelet = <T extends Record<string, boolean>>({
                   className={
                     activePoint[item.marker] ? 'allTextBlack' : 'allText'
                   }
-                  htmlFor={`radio-${item.id}`}
+                  htmlFor={`${initialPath}-${item.id}`}
                 >
                   {item.text}
                 </label>

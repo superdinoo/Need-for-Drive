@@ -12,7 +12,10 @@ const initialState: InitialStateCar = {
   activeCar: {
     id: null,
     name: '',
-    price: '',
+    price: 0,
+    markNumber: '',
+    img: '',
+    priceCart: '',
   },
 }
 
@@ -48,8 +51,11 @@ const carSlice = createSlice({
     },
 
     setActiveCar: (state, action) => {
-      const { id, name, price } = action.payload
-      return { ...state, activeCar: { id, name, price } }
+      const { id, name, price, markNumber, img, priceCart } = action.payload
+      return {
+        ...state,
+        activeCar: { id, name, price, markNumber, img, priceCart },
+      }
     },
   },
 })

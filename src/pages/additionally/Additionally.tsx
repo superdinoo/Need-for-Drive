@@ -3,14 +3,9 @@ import './Additionally.scss'
 import { useSelector } from 'react-redux'
 import { Hamburger, Header } from 'components/leftWrapper/leftComponent'
 import BreadCramb from 'components/maps/breadCramb/BreadCramb'
-import {
-  AdditionallyPathColor,
-  AdditionallyPathOptions,
-  AdditionallyPathRate,
-  AdditionallyPathRentalDate,
-} from '../../components/additionallyPath'
 import Order from '../../components/maps/order/Order'
 import { selectActiveCar } from '../../components/cars/selectors'
+import { AdditionallyMain } from '../../components/additionallyPath/index'
 
 const Additionally: React.FC = () => {
   const activeCar = useSelector(selectActiveCar)
@@ -24,10 +19,7 @@ const Additionally: React.FC = () => {
         <BreadCramb />
         <div className="wrapperCenterAdditionally">
           <div className="settingCenterAdditionally">
-            <AdditionallyPathColor />
-            <AdditionallyPathRentalDate />
-            <AdditionallyPathRate />
-            <AdditionallyPathOptions />
+            <AdditionallyMain />
           </div>
           <Order activeCar={activeCar} currentPages={currentPages} />
         </div>

@@ -63,6 +63,7 @@ const BreadCramb: React.FC = () => {
             </p>
           </Link>
           <IoMdArrowDropright className="arrowIcon" />
+
           <p className="breadIcon">Итого</p>
         </div>
       </div>

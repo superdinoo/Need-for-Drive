@@ -1,5 +1,5 @@
-/* eslint-disable no-nested-ternary */
 import React from 'react'
+import { useSelector } from 'react-redux'
 import {
   OrderPathColor,
   OrderPathModel,
@@ -8,10 +8,13 @@ import {
   OrderRatesDate,
   OrderPathHeader,
   OrderPathBtn,
+  OrderPathPrice,
 } from './orderPathMain'
 import { OrderProps } from '../../../interface/Interface'
+import { selectActiveCar } from '../../cars/selectors'
 
-const OrderPathUnity: React.FC<OrderProps> = ({ currentPages, activeCar }) => {
+const OrderPathUnity: React.FC<OrderProps> = ({ currentPages }) => {
+  const activeCar = useSelector(selectActiveCar)
   return (
     <>
       <OrderPathHeader />
@@ -28,10 +31,7 @@ const OrderPathUnity: React.FC<OrderProps> = ({ currentPages, activeCar }) => {
           ) : (
             ''
           )}
-          <div className="priceOrderContainer">
-            <h3 className="priceOrder">Цена: </h3>
-            <p className="priceOrderWidth">{activeCar.price}</p>
-          </div>
+          <OrderPathPrice activeCar={activeCar} currentPages="" />
         </>
       ) : (
         ''

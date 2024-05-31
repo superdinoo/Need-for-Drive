@@ -13,23 +13,31 @@ export interface ChangePageAction {
 export interface Car {
   id: number
   name: string
-  price: string
+  price: number
   img: string
+  markNumber: string
+  priceCart: string
 }
 
 export interface OrderProps {
   currentPages: string
   activeCar: {
     name: string
-    price: string
+    price: number
+    priceCart: string
   }
+}
+export interface NamesBtn {
+  [key: string]: string
 }
 export interface FilterCar {
   id: number
   name: string
-  price: string
+  price: number
   img: string
   type: string
+  markNumber: string
+  priceCart: string
 }
 
 export interface InitialStateCar {
@@ -42,7 +50,10 @@ export interface InitialStateCar {
   activeCar: {
     id: number | null
     name: string
-    price: string
+    price: number
+    markNumber: string
+    priceCart: string
+    img: string
   }
 }
 

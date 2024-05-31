@@ -1,43 +1,51 @@
-import React from 'react'
+/* eslint-disable no-shadow */
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { selectLocation } from '../selectorsOrder'
-import { OrderProps } from '../../../../interface/Interface'
+import { OrderProps, NamesBtn } from '../../../../interface/Interface'
 
-const OrderPathBtn: React.FC<OrderProps> = ({ activeCar, currentPages }) => {
+enum EPath {
+  '/' = '/LocationPage',
+  '/LocationPage' = '/ModelCar',
+  '/ModelCar' = '/Additionally',
+}
+
+const OrderPathBtn: React.FC<OrderProps & NamesBtn> = ({ activeCar }) => {
   const { city, point } = useSelector(selectLocation)
-  let toPath = '/LocationPage'
+  const { pathname } = useLocation()
+  const [disabled, setDisabled] = useState(false)
 
   const cityAndPoint = city.length > 0 && point.length > 0
-
+  const activeCarConst = activeCar.name.length > 0
+  let nextPath = EPath['/']
   if (cityAndPoint) {
-    toPath = '/ModelCar'
+    nextPath = EPath['/LocationPage']
   }
-  if (activeCar.name.length > 0 && city.length > 0 && point.length > 0) {
-    toPath = '/Additionally'
+  if (cityAndPoint && activeCarConst) {
+    nextPath = EPath['/ModelCar']
+  }
+  const namesBtn: NamesBtn = {
+    '/LocationPage': 'Выбрать модель',
+    '/ModelCar': 'Дополнительно',
+    '/Additionally': 'Итого',
   }
 
-  const handleNameBtn = () => {
-    switch (currentPages) {
-      case 'location':
-        return 'Выбрать модель'
-      case 'modelCar':
-        return 'Дополнительно'
-      case 'additionally':
-        return 'Итого'
-      default:
-        return ''
-    }
+  const handleDisabled = () => {
+    if (cityAndPoint || activeCarConst) setDisabled(!disabled)
   }
 
   return (
     <div className="btnContainerOrder">
-      <Link to={toPath} className="linkOrder">
+      <Link to={nextPath} className="linkOrder">
         <button
           type="button"
-          className={cityAndPoint ? 'btnOrderTrue' : 'btnOrder'}
+          disabled={handleDisabled}
+          className={`btnOrder ${
+            cityAndPoint || activeCarConst ? 'btnOrderTrue' : ''
+          }`}
         >
-          {handleNameBtn()}
+          {namesBtn[pathname] ?? ''}
         </button>
       </Link>
     </div>

@@ -4,15 +4,17 @@ import { selectActivePointOptions } from '../../../additionallyPath/selectors'
 
 const OrderPathOptions: React.FC = () => {
   const activeOptions = useSelector(selectActivePointOptions)
+
+  const optionsSetting = [
+    { key: 'tank', label: 'Полный бак' },
+    { key: 'seat', label: 'Детское кресло' },
+    { key: 'wheel', label: 'Правый руль' },
+  ]
   return (
     <div>
       {activeOptions && (
         <>
-          {[
-            { key: 'tank', label: 'Полный бак' },
-            { key: 'seat', label: 'Детское кресло' },
-            { key: 'wheel', label: 'Правый руль' },
-          ].map(
+          {optionsSetting.map(
             (option) =>
               activeOptions[option.key] && (
                 <div key={option.key} className="textOrderContainer">

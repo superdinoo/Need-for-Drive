@@ -1,7 +1,14 @@
+/* eslint-disable no-shadow */
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { selectActivePointColor } from 'components/additionallyPath/selectors'
 import { InitialStateAdditionally } from '../../../../interface/Interface'
+
+enum EPath {
+  Red = 'Красный',
+  Blue = 'Синий',
+  Any = 'Любой',
+}
 
 const OrderPathColor: React.FC = () => {
   const activeColor = useSelector(selectActivePointColor)
@@ -9,16 +16,9 @@ const OrderPathColor: React.FC = () => {
   const handleActiveColor = (
     color: InitialStateAdditionally['activePointColor'],
   ) => {
-    if (color.red) {
-      return 'Красный'
-    }
-    if (color.blue) {
-      return 'Синий'
-    }
-    if (color.any) {
-      return 'Любой'
-    }
-    return ''
+    if (color.red) return EPath.Red
+    if (color.blue) return EPath.Blue
+    return EPath.Any
   }
 
   return (

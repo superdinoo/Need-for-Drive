@@ -1,32 +1,29 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { RxCross2 } from 'react-icons/rx'
 import DatePicker from 'react-datepicker'
 import setRatesDate from '../../redux/actions/setRentalDate'
-
 import 'react-datepicker/dist/react-datepicker.css'
+import { selectRentalDate } from '../maps/order/selectorsOrder'
 
 const AdditionallyPathRentalDate: React.FC = () => {
-  const [dates, setDates] = useState<{ start: Date | null; end: Date | null }>({
-    start: null,
-    end: null,
-  })
-
   const dispatch = useDispatch()
+  const { start: saveStart, end: saveEnd } = useSelector(selectRentalDate)
 
-  useEffect(() => {
-    if (dates.start && dates.end) {
-      dispatch(
-        setRatesDate({
-          start: dates.start.toISOString(),
-          end: dates.end.toISOString(),
-        }),
-      )
-    }
-  }, [dates.start, dates.end, dispatch])
+  const [dates, setDates] = useState({
+    start: saveStart ? new Date(saveStart) : null,
+    end: saveEnd ? new Date(saveEnd) : null,
+  })
 
   const handleReset = (datesType: keyof typeof dates) => {
     setDates((prevDates) => ({ ...prevDates, [datesType]: null }))
+    dispatch(
+      setRatesDate({
+        [datesType]: null,
+        start: '',
+        end: '',
+      }),
+    )
   }
 
   return (
@@ -40,9 +37,17 @@ const AdditionallyPathRentalDate: React.FC = () => {
               <DatePicker
                 className="inputCity"
                 selected={dates.start}
-                onChange={(date: Date | null) =>
-                  setDates((prevState) => ({ ...prevState, start: date }))
-                }
+                onChange={(date: Date | null) => {
+                  if (date) {
+                    setDates((prevDates) => ({ ...prevDates, start: date }))
+                    dispatch(
+                      setRatesDate({
+                        start: date ? date.toISOString() : '',
+                        end: '',
+                      }),
+                    )
+                  }
+                }}
                 placeholderText="Введите дату и время"
                 showTimeSelect
                 dateFormat="dd.MM.yyyy HH:mm"
@@ -59,9 +64,17 @@ const AdditionallyPathRentalDate: React.FC = () => {
               <DatePicker
                 className="inputCity"
                 selected={dates.end}
-                onChange={(date: Date | null) =>
-                  setDates((prevState) => ({ ...prevState, end: date }))
-                }
+                onChange={(date: Date | null) => {
+                  if (date) {
+                    setDates((prevDates) => ({ ...prevDates, end: date }))
+                    dispatch(
+                      setRatesDate({
+                        start: dates.start ? dates.start.toISOString() : '',
+                        end: date ? date.toISOString() : '',
+                      }),
+                    )
+                  }
+                }}
                 placeholderText="Введите дату и время"
                 showTimeSelect
                 dateFormat="dd.MM.yyyy HH:mm"
