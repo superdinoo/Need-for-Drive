@@ -1,19 +1,37 @@
 import React from 'react'
-import { OrderPathModel, OrderPathHeader, OrderPathBtn } from './orderPathMain'
+import { useSelector } from 'react-redux'
+import {
+  OrderPathColor,
+  OrderPathModel,
+  OrderPathOptions,
+  OrderPathRate,
+  OrderRatesDate,
+  OrderPathHeader,
+  OrderPathBtn,
+  OrderPathPrice,
+} from './orderPathMain'
 import { OrderProps } from '../../../interface/Interface'
+import { selectActiveCar } from '../../cars/selectors'
 
-const OrderPathUnity: React.FC<OrderProps> = ({ currentPages, activeCar }) => {
+const OrderPathUnity: React.FC<OrderProps> = ({ currentPages }) => {
+  const activeCar = useSelector(selectActiveCar)
   return (
     <>
       <OrderPathHeader />
       {currentPages === 'modelCar' || currentPages === 'additionally' ? (
         <>
           <OrderPathModel currentPages={currentPages} activeCar={activeCar} />
-
-          <div className="priceOrderContainer">
-            <h3 className="priceOrder">Цена: </h3>
-            <p className="priceOrderWidth">{activeCar.price}</p>
-          </div>
+          {currentPages === 'additionally' ? (
+            <>
+              <OrderPathColor />
+              <OrderRatesDate />
+              <OrderPathRate />
+              <OrderPathOptions />
+            </>
+          ) : (
+            ''
+          )}
+          <OrderPathPrice activeCar={activeCar} currentPages="" />
         </>
       ) : (
         ''

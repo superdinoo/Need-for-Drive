@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
 import './BreadCrambsCar.scss'
@@ -11,13 +10,14 @@ const BreadCrambsCar: React.FC = () => {
   const dispatch = useDispatch()
   const { activePoint } = useSelector(getCarInfo)
 
-  const handleActivePoint = (marker: string) => {
+  const handleActivePoint = (marker: any) => {
     dispatch(setActivePoint(marker))
   }
 
   return (
     <>
       <BreadCrambSkelet
+        initialPath="car"
         activePoint={activePoint}
         title=""
         handleActivePoint={handleActivePoint}
@@ -26,6 +26,7 @@ const BreadCrambsCar: React.FC = () => {
           { text: 'Эконом', marker: 'eco', id: 2 },
           { text: 'Премиум', marker: 'premium', id: 3 },
         ]}
+        type="radio"
       />
     </>
   )
