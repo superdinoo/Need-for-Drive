@@ -63,8 +63,16 @@ const BreadCramb: React.FC = () => {
             </p>
           </Link>
           <IoMdArrowDropright className="arrowIcon" />
-
-          <p className="breadIcon">Итого</p>
+          <Link to="/Total">
+            <p
+              className="breadIcon"
+              style={{
+                color: location.pathname === '/Total' ? '#0EC261' : 'black',
+              }}
+            >
+              Итого
+            </p>
+          </Link>
         </div>
       </div>
     </div>

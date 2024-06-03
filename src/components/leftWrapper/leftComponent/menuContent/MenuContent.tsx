@@ -13,7 +13,8 @@ const MenuContent: React.FC<MenuContentProps> = ({
     blackBackground:
       currentPages === 'location' ||
       currentPages === 'modelCar' ||
-      currentPages === 'additionally',
+      currentPages === 'additionally' ||
+      currentPages === 'totalPages',
   })
 
   return (

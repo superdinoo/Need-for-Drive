@@ -18,10 +18,12 @@ const OrderPathUnity: React.FC<OrderProps> = ({ currentPages }) => {
   return (
     <>
       <OrderPathHeader />
-      {currentPages === 'modelCar' || currentPages === 'additionally' ? (
+      {currentPages === 'modelCar' ||
+      currentPages === 'additionally' ||
+      currentPages === 'totalPages' ? (
         <>
           <OrderPathModel currentPages={currentPages} activeCar={activeCar} />
-          {currentPages === 'additionally' ? (
+          {currentPages === 'additionally' || currentPages === 'totalPages' ? (
             <>
               <OrderPathColor />
               <OrderRatesDate />
@@ -31,7 +33,7 @@ const OrderPathUnity: React.FC<OrderProps> = ({ currentPages }) => {
           ) : (
             ''
           )}
-          <OrderPathPrice activeCar={activeCar} currentPages="" />
+          <OrderPathPrice activeCar={activeCar} currentPages={currentPages} />
         </>
       ) : (
         ''

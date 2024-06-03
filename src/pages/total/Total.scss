@@ -1,0 +1,44 @@
+.totalContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}
+.totalWrapper {
+  width: 100%;
+}
+.wrapperCenterTotal {
+  display: flex;
+  justify-content: space-between;
+  height: 86vh;
+}
+
+.settingCenterTotal {
+  width: 60%;
+}
+
+.hmContainerTotal {
+  height: auto;
+  display: flex;
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .settingCenterTotal {
+    width: 100%;
+  }
+  .wrapperCenterTotal {
+    flex-direction: column;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .wrapperCenterTotal {
+    flex-direction: column;
+    gap: 30px;
+  }
+  .hmContainerTotal {
+    height: 130vh;
+  }
+  .settingCenterTotal {
+    width: 96%;
+  }
+}

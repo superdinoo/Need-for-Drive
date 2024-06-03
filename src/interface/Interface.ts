@@ -78,3 +78,7 @@ export interface InitialStateAdditionally {
     wheel: boolean
   }
 }
+
+export interface PopupTotal {
+  onClose: boolean
+}
