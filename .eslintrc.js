@@ -3,6 +3,8 @@ module.exports = {
   plugins: ['react', 'jsx-a11y', 'import', 'react-hooks', '@typescript-eslint'],
   rules: {
     'react/jsx-no-useless-fragment': 'off',
+    'react/jsx-uses-react': 'off',
+    'react/react-in-jsx-scope': 'off',
     'react/jsx-filename-extension': [
       1,
       { extensions: ['.js', '.jsx', '.ts', '.tsx'] },
@@ -40,7 +42,7 @@ module.exports = {
       files: ['*.ts', '*.tsx'],
       parser: '@typescript-eslint/parser',
       parserOptions: {
-        ecmaVersion: 2018,
+        ecmaVersion: 'latest',
         sourceType: 'module',
         ecmaFeatures: {
           jsx: true,

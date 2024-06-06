@@ -1,4 +1,3 @@
-/* eslint-disable no-shadow */
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
@@ -9,20 +8,13 @@ import {
   selectActivePointRate,
 } from '../../../additionallyPath/selectors'
 import ModalTotal from '../../../totalPath/ModalTotal'
-
-enum EPath {
-  '/' = '/LocationPage',
-  '/LocationPage' = '/ModelCar',
-  '/ModelCar' = '/Additionally',
-  '/Additionally' = '/Total',
-}
+import { nextPathLoc } from './helpers'
 
 const OrderPathBtn: React.FC<OrderProps & NamesBtn> = ({
   currentPages,
   activeCar,
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [disabled, setDisabled] = useState(false)
   const { start, end } = useSelector(selectRentalDate)
   const { any, red, blue } = useSelector(selectActivePointColor)
   const { everyMinute, forADay } = useSelector(selectActivePointRate)
@@ -35,18 +27,6 @@ const OrderPathBtn: React.FC<OrderProps & NamesBtn> = ({
   const color = any === true || red === true || blue === true
   const rate = everyMinute === true || forADay === true
 
-  let nextPath = EPath['/']
-
-  if (cityAndPoint) {
-    nextPath = EPath['/LocationPage']
-  }
-  if (cityAndPoint && activeCarConst) {
-    nextPath = EPath['/ModelCar']
-  }
-  if (cityAndPoint && activeCarConst && startEnd && color && rate) {
-    nextPath = EPath['/Additionally']
-  }
-
   const namesBtn: NamesBtn = {
     '/LocationPage': 'Выбрать модель',
     '/ModelCar': 'Дополнительно',
@@ -54,10 +34,16 @@ const OrderPathBtn: React.FC<OrderProps & NamesBtn> = ({
     '/Total': 'Заказать',
   }
 
-  const handleDisabled = () => {
-    if (cityAndPoint || activeCarConst || startEnd || color || rate)
-      setDisabled(!disabled)
+  const routeData = {
+    pathname,
+    cityAndPoint,
+    activeCarConst,
+    startEnd,
+    color,
+    rate,
   }
+
+  const { nextPath, isActive } = nextPathLoc(routeData)
 
   const handleOrderClick = () => {
     if (currentPages === 'totalPages') {
@@ -70,14 +56,12 @@ const OrderPathBtn: React.FC<OrderProps & NamesBtn> = ({
       <Link to={nextPath} className="linkOrder" onClick={handleOrderClick}>
         <button
           type="button"
-          disabled={handleDisabled}
-          className={`btnOrder ${
-            cityAndPoint || activeCarConst ? 'btnOrderTrue' : ''
-          }`}
+          className={`btnOrder ${isActive ? 'btnOrderTrue' : ''}`}
         >
           {namesBtn[pathname] ?? ''}
         </button>
       </Link>
+
       {isModalOpen && (
         <div className="modalOverlay">
           <ModalTotal onClose={() => setIsModalOpen(false)} />
