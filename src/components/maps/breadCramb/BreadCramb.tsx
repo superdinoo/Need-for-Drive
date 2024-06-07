@@ -6,8 +6,10 @@ import { useSelector } from 'react-redux'
 import { selectActiveCar } from '../../cars/selectors'
 import { selectLocation } from '../order/selectorsOrder'
 import breadMap from './dataMapLink'
+import { selectModalTotal } from '../../totalPath/selectorsModalTotal'
 
 const BreadCramb: React.FC = () => {
+  const { confirm } = useSelector(selectModalTotal)
   const { city, point } = useSelector(selectLocation)
   const activeCar = useSelector(selectActiveCar)
   const location = useLocation()
@@ -28,24 +30,28 @@ const BreadCramb: React.FC = () => {
     <div className="breadCramb">
       <div className="containerBread">
         <div className="iconContainer">
-          {breadMap.map((crumbs) => (
-            <React.Fragment key={crumbs.to}>
-              <Link to={getLinkTo(crumbs)}>
-                <p
-                  className="breadIcon"
-                  style={{
-                    color:
-                      location.pathname === crumbs.to ? '#0EC261' : 'black',
-                  }}
-                >
-                  {crumbs.text}
-                </p>
-              </Link>
-              {crumbs.id < breadMap.length && (
-                <IoMdArrowDropright color="gray" />
-              )}
-            </React.Fragment>
-          ))}
+          {confirm === true && (
+            <p className="oilName">Заказ номер RU58491823</p>
+          )}
+          {!confirm &&
+            breadMap.map((crumbs) => (
+              <React.Fragment key={crumbs.to}>
+                <Link to={getLinkTo(crumbs)}>
+                  <p
+                    className="breadIcon"
+                    style={{
+                      color:
+                        location.pathname === crumbs.to ? '#0EC261' : 'black',
+                    }}
+                  >
+                    {crumbs.text}
+                  </p>
+                </Link>
+                {crumbs.id < breadMap.length && (
+                  <IoMdArrowDropright className="arrowIcon" />
+                )}
+              </React.Fragment>
+            ))}
         </div>
       </div>
     </div>
