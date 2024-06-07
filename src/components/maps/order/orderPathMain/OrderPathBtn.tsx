@@ -84,11 +84,25 @@ const OrderPathBtn: React.FC<OrderProps & NamesBtn> = ({
 
   return (
     <div className="btnContainerOrder">
-      <Link to={nextPath} className="linkOrder" onClick={handleOrderClick}>
-        <button type="button" className="btnOrder" disabled={!isActive}>
-          {namesBtn[pathname] ?? ''}
+      {confirm && (
+        <button
+          type="button"
+          onClick={handleCancelOrder}
+          className={`btnOrder ${confirm ? 'btnModalTotal' : ''}`}
+        >
+          <span>Отменить</span>
         </button>
-      </Link>
+      )}
+      {!confirm && (
+        <Link to={nextPath} className="linkOrder" onClick={handleOrderClick}>
+          <button
+            type="button"
+            className={`btnOrder ${isActive ? 'btnOrderTrue' : ''}`}
+          >
+            {namesBtn[pathname]}
+          </button>
+        </Link>
+      )}
 
       {!confirm && isModalOpen && (
         <div className="modalOverlay">
