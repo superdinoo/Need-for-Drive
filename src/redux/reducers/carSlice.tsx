@@ -57,9 +57,16 @@ const carSlice = createSlice({
         activeCar: { id, name, price, markNumber, img, priceCart },
       }
     },
+    setResetActiveCar: (state) => {
+      return {
+        ...state,
+        activeCar: initialState.activeCar,
+      }
+    },
   },
 })
 
-export const { setActivePoint, setFilterCar, setActiveCar } = carSlice.actions
+export const { setActivePoint, setFilterCar, setActiveCar, setResetActiveCar } =
+  carSlice.actions
 
 export default carSlice.reducer

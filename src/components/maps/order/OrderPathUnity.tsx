@@ -16,20 +16,18 @@ import {
   selectActivePointColor,
   selectActivePointRate,
 } from '../../additionallyPath/selectors'
-import { selectLocation, selectRentalDate } from './selectorsOrder'
+import { selectRentalDate } from './selectorsOrder'
 
 const OrderPathUnity: React.FC<OrderProps> = ({ currentPages }) => {
   const activeCar = useSelector(selectActiveCar)
-  const activeLocation = useSelector(selectLocation)
+
   const activeColor = useSelector(selectActivePointColor)
   const activeRate = useSelector(selectActivePointRate)
   const activeRentalDate = useSelector(selectRentalDate)
 
   return (
     <>
-      {activeLocation.city.length > 0 && activeLocation.point.length > 0 && (
-        <OrderPathHeader />
-      )}
+      <OrderPathHeader />
 
       <>
         {activeCar.name.length > 0 && (

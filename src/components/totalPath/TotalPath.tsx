@@ -3,8 +3,10 @@ import './TotalPath.scss'
 import { useSelector } from 'react-redux'
 import { selectActiveCar } from '../cars/selectors'
 import { selectRentalDate } from '../maps/order/selectorsOrder'
+import { selectModalTotal } from './selectorsModalTotal'
 
 const TotalPath: React.FC = () => {
+  const { confirm } = useSelector(selectModalTotal)
   const { markNumber, name, img } = useSelector(selectActiveCar)
   const { start } = useSelector(selectRentalDate)
 
@@ -23,6 +25,7 @@ const TotalPath: React.FC = () => {
   return (
     <div className="totalPathContainer">
       <div className="leftPathTotal">
+        {confirm && <h3 className="titleConfirm">Ваш заказ подтверждён</h3>}
         <p className="titleLeftPathTotal">Hyndai, {name}</p>
         <div className="totalMark">
           <p className="markName">{markNumber}</p>

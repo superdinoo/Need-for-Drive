@@ -24,43 +24,65 @@ const additionallySlice = createSlice({
   reducers: {
     setActiveColor: (
       state,
-      action: PayloadAction<keyof InitialStateAdditionally['activePointColor']>,
+      action: PayloadAction<{
+        colorKey: keyof InitialStateAdditionally['activePointColor'] | ''
+        reset: boolean
+      }>,
     ) => {
       return {
         ...state,
         activePointColor: {
           ...initialState.activePointColor,
-          [action.payload]: !state.activePointColor[action.payload],
+          [action.payload.colorKey]: action.payload.reset
+            ? false
+            : !state.activePointColor[action.payload.colorKey],
         },
       }
     },
 
     setActiveRate: (
       state,
-      action: PayloadAction<'everyMinute' | 'forADay'>,
+      action: PayloadAction<{
+        rateKey: 'everyMinute' | 'forADay' | ''
+        reset: boolean
+      }>,
     ) => {
       return {
         ...state,
         activePointRate: {
           ...initialState.activePointRate,
-          [action.payload]: !state.activePointRate[action.payload],
+          [action.payload.rateKey]: action.payload.reset
+            ? false
+            : !state.activePointRate[action.payload.rateKey],
         },
       }
     },
 
     setActiveOptions: (
       state,
-      action: PayloadAction<
-        keyof InitialStateAdditionally['activePointOptions']
-      >,
+      action: PayloadAction<{
+        optionsKey: keyof InitialStateAdditionally['activePointOptions'] | 'all'
+        reset: boolean
+      }>,
     ) => {
+      if (action.payload.optionsKey === 'all' && action.payload.reset) {
+        return {
+          ...state,
+          activePointOptions: {
+            ...initialState.activePointOptions,
+            tank: false,
+            seat: false,
+            wheel: false,
+          },
+        }
+      }
       return {
         ...state,
         activePointOptions: {
           ...state.activePointOptions,
-          [action.payload]: !state.activePointOptions[action.payload],
+          [action.payload.optionsKey]:
+            !state.activePointOptions[action.payload.optionsKey],
         },
-        state,
       }
     },
   },

@@ -92,7 +92,8 @@
   margin-bottom: 20px;
 }
 .btnOrder,
-.btnOrderTrue {
+.btnOrderTrue,
+.btnModalTotal {
   width: 100%;
   height: 48px;
   font-family: Roboto;
@@ -112,6 +113,9 @@
 }
 .btnOrderTrue {
   background: linear-gradient(90deg, #0ec261 2.61%, #039f67 112.6%);
+}
+.btnModalTotal {
+  background: linear-gradient(90deg, #493013 0%, #7b0c3b 100%);
 }
 .linkOrder {
   width: 100%;
