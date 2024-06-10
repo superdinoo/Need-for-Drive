@@ -1,6 +1,7 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
-import { Link, useLocation } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { selectLocation, selectRentalDate } from '../selectorsOrder'
 import { OrderProps, NamesBtn } from '../../../../interface/Interface'
 import {
@@ -9,6 +10,14 @@ import {
 } from '../../../additionallyPath/selectors'
 import ModalTotal from '../../../totalPath/ModalTotal'
 import { nextPathLoc } from './helpers'
+import { selectModalTotal } from '../../../totalPath/selectorsModalTotal'
+import { setResetConfirm } from '../../../../redux/reducers/modalTotalSlice'
+import {
+  setActiveColor,
+  setActiveOptions,
+  setActiveRate,
+} from '../../../../redux/reducers/additionallySlice'
+import { setResetActiveCar } from '../../../../redux/reducers/carSlice'
 
 const OrderPathBtn: React.FC<OrderProps & NamesBtn> = ({
   currentPages,
@@ -19,7 +28,10 @@ const OrderPathBtn: React.FC<OrderProps & NamesBtn> = ({
   const { any, red, blue } = useSelector(selectActivePointColor)
   const { everyMinute, forADay } = useSelector(selectActivePointRate)
   const { city, point } = useSelector(selectLocation)
+  const { confirm } = useSelector(selectModalTotal)
   const { pathname } = useLocation()
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const cityAndPoint = city.length > 0 && point.length > 0
   const activeCarConst = activeCar.name.length > 0
@@ -51,15 +63,45 @@ const OrderPathBtn: React.FC<OrderProps & NamesBtn> = ({
     }
   }
 
+  const handleCancelOrder = () => {
+    dispatch(setResetConfirm())
+    dispatch(
+      setActiveColor({ colorKey: 'any' && 'blue' && 'red', reset: true }),
+    )
+    dispatch(
+      setActiveRate({ rateKey: 'everyMinute' && 'forADay', reset: true }),
+    )
+    dispatch(
+      setActiveOptions({
+        optionsKey: 'all',
+        reset: true,
+      }),
+    )
+    dispatch(setResetActiveCar())
+
+    navigate('/LocationPage')
+  }
+
   return (
     <div className="btnContainerOrder">
-      <Link to={nextPath} className="linkOrder" onClick={handleOrderClick}>
-        <button type="button" className="btnOrder" disabled={!isActive}>
-          {namesBtn[pathname] ?? ''}
+      {confirm && (
+        <button
+          type="button"
+          onClick={handleCancelOrder}
+          className={`btnOrder ${confirm ? 'btnModalTotal' : ''}`}
+        >
+          <span>Отменить</span>
         </button>
-      </Link>
+      )}
+      {!confirm && (
+        <Link to={nextPath} className="linkOrder" onClick={handleOrderClick}>
+          <button type="button" className="btnOrder " disabled={!isActive}>
+            {namesBtn[pathname]}
+          </button>
+        </Link>
+      )}
 
-      {isModalOpen && (
+      {!confirm && isModalOpen && (
         <div className="modalOverlay">
           <ModalTotal onClose={() => setIsModalOpen(false)} />
         </div>

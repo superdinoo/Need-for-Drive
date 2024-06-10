@@ -30,7 +30,7 @@ const AdditionallyMain: React.FC = () => {
               { text: 'Голубой', marker: 'blue', id: 6 },
             ]}
             handleActivePoint={(marker: any) =>
-              dispatch(setActiveColor(marker))
+              dispatch(setActiveColor({ colorKey: marker, reset: false }))
             }
             type="radio"
           />
@@ -48,7 +48,9 @@ const AdditionallyMain: React.FC = () => {
             { text: 'Поминутно, 7₽/мин', marker: 'everyMinute', id: 12 },
             { text: 'На сутки, 1999 ₽/сутки', marker: 'forADay', id: 13 },
           ]}
-          handleActivePoint={(marker: any) => dispatch(setActiveRate(marker))}
+          handleActivePoint={(marker: any) =>
+            dispatch(setActiveRate({ rateKey: marker, reset: false }))
+          }
           type="radio"
         />
       </div>
@@ -64,7 +66,7 @@ const AdditionallyMain: React.FC = () => {
             { text: 'Правый руль, 1600р', marker: 'wheel', id: 11 },
           ]}
           handleActivePoint={(marker: any) =>
-            dispatch(setActiveOptions(marker))
+            dispatch(setActiveOptions({ optionsKey: marker, reset: false }))
           }
           type="checkbox"
         />

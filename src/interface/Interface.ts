@@ -68,20 +68,23 @@ export interface InitialStateAdditionally {
     any: boolean
     red: boolean
     blue: boolean
+    [key: string]: boolean
   }
   activePointRate: {
     everyMinute: boolean
     forADay: boolean
+    [key: string]: boolean
   }
   activePointOptions: {
     tank: boolean
     seat: boolean
     wheel: boolean
+    [key: string]: boolean
   }
 }
 
 export interface PopupTotal {
-  onClose: boolean
+  onClose: () => void
 }
 
 export interface RouteData {
@@ -91,6 +94,13 @@ export interface RouteData {
   startEnd: boolean
   color: boolean
   rate: boolean
+}
+
+export interface InitialStateModalTotal {
+  activeButtonModal: {
+    confirm: boolean
+    back: boolean
+  }
 }
 
 export enum EPath {
