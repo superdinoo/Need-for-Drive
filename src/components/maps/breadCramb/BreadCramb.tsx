@@ -42,7 +42,7 @@ const BreadCramb: React.FC = () => {
                 </p>
               </Link>
               {crumbs.id < breadMap.length && (
-                <IoMdArrowDropright className="arrowIcon" />
+                <IoMdArrowDropright color="gray" />
               )}
             </React.Fragment>
           ))}
