@@ -18,7 +18,7 @@ const Slider: React.FC = () => {
       }, 5000)
     }
 
-    return () => clearInterval(interval)
+    return () => clearInterval(interval as number)
   }, [activeIndex, isAutoPlay])
 
   const toggleAutoPlay = () => {
