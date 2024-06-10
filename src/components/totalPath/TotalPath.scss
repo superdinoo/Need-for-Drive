@@ -1,0 +1,125 @@
+.totalPathContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 25px;
+}
+.leftPathTotal {
+  margin-left: 80px;
+}
+.titleLeftPathTotal {
+  font-family: 'Roboto';
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 21.09px;
+  text-align: left;
+}
+
+.totalMark {
+  border: 1px solid #121212;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  width: 94px;
+  height: 24px;
+}
+.markName {
+  font-family: 'Roboto';
+  font-size: 14px;
+  line-height: 16px;
+  margin: 5px 1px;
+}
+.oilContainer,
+.dateTotalContainer {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.oilName,
+.oilValue {
+  font-family: 'Roboto';
+  font-size: 14px;
+  line-height: 16px;
+  margin-bottom: 3px;
+  margin-top: 13px;
+}
+.oilName {
+  font-weight: bold;
+}
+
+// {MODALTOTAL}
+.containerModalTotal {
+  display: contents;
+  height: 100%;
+  width: 100%;
+}
+
+.nameTitle {
+  font-family: 'Roboto';
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 28.13px;
+  text-align: center;
+}
+
+.btnContainerModalTotal {
+  display: flex;
+  gap: 10px;
+}
+.btnFirstContainer,
+.btnSecondContainer {
+  width: 177px;
+  height: 48px;
+}
+.btnFirstModalTotal,
+.btnSecondModalTotal {
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #0ec261 2.61%, #039f67 112.6%);
+  background-blend-mode: darken;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Roboto';
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 21.09px;
+  text-align: center;
+  color: #ffffff;
+  transition: all 0.5s;
+  &:hover {
+    filter: brightness(90%);
+  }
+}
+.btnSecondModalTotal {
+  background: linear-gradient(90deg, #493013 0%, #7b0c3b 100%);
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .totalPathContainer {
+    display: flex;
+    margin-top: 25px;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .leftPathTotal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 0;
+  }
+  .containerModalTotal {
+    display: flex;
+    align-items: center;
+  }
+  .wrapperModalTotal {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+  }
+  .btnContainerModalTotal {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}

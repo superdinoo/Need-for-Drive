@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 export interface InputCityProps {
   city: string
   point: string
@@ -77,4 +78,24 @@ export interface InitialStateAdditionally {
     seat: boolean
     wheel: boolean
   }
+}
+
+export interface PopupTotal {
+  onClose: boolean
+}
+
+export interface RouteData {
+  pathname: string
+  cityAndPoint: boolean
+  activeCarConst: boolean
+  startEnd: boolean
+  color: boolean
+  rate: boolean
+}
+
+export enum EPath {
+  '/' = '/LocationPage',
+  '/LocationPage' = '/ModelCar',
+  '/ModelCar' = '/Additionally',
+  '/Additionally' = '/Total',
 }
