@@ -95,10 +95,7 @@ const OrderPathBtn: React.FC<OrderProps & NamesBtn> = ({
       )}
       {!confirm && (
         <Link to={nextPath} className="linkOrder" onClick={handleOrderClick}>
-          <button
-            type="button"
-            className={`btnOrder ${isActive ? 'btnOrderTrue' : ''}`}
-          >
+          <button type="button" className="btnOrder " disabled={!isActive}>
             {namesBtn[pathname]}
           </button>
         </Link>
