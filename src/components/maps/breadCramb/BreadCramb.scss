@@ -16,12 +16,20 @@
 .breadIcon {
   margin: 10px 5px;
   text-decoration: none;
-  color: gray;
+  color: #0ec261;
   font-family: 'Roboto';
   font-size: 14px;
   line-height: 16.41px;
   text-align: left;
   gap: 5px;
+}
+
+.breadIcon.passed {
+  color: black;
+}
+
+.breadIcon.next {
+  color: gray;
 }
 
 @media screen and (min-width: 320px) and (max-width: 767px) {
