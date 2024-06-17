@@ -1,21 +1,46 @@
-import React, { useState } from 'react'
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+import React, { useEffect, useState } from 'react'
 import './Slider.scss'
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io'
 import dataSlider from './dataSlider'
 
 const Slider: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0)
+  const [isAutoPlay, setIsAutoPlay] = useState(true)
 
+  useEffect(() => {
+    let interval: NodeJS.Timer
+    if (isAutoPlay) {
+      interval = setInterval(() => {
+        setActiveIndex((prevIndex) =>
+          prevIndex < dataSlider.length - 1 ? prevIndex + 1 : 0,
+        )
+      }, 5000)
+    }
+
+    return () => clearInterval(interval as number)
+  }, [activeIndex, isAutoPlay])
+
+  const toggleAutoPlay = () => {
+    setIsAutoPlay(!isAutoPlay)
+  }
   const handleClickLeft = () => {
     setActiveIndex((prevIndex) =>
       prevIndex > 0 ? prevIndex - 1 : dataSlider.length - 1,
     )
+    toggleAutoPlay()
   }
 
   const handleClickRight = () => {
     setActiveIndex((prevIndex) =>
       prevIndex < dataSlider.length - 1 ? prevIndex + 1 : 0,
     )
+    toggleAutoPlay()
+  }
+
+  const handleClickDots = (itemID: number) => {
+    setActiveIndex(itemID - 1)
+    toggleAutoPlay()
   }
 
   return (
@@ -51,6 +76,7 @@ const Slider: React.FC = () => {
             <div className="dots">
               {dataSlider.map((item) => (
                 <div
+                  onClick={() => handleClickDots(item.id)}
                   className="circle"
                   key={item.id}
                   style={{
