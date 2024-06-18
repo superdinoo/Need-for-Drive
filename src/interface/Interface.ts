@@ -103,6 +103,17 @@ export interface InitialStateModalTotal {
   }
 }
 
+export interface City {
+  id: string
+  name: string
+}
+
+export interface Point {
+  id: string
+  name: string
+  cityId: City | null
+}
+
 export enum EPath {
   '/' = '/LocationPage',
   '/LocationPage' = '/ModelCar',

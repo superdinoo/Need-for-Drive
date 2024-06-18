@@ -1,27 +1,10 @@
-/* eslint-disable consistent-return */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable no-console */
-/* eslint-disable no-use-before-define */
-/* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
 import './InputCity.scss'
 import { useDispatch } from 'react-redux'
 import ApiMap from '../apiMap/ApiMap'
 import InputField from './form/InputField'
 import setLocation from '../../../redux/actions/setLocation '
-
-interface City {
-  id: string
-  name: string
-  cityId: number
-}
-
-interface Point {
-  id: string
-  name: string
-  cityId: number
-}
+import apiSwagger from './apiSwagger'
 
 const InputCity: React.FC = () => {
   const dispatch = useDispatch()
@@ -31,72 +14,33 @@ const InputCity: React.FC = () => {
     cityId: null as string | null,
   })
 
-  const [cities, setCities] = useState<City[]>([])
-  const [points, setPoints] = useState<City[]>([])
+  const { fetchCities, fetchPoints, cities, points } = apiSwagger()
 
   const handleInputChange = (name: string, value: string) => {
     const truncatedValue = value.substring(0, 150).replace(/^\s+/, '')
-    setInputValues((prevState) => ({ ...prevState, [name]: truncatedValue }))
 
     if (name === 'city') {
+      const selectedCity = cities.find((city) => city.name === truncatedValue)
+      setInputValues((prevState) => ({
+        ...prevState,
+        city: truncatedValue,
+        cityId: selectedCity ? selectedCity.id : null,
+      }))
       fetchCities(truncatedValue)
-    } else if (name === 'point' && inputValues.city) {
-      fetchPoints(inputValues.city, truncatedValue)
     }
-  }
-  const API_KEY = '5e25c641099b810b946c5d5b'
-  const API_BASE_URL = 'https://api-factory.simbirsoft1.com/api/db'
-  const fetchCities = async (query: string) => {
-    try {
-      const response = await axios.get(`${API_BASE_URL}/city/search=${query}`, {
-        headers: {
-          'X-Api-Factory-Application-Id': API_KEY,
-        },
-      })
-      setCities(response.data)
-      console.log('Полученно данных:', response.data)
-    } catch (error) {
-      console.error('Ошибка при загрузке городов', error)
+
+    if (name === 'point' && inputValues.city) {
+      setInputValues((prevState) => ({
+        ...prevState,
+        point: truncatedValue,
+      }))
+      fetchPoints(truncatedValue)
     }
   }
 
-  const handleCitySelect = (city: City) => {
-    setInputValues({
-      ...inputValues,
-      city: city.name,
-      cityId: city.id,
-    })
-    setCities([])
-    setPoints([])
-  }
-
-  const fetchPoints = async (cityId: string, query: string) => {
-    try {
-      const response = await axios.get(
-        `${API_BASE_URL}/point?cityId=${cityId}&search=${query}`,
-        {
-          headers: {
-            'X-Api-Factory-Application-Id': API_KEY,
-          },
-        },
-      )
-      setPoints(response.data)
-      console.log(response.data)
-      console.log(cityId)
-    } catch (error) {
-      console.error('Ошибка при загрузке пунктов выдачи', error)
-    }
-  }
-
-  const handlePointSelect = (point: Point) => {
-    setInputValues({
-      ...inputValues,
-      point: point.name,
-      cityId: point.id,
-    })
-
-    setPoints([])
-  }
+  const filteredPoints = !inputValues.city
+    ? []
+    : points.filter((point) => point.cityId?.name === inputValues.city)
 
   useEffect(() => {
     dispatch(
@@ -121,15 +65,15 @@ const InputCity: React.FC = () => {
             labels="Город"
             list="cities"
           />
-          {cities.length > 0 && (
-            <ul>
-              {cities.map((city) => (
-                <li key={city.id} onClick={() => handleCitySelect(city)}>
-                  {city.name}
-                </li>
-              ))}
-            </ul>
-          )}
+
+          <datalist id="cities">
+            {cities.map((city) => (
+              <option key={city.id} value={city.name}>
+                {city.name}
+              </option>
+            ))}
+          </datalist>
+
           <InputField
             value={inputValues.point}
             onChange={(value) => handleInputChange('point', value)}
@@ -139,15 +83,13 @@ const InputCity: React.FC = () => {
             labels="Пункт выдачи"
             list="point"
           />
-          {points.length > 0 && (
-            <ul>
-              {points.map((point) => (
-                <li key={point.id} onClick={() => handlePointSelect(point)}>
-                  {point.name}
-                </li>
-              ))}
-            </ul>
-          )}
+          <datalist id="point">
+            {filteredPoints.map((point) => (
+              <option key={point.id} value={point.name}>
+                {point.name}
+              </option>
+            ))}
+          </datalist>
         </div>
         <div className="mapCityContainer">
           <ApiMap city={inputValues.city} point={inputValues.point} option="" />
