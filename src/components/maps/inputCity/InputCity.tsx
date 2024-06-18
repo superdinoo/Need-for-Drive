@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 import './InputCity.scss'
 import { useDispatch } from 'react-redux'
 import ApiMap from '../apiMap/ApiMap'
@@ -11,6 +12,7 @@ const InputCity: React.FC = () => {
   const [inputValues, setInputValues] = useState({
     city: '',
     point: '',
+    cityId: null as string | null,
     cityId: null as string | null,
   })
 
