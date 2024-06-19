@@ -2,6 +2,7 @@
 export interface InputCityProps {
   city: string
   point: string
+  address: string
   option: string
 }
 
@@ -112,6 +113,7 @@ export interface Point {
   id: string
   name: string
   cityId: City | null
+  address: string
 }
 
 export enum EPath {

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
 import './InputCity.scss'
 import { useDispatch } from 'react-redux'
 import ApiMap from '../apiMap/ApiMap'
@@ -12,7 +11,6 @@ const InputCity: React.FC = () => {
   const [inputValues, setInputValues] = useState({
     city: '',
     point: '',
-    cityId: null as string | null,
     cityId: null as string | null,
   })
 
@@ -44,15 +42,22 @@ const InputCity: React.FC = () => {
     ? []
     : points.filter((point) => point.cityId?.name === inputValues.city)
 
+  const addressPoint = filteredPoints.find(
+    (point) => point.name === inputValues.point,
+  )
+
   useEffect(() => {
+    fetchCities(inputValues.city)
+    fetchPoints(inputValues.point)
     dispatch(
       setLocation({
         city: inputValues.city,
         point: inputValues.point,
+        address: addressPoint ? addressPoint.address : '',
         option: '',
       }),
     )
-  }, [inputValues.city, inputValues.point, dispatch])
+  }, [inputValues.city, inputValues.point, dispatch, fetchCities, fetchPoints])
 
   return (
     <div className="inputCityContainerMain">
@@ -94,7 +99,12 @@ const InputCity: React.FC = () => {
           </datalist>
         </div>
         <div className="mapCityContainer">
-          <ApiMap city={inputValues.city} point={inputValues.point} option="" />
+          <ApiMap
+            city={inputValues.city}
+            point={inputValues.point}
+            option=""
+            address={addressPoint?.address ?? inputValues.point}
+          />
         </div>
       </div>
     </div>

@@ -1,8 +1,9 @@
 /* eslint-disable no-console */
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import axios from 'axios'
 import { API_BASE_URL, API_KEY } from 'components/utils'
 import { City, Point } from '../../../interface/Interface'
+import debounce from '../../debounce'
 
 const apiSwagger = () => {
   const [cities, setCities] = useState<City[]>([])
@@ -40,6 +41,15 @@ const apiSwagger = () => {
       console.error('Ошибка при загрузке пунктов выдачи', error)
     }
   }
-  return { fetchCities, fetchPoints, cities, points }
+
+  const debouncedFetchCities = useCallback(debounce(fetchCities, 500), [])
+  const debouncedFetchPoints = useCallback(debounce(fetchPoints, 500), [])
+
+  return {
+    fetchCities: debouncedFetchCities,
+    fetchPoints: debouncedFetchPoints,
+    cities,
+    points,
+  }
 }
 export default apiSwagger
