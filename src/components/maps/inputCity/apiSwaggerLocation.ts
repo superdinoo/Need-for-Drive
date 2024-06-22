@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-console */
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import axios from 'axios'
 import { API_BASE_URL, API_KEY } from 'components/utils'
 import { City, Point } from '../../../interface/Interface'

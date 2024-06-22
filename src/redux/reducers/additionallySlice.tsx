@@ -1,15 +1,14 @@
+/* eslint-disable no-else-return */
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { InitialStateAdditionally } from 'interface/Interface'
 
 const initialState: InitialStateAdditionally = {
   activePointColor: {
-    any: false,
-    red: false,
-    blue: false,
+    colorText: false,
   },
   activePointRate: {
-    everyMinute: false,
-    forADay: false,
+    rateText: false,
+    ratePrice: 0,
   },
   activePointOptions: {
     tank: false,
@@ -43,17 +42,44 @@ const additionallySlice = createSlice({
     setActiveRate: (
       state,
       action: PayloadAction<{
-        rateKey: 'everyMinute' | 'forADay' | ''
+        rateKey: keyof InitialStateAdditionally['activePointRate'] | ''
         reset: boolean
+        price: number
       }>,
     ) => {
+      // if (action.payload.reset) {
+      //   return {
+      //     ...state,
+      //     activePointRate: initialState.activePointRate,
+      //   }
+      // } else {
+      //   return {
+      //     ...state,
+      //     activePointRate: {
+      //       ...initialState.activePointRate,
+      //       [action.payload
+      //         .rateKey as keyof InitialStateAdditionally['activePointRate']]:
+      //         !state.activePointRate[
+      //           action.payload
+      //             .rateKey as keyof InitialStateAdditionally['activePointRate']
+      //         ],
+      //       ratePrice: action.payload.price,
+      //     },
+      //   }
+      // }
       return {
         ...state,
         activePointRate: {
           ...initialState.activePointRate,
-          [action.payload.rateKey]: action.payload.reset
-            ? false
-            : !state.activePointRate[action.payload.rateKey],
+          [action.payload
+            .rateKey as keyof InitialStateAdditionally['activePointRate']]:
+            action.payload.reset
+              ? false
+              : !state.activePointRate[
+                  action.payload
+                    .rateKey as keyof InitialStateAdditionally['activePointRate']
+                ],
+          ratePrice: action.payload.price,
         },
       }
     },

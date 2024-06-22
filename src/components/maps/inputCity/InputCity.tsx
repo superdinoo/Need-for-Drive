@@ -4,7 +4,8 @@ import { useDispatch } from 'react-redux'
 import ApiMap from '../apiMap/ApiMap'
 import InputField from './form/InputField'
 import setLocation from '../../../redux/actions/setLocation '
-import apiSwagger from './apiSwagger'
+import apiSwagger from './apiSwaggerLocation'
+import { setActivePoint } from '../../../redux/reducers/carSlice'
 
 const InputCity: React.FC = () => {
   const dispatch = useDispatch()
@@ -57,6 +58,7 @@ const InputCity: React.FC = () => {
         option: '',
       }),
     )
+    dispatch(setActivePoint({ pointKey: '', reset: true }))
   }, [inputValues.city, inputValues.point, dispatch, fetchCities, fetchPoints])
 
   return (
