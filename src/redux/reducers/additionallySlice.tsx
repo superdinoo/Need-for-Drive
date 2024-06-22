@@ -1,4 +1,3 @@
-/* eslint-disable no-else-return */
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { InitialStateAdditionally } from 'interface/Interface'
 
@@ -47,26 +46,6 @@ const additionallySlice = createSlice({
         price: number
       }>,
     ) => {
-      // if (action.payload.reset) {
-      //   return {
-      //     ...state,
-      //     activePointRate: initialState.activePointRate,
-      //   }
-      // } else {
-      //   return {
-      //     ...state,
-      //     activePointRate: {
-      //       ...initialState.activePointRate,
-      //       [action.payload
-      //         .rateKey as keyof InitialStateAdditionally['activePointRate']]:
-      //         !state.activePointRate[
-      //           action.payload
-      //             .rateKey as keyof InitialStateAdditionally['activePointRate']
-      //         ],
-      //       ratePrice: action.payload.price,
-      //     },
-      //   }
-      // }
       return {
         ...state,
         activePointRate: {

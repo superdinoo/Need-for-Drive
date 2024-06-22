@@ -1,5 +1,3 @@
-/* eslint-disable object-shorthand */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect } from 'react'
 import './AdditionallyPath.scss'
@@ -72,7 +70,7 @@ const AdditionallyMain: React.FC = () => {
               setActiveRate({
                 rateKey: marker as 'rateText' | 'ratePrice',
                 reset: false,
-                price: price,
+                price,
               }),
             )
           }
