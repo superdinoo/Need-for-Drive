@@ -15,22 +15,7 @@ import {
   selectActivePointRate,
   selectActiveRentalPrice,
 } from 'components/additionallyPath/selectors'
-
-interface OrderPost {
-  id: 0
-  orderStatusId: 0
-  cityId: { id: number; name: string }
-  pointId: { id: number; name: string }
-  carId: { id: number; name: string }
-  color: string
-  dateFrom: number
-  dateTo: number
-  rateId: { id: number; name: string }
-  price: number
-  isFullTank: boolean
-  isNeedChildChair: boolean
-  isRightWheel: boolean
-}
+import { OrderPost } from '../../interface/Interface'
 
 const apiSwaggerTotalPath = () => {
   const [orderPost, setOrderPost] = useState<OrderPost[]>([])

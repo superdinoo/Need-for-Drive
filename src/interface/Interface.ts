@@ -165,6 +165,22 @@ export interface UseLocationInputProps {
   fetchPoints: (query: string) => void
 }
 
+export interface OrderPost {
+  id: 0
+  orderStatusId: 0
+  cityId: { id: number; name: string }
+  pointId: { id: number; name: string }
+  carId: { id: number; name: string }
+  color: string
+  dateFrom: number
+  dateTo: number
+  rateId: { id: number; name: string }
+  price: number
+  isFullTank: boolean
+  isNeedChildChair: boolean
+  isRightWheel: boolean
+}
+
 export enum EPath {
   '/' = '/LocationPage',
   '/LocationPage' = '/ModelCar',
