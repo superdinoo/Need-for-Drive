@@ -1,16 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { selectActiveCar } from 'components/cars/selectors'
+
 import { EPath, RouteData } from 'interface/Interface'
-import { useSelector } from 'react-redux'
 
 export const calculater = (
   startDatePrice: Date,
   endDatePrice: Date,
   activeOptions: any,
   activePointRate: any,
+  priceMin: number,
 ) => {
-  const { priceMin } = useSelector(selectActiveCar)
-
   const timeDifferenceMs = endDatePrice.getTime() - startDatePrice.getTime()
   let totalPrice = priceMin
 

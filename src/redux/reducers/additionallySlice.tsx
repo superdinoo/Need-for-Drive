@@ -8,11 +8,15 @@ const initialState: InitialStateAdditionally = {
   activePointRate: {
     rateText: false,
     ratePrice: 0,
+    rateId: 0,
   },
   activePointOptions: {
     tank: false,
     seat: false,
     wheel: false,
+  },
+  activeRentalPrice: {
+    rentalPrice: 0,
   },
 }
 
@@ -44,6 +48,7 @@ const additionallySlice = createSlice({
         rateKey: keyof InitialStateAdditionally['activePointRate'] | ''
         reset: boolean
         price: number
+        id: number
       }>,
     ) => {
       return {
@@ -59,6 +64,7 @@ const additionallySlice = createSlice({
                     .rateKey as keyof InitialStateAdditionally['activePointRate']
                 ],
           ratePrice: action.payload.price,
+          rateId: action.payload.id,
         },
       }
     },
@@ -90,10 +96,24 @@ const additionallySlice = createSlice({
         },
       }
     },
+
+    setRentalPrice: (state, action) => {
+      return {
+        ...state,
+        activeRentalPrice: {
+          ...state.activeRentalPrice,
+          rentalPrice: action.payload.rentalPrice,
+        },
+      }
+    },
   },
 })
 
-export const { setActiveColor, setActiveRate, setActiveOptions } =
-  additionallySlice.actions
+export const {
+  setActiveColor,
+  setActiveRate,
+  setActiveOptions,
+  setRentalPrice,
+} = additionallySlice.actions
 
 export default additionallySlice.reducer

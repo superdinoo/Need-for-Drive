@@ -24,7 +24,6 @@ const apiSwaggerCar = () => {
       console.error('Ошибка при загрузке машины', error)
     }
   }
-
   const fetchCategory = async () => {
     try {
       const response = await axios.get(`${API_BASE_URL}/api/db/category`, {
@@ -37,7 +36,6 @@ const apiSwaggerCar = () => {
       console.error('Ошибка при загрузке машины', error)
     }
   }
-
   return { fetchCarApi, fetchCategory, carsMain, category }
 }
 

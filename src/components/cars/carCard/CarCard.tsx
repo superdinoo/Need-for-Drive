@@ -1,62 +1,20 @@
 import React, { useEffect } from 'react'
 import './CarCard.scss'
-import { useDispatch, useSelector } from 'react-redux'
-import { setActiveCar } from '../../../redux/reducers/carSlice'
+import { useSelector } from 'react-redux'
 import { getCarInfo } from '../selectors'
 import { CarApi } from '../../../interface/Interface'
 import apiSwaggerCar from '../apiSwaggerCar'
 import CarLoader from './CarLoader'
-import {
-  setActiveColor,
-  setActiveOptions,
-  setActiveRate,
-} from '../../../redux/reducers/additionallySlice'
-import setRatesDate from '../../../redux/actions/setRentalDate'
+import useCarAction from './useCarAction'
 
 const CarCard: React.FC = () => {
-  const dispatch = useDispatch()
-  const { activePoint, activeCar, filterCar } = useSelector(getCarInfo)
-  const { fetchCarApi, carsMain } = apiSwaggerCar()
-
-  const handleActiveCar = (
-    carID: number,
-    carName: string,
-    carMinPrice: number,
-    carMaxPrice: number,
-    carMarkNumber: string,
-    carImg: string,
-    carColors: string[],
-  ) => {
-    dispatch(
-      setActiveCar({
-        id: carID,
-        name: carName,
-        priceMin: carMinPrice,
-        priceMax: carMaxPrice,
-        markNumber: carMarkNumber,
-        img: carImg,
-        color: carColors,
-      }),
-    )
-  }
+  const { activeCar, filterCar } = useSelector(getCarInfo)
+  const { carsMain, fetchCarApi } = apiSwaggerCar()
+  const { handleActiveCar } = useCarAction()
 
   useEffect(() => {
     fetchCarApi()
-    dispatch(setActiveColor({ colorKey: '', reset: true }))
-    dispatch(setActiveRate({ rateKey: '', reset: true, price: 0 }))
-    dispatch(
-      setActiveOptions({
-        optionsKey: 'all',
-        reset: true,
-      }),
-    )
-    dispatch(
-      setRatesDate({
-        start: '',
-        end: '',
-      }),
-    )
-  }, [activePoint, dispatch])
+  }, [])
 
   return (
     <div className="modelCartContainer">

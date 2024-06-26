@@ -2,6 +2,8 @@
 export interface InputCityProps {
   city: string
   point: string
+  cityId: number
+  pointId: number
   address: string
   option: string
 }
@@ -73,12 +75,16 @@ export interface InitialStateAdditionally {
   activePointRate: {
     rateText: boolean
     ratePrice: number
+    rateId: number
   }
   activePointOptions: {
     tank: boolean
     seat: boolean
     wheel: boolean
     [key: string]: boolean
+  }
+  activeRentalPrice: {
+    rentalPrice: number
   }
 }
 
@@ -124,6 +130,39 @@ export interface Point {
   name: string
   cityId: City | null
   address: string
+}
+
+export interface DateTimeFormatOptions {
+  year?: 'numeric' | '2-digit'
+  month?: 'numeric' | '2-digit' | 'narrow' | 'short' | 'long'
+  day?: 'numeric' | '2-digit'
+  hour?: 'numeric' | '2-digit'
+  minute?: 'numeric' | '2-digit'
+}
+
+export interface RateDataidPriceName {
+  id: number
+  price: number
+  rateTypeId: {
+    name: string
+  }
+}
+
+export interface InputProps {
+  value: string
+  onChange: (value: string) => void
+  name: string
+  placeholder: string
+  onReset: () => void
+  labels: string
+  list: string
+}
+
+export interface UseLocationInputProps {
+  cities: City[]
+  points: Point[]
+  fetchCities: (query: string) => void
+  fetchPoints: (query: string) => void
 }
 
 export enum EPath {

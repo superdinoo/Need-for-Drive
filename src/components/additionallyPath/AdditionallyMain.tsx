@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect } from 'react'
 import './AdditionallyPath.scss'
 import { useDispatch, useSelector } from 'react-redux'
@@ -12,29 +11,15 @@ import BreadCrambSkelet from '../cars/breadCrambsCar/BreadCrambSkelet'
 import { AdditionallyPathRentalDate } from './index'
 import { selectActiveCar } from '../cars/selectors'
 import apiSwaggerRate from './apiSwaggerRate'
+import helpers from './helpers'
 
 const AdditionallyMain: React.FC = () => {
   const dispatch = useDispatch()
   const { activePointColor, activePointOptions, activePointRate } =
     useSelector(getAdditionallyInfo)
   const activeCar = useSelector(selectActiveCar)
-
   const { fetchRateDate, rateDateApi } = apiSwaggerRate()
-
-  const activeColors = activeCar.color.map(
-    (carColor: string, index: number) => ({
-      text: carColor,
-      marker: carColor,
-      id: index,
-    }),
-  )
-
-  const activeRate = rateDateApi.map((rateDataidPriceName) => ({
-    id: rateDataidPriceName.id,
-    price: Number(rateDataidPriceName.price),
-    text: `${rateDataidPriceName.rateTypeId.name}, ${rateDataidPriceName.price} ₽`,
-    marker: rateDataidPriceName.rateTypeId.name,
-  }))
+  const { activeRate, activeColors } = helpers(activeCar, rateDateApi)
 
   useEffect(() => {
     fetchRateDate()
@@ -56,28 +41,26 @@ const AdditionallyMain: React.FC = () => {
           />
         </div>
       </div>
-
       <AdditionallyPathRentalDate />
-
       <div className="centerPath">
         <BreadCrambSkelet
           initialPath="rate"
           activePoint={activePointRate}
           title="Тариф"
           items={activeRate}
-          handleActivePoint={(marker: string, price: number = 0) =>
+          handleActivePoint={(marker: string, price?: number, id?: number) =>
             dispatch(
               setActiveRate({
                 rateKey: marker as 'rateText' | 'ratePrice',
                 reset: false,
-                price,
+                price: price ?? 0,
+                id: id ?? 0,
               }),
             )
           }
           type="radio"
         />
       </div>
-
       <div className="centerPath">
         <BreadCrambSkelet
           initialPath="options"
@@ -88,7 +71,7 @@ const AdditionallyMain: React.FC = () => {
             { text: 'Детское кресло, 200р', marker: 'seat', id: 10 },
             { text: 'Правый руль, 1600р', marker: 'wheel', id: 11 },
           ]}
-          handleActivePoint={(marker: any) =>
+          handleActivePoint={(marker: string) =>
             dispatch(setActiveOptions({ optionsKey: marker, reset: false }))
           }
           type="checkbox"
@@ -97,5 +80,4 @@ const AdditionallyMain: React.FC = () => {
     </>
   )
 }
-
 export default AdditionallyMain

@@ -70,7 +70,15 @@ const carSlice = createSlice({
         action.payload
       return {
         ...state,
-        activeCar: { id, name, markNumber, img, priceMin, priceMax, color },
+        activeCar: {
+          id,
+          name,
+          markNumber,
+          img,
+          priceMin,
+          priceMax,
+          color,
+        },
       }
     },
     setResetActiveCar: (state) => {

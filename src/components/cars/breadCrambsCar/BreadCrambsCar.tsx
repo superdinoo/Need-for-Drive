@@ -6,29 +6,17 @@ import { setActivePoint } from '../../../redux/reducers/carSlice'
 import { getCarInfo } from '../selectors'
 import BreadCrambSkelet from './BreadCrambSkelet'
 import apiSwaggerCar from '../apiSwaggerCar'
+import helpersBreadCrambCar from './helpersBreadCrambCar'
 
 const BreadCrambsCar: React.FC = () => {
   const dispatch = useDispatch()
   const { activePoint } = useSelector(getCarInfo)
-
   const { category, fetchCategory } = apiSwaggerCar()
+  const { items } = helpersBreadCrambCar(category)
 
   const handleActivePoint = (marker: any) => {
     dispatch(setActivePoint({ pointKey: marker }))
   }
-
-  const markerMap: { [key: string]: string } = {
-    Бизнес: 'premium',
-    Эконом: 'eco',
-    Мототехника: 'bike',
-    Спорт: 'sport',
-  }
-
-  const items = category.map((categoryItem) => ({
-    text: categoryItem.name,
-    marker: markerMap[categoryItem.name] || 'all',
-    id: categoryItem.id,
-  }))
 
   useEffect(() => {
     fetchCategory()

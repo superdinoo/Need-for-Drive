@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createSelector } from '@reduxjs/toolkit'
 import { InputCityProps, InputRatesDate } from '../../../interface/Interface'
 
