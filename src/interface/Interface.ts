@@ -116,6 +116,13 @@ export interface Point {
   address: string
 }
 
+export interface LocationsState {
+  cities: City[]
+  points: Point[]
+  isLoading: boolean
+  error: string | null
+}
+
 export enum EPath {
   '/' = '/LocationPage',
   '/LocationPage' = '/ModelCar',
