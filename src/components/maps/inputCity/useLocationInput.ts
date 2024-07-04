@@ -1,10 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../../redux/rootState'
-import {
-  fetchCities,
-  fetchPoints,
-} from '../../../redux/reducers/apiSwaggerReducer'
+import { fetchCities, fetchPoints } from '../../../redux/thunks/thunksLocation'
 import setLocation from '../../../redux/actions/setLocation '
 
 const useLocationInput = () => {

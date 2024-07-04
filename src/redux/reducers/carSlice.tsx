@@ -1,21 +1,19 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import dataCar from 'components/cars/dataCar'
-import { InitialStateCar } from 'interface/Interface'
+import { CarApi, InitialStateCar } from '../../interface/Interface'
 
 const initialState: InitialStateCar = {
   activePoint: {
-    all: false,
-    eco: false,
-    premium: false,
+    pointText: false,
   },
-  filterCar: dataCar,
+  filterCar: [],
   activeCar: {
     id: null,
     name: '',
-    price: 0,
     markNumber: '',
     img: '',
-    priceCart: '',
+    priceMin: 0,
+    priceMax: 0,
+    color: [],
   },
 }
 
@@ -25,36 +23,54 @@ const carSlice = createSlice({
   reducers: {
     setActivePoint: (
       state,
-      action: PayloadAction<keyof InitialStateCar['activePoint']>,
+      action: PayloadAction<{
+        pointKey: keyof InitialStateCar['activePoint']
+        reset?: boolean
+      }>,
     ) => {
       return {
         ...state,
         activePoint: {
           ...initialState.activePoint,
-          [action.payload]: !state.activePoint[action.payload],
+          [action.payload.pointKey]: action.payload.reset
+            ? false
+            : !state.activePoint[action.payload.pointKey],
         },
-        filterCar:
-          action.payload !== 'all'
-            ? state.filterCar
-            : state.filterCar.filter((car) => car.type === action.payload),
       }
     },
 
-    setFilterCar: (state) => {
-      let filteredCars = dataCar
-      if (state.activePoint.eco) {
-        filteredCars = dataCar.filter((car) => car.type === 'eco')
-      } else if (state.activePoint.premium) {
-        filteredCars = dataCar.filter((car) => car.type === 'premium')
+    setFilterCar: (state, action: PayloadAction<CarApi[]>) => {
+      const newState = {
+        ...state,
+        filterCar: action.payload,
+      }
+      let filteredCars = newState.filterCar
+      if (newState.activePoint.eco) {
+        filteredCars = filteredCars.filter(
+          (car) => car.categoryId.name === 'Эконом',
+        )
+      } else if (newState.activePoint.premium) {
+        filteredCars = filteredCars.filter(
+          (car) => car.categoryId.name === 'Бизнес',
+        )
+      } else if (newState.activePoint.bike) {
+        filteredCars = filteredCars.filter(
+          (car) => car.categoryId.name === 'Мототехника',
+        )
+      } else if (newState.activePoint.sport) {
+        filteredCars = filteredCars.filter(
+          (car) => car.categoryId.name === 'Спорт',
+        )
       }
       return { ...state, filterCar: filteredCars }
     },
 
     setActiveCar: (state, action) => {
-      const { id, name, price, markNumber, img, priceCart } = action.payload
+      const { id, name, markNumber, img, priceMin, priceMax, color } =
+        action.payload
       return {
         ...state,
-        activeCar: { id, name, price, markNumber, img, priceCart },
+        activeCar: { id, name, markNumber, img, priceMin, priceMax, color },
       }
     },
     setResetActiveCar: (state) => {

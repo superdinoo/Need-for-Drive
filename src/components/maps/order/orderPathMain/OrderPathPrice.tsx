@@ -31,7 +31,7 @@ const OrderPathPrice: React.FC<OrderProps> = ({ activeCar }) => {
       <p className="priceOrderWidth">
         {pathname === '/Additionally' || pathname === '/Total'
           ? `${rentalPrice} ₽`
-          : activeCar.priceCart}
+          : `${activeCar.priceMin} ₽`}
       </p>
     </div>
   )

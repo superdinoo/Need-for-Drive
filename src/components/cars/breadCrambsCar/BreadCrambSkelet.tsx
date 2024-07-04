@@ -4,8 +4,8 @@ import React, { HTMLInputTypeAttribute } from 'react'
 interface BreadCrambsProps<T> {
   title: string
   activePoint: T
-  handleActivePoint: (marker: string) => void
-  items: { text: string; marker: string; id: number }[]
+  handleActivePoint: (marker: string, price?: number) => void
+  items: { text: string; marker: string; id: number; price?: number }[]
   initialPath: 'rate' | 'color' | 'options' | 'car'
   type: HTMLInputTypeAttribute
 }
@@ -21,6 +21,7 @@ const BreadCrambSkelet = <T extends Record<string, boolean>>({
   const breadCrambClass = classNames('containerAllModel', {
     containerAllModelRate: initialPath === 'rate' || initialPath === 'options',
     containerAllModelColor: initialPath === 'color',
+    containerAllModelCarOptions: initialPath === 'car',
   })
 
   return (
@@ -45,8 +46,9 @@ const BreadCrambSkelet = <T extends Record<string, boolean>>({
                   type={type}
                   id={`${initialPath}-${item.id}`}
                   checked={activePoint[item.marker]}
-                  onChange={() => handleActivePoint(item.marker)}
+                  onChange={() => handleActivePoint(item.marker, item.price)}
                 />
+
                 <label
                   className={
                     activePoint[item.marker] ? 'allTextBlack' : 'allText'

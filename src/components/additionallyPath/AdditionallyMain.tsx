@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from 'react'
+import React, { useEffect } from 'react'
 import './AdditionallyPath.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import {
@@ -10,11 +10,54 @@ import {
 import { getAdditionallyInfo } from './selectors'
 import BreadCrambSkelet from '../cars/breadCrambsCar/BreadCrambSkelet'
 import { AdditionallyPathRentalDate } from './index'
+import { selectActiveCar } from '../cars/selectors'
+import { RootState } from '../../redux/rootState'
+import { fetchRateDate } from '../../redux/reducers/apiSwaggerReducer'
 
 const AdditionallyMain: React.FC = () => {
   const dispatch = useDispatch()
   const { activePointColor, activePointOptions, activePointRate } =
     useSelector(getAdditionallyInfo)
+  const activeCar = useSelector(selectActiveCar)
+
+  const { rate } = useSelector((state: RootState) => state.apiSwagger)
+
+  const activeColors = activeCar.color.map(
+    (carColor: string, index: number) => ({
+      text: carColor,
+      marker: carColor,
+      id: index,
+    }),
+  )
+
+  const activeRate = rate.map((rateDataidPriceName) => ({
+    id: rateDataidPriceName.id,
+    price: Number(rateDataidPriceName.price),
+    text: `${rateDataidPriceName.rateTypeId.name}, ${rateDataidPriceName.price} ₽`,
+    marker: rateDataidPriceName.rateTypeId.name,
+  }))
+
+  useEffect(() => {
+    fetchRateDate()
+  }, [])
+
+  const handleActivePointRate = (marker: string, price = 0) => {
+    dispatch(
+      setActiveRate({
+        rateKey: marker as 'rateText' | 'ratePrice',
+        reset: false,
+        price,
+      }),
+    )
+  }
+
+  const handleActivePointColor = (marker: string) => {
+    dispatch(setActiveColor({ colorKey: marker, reset: false }))
+  }
+
+  const handleActivePointOptions = (marker: string) => {
+    dispatch(setActiveOptions({ optionsKey: marker, reset: false }))
+  }
 
   return (
     <>
@@ -24,14 +67,8 @@ const AdditionallyMain: React.FC = () => {
             initialPath="color"
             activePoint={activePointColor}
             title="Цвет"
-            items={[
-              { text: 'Любой', marker: 'any', id: 4 },
-              { text: 'Красный', marker: 'red', id: 5 },
-              { text: 'Голубой', marker: 'blue', id: 6 },
-            ]}
-            handleActivePoint={(marker: any) =>
-              dispatch(setActiveColor({ colorKey: marker, reset: false }))
-            }
+            items={activeColors}
+            handleActivePoint={handleActivePointColor}
             type="radio"
           />
         </div>
@@ -44,13 +81,8 @@ const AdditionallyMain: React.FC = () => {
           initialPath="rate"
           activePoint={activePointRate}
           title="Тариф"
-          items={[
-            { text: 'Поминутно, 7₽/мин', marker: 'everyMinute', id: 12 },
-            { text: 'На сутки, 1999 ₽/сутки', marker: 'forADay', id: 13 },
-          ]}
-          handleActivePoint={(marker: any) =>
-            dispatch(setActiveRate({ rateKey: marker, reset: false }))
-          }
+          items={activeRate}
+          handleActivePoint={handleActivePointRate}
           type="radio"
         />
       </div>
@@ -65,9 +97,7 @@ const AdditionallyMain: React.FC = () => {
             { text: 'Детское кресло, 200р', marker: 'seat', id: 10 },
             { text: 'Правый руль, 1600р', marker: 'wheel', id: 11 },
           ]}
-          handleActivePoint={(marker: any) =>
-            dispatch(setActiveOptions({ optionsKey: marker, reset: false }))
-          }
+          handleActivePoint={handleActivePointOptions}
           type="checkbox"
         />
       </div>

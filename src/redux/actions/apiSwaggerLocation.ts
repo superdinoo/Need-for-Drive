@@ -1,32 +1,27 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import { ActionReducerMapBuilder, AsyncThunk } from '@reduxjs/toolkit'
+import { City, LocationsState, Point } from '../../interface/Interface'
+import { RootState } from '../rootState'
 
-import { fetchCities, fetchPoints } from '../reducers/apiSwaggerReducer'
+type ThunkType = AsyncThunk<City[] | Point[], string, { state: RootState }>
 
-const apiSwaggerLocation = (thunk: any) => (builder: any) => {
-  builder
-    .addCase(thunk.pending, (state: any) => {
-      const newState = { ...state }
-      newState.isLoading = true
-      newState.error = null
-      return newState
-    })
-    .addCase(thunk.fulfilled, (state: any, action: any) => {
-      const newState = { ...state, isLoading: false }
-      if (thunk === fetchCities) {
-        newState.cities = action.payload
-      } else if (thunk === fetchPoints) {
-        newState.points = action.payload
-      }
-      return newState
-    })
-    .addCase(thunk.rejected, (state: any, action: any) => {
-      const newState = {
+const apiSwaggerLocation =
+  (thunk: ThunkType, paramName: 'cities' | 'points') =>
+  (builder: ActionReducerMapBuilder<LocationsState>) => {
+    builder
+      .addCase(thunk.pending, (state) => ({
+        ...state,
+        isLoading: true,
+      }))
+      .addCase(thunk.fulfilled, (state, { payload }) => ({
+        ...state,
+        [paramName]: payload,
+        isLoading: false,
+      }))
+      .addCase(thunk.rejected, (state, { payload }) => ({
         ...state,
         isLoading: false,
-        error: action.payload as string,
-      }
-      return newState
-    })
-}
+        error: payload as string,
+      }))
+  }
 
 export default apiSwaggerLocation

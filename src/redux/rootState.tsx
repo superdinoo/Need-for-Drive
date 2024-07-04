@@ -1,3 +1,4 @@
+import { Rate } from 'interface/Interface'
 import store from './Store'
 
 export type MapState = {
@@ -8,6 +9,7 @@ export type MapState = {
 export type SwaggerState = {
   city: [string, string]
   point: [string, string]
+  rate: Rate[]
 }
 
 export type RootState = ReturnType<typeof store.getState>
