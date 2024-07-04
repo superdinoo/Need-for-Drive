@@ -1,66 +1,16 @@
-import React, { useEffect, useState } from 'react'
-import './InputCity.scss'
-import { useDispatch } from 'react-redux'
+import React from 'react'
 import ApiMap from '../apiMap/ApiMap'
 import InputField from './form/InputField'
-import setLocation from '../../../redux/actions/setLocation '
-import apiSwagger from './apiSwaggerLocation'
-import { setActivePoint } from '../../../redux/reducers/carSlice'
+import useLocationInput from './useLocationInput'
 
 const InputCity: React.FC = () => {
-  const dispatch = useDispatch()
-  const [inputValues, setInputValues] = useState({
-    city: '',
-    point: '',
-    cityId: null as string | null,
-  })
-
-  const { fetchCities, fetchPoints, cities, points } = apiSwagger()
-
-  const handleInputChange = (name: string, value: string) => {
-    const truncatedValue = value.substring(0, 150).replace(/^\s+/, '')
-
-    if (name === 'city') {
-      const selectedCity = cities.find((city) => city.name === truncatedValue)
-      setInputValues((prevState) => ({
-        ...prevState,
-        city: truncatedValue,
-        cityId: selectedCity ? selectedCity.id : null,
-      }))
-      fetchCities(truncatedValue)
-    }
-
-    if (name === 'point' && inputValues.city) {
-      setInputValues((prevState) => ({
-        ...prevState,
-        point: truncatedValue,
-      }))
-      fetchPoints(truncatedValue)
-    }
-  }
-
-  const filteredPoints = !inputValues.city
-    ? []
-    : points.filter((point) => point.cityId?.name === inputValues.city)
-
-  const addressPoint = filteredPoints.find(
-    (point) => point.name === inputValues.point,
-  )
-
-  useEffect(() => {
-    fetchCities(inputValues.city)
-    fetchPoints(inputValues.point)
-    dispatch(
-      setLocation({
-        city: inputValues.city,
-        point: inputValues.point,
-        address: addressPoint ? addressPoint.address : '',
-        option: '',
-      }),
-    )
-    dispatch(setActivePoint({ pointKey: '', reset: true }))
-  }, [inputValues.city, inputValues.point, dispatch, fetchCities, fetchPoints])
-
+  const {
+    inputValues,
+    cities,
+    handleInputChange,
+    filteredPoints,
+    addressPoint,
+  } = useLocationInput()
   return (
     <div className="inputCityContainerMain">
       <div className="inputCityContainer">

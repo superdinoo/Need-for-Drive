@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useCallback, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import './ApiMap.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { YMaps, Map, Placemark } from '@pbe/react-yandex-maps'
@@ -7,21 +7,13 @@ import { RootState } from '../../../redux/rootState'
 import { InputCityProps } from '../../../interface/Interface'
 import fetchMapData from '../../../redux/actions/fetchMapData'
 import getMapInfo from './selectorsMap'
-import debounce from '../../debounce'
 
 const ApiMap: React.FC<InputCityProps> = ({ city, address }) => {
   const dispatch: any = useDispatch()
 
-  const debouncedFetchMapData = useCallback(
-    debounce(() => {
-      dispatch(fetchMapData(city, address, {}))
-    }, 500),
-    [dispatch, city, address],
-  )
-
   useEffect(() => {
-    debouncedFetchMapData()
-  }, [city, address, debouncedFetchMapData])
+    dispatch(fetchMapData(city, address, {}))
+  }, [city, address, dispatch])
 
   const { mapCenter, mapPoint } = useSelector((state: RootState) =>
     getMapInfo(state),
