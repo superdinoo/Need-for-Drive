@@ -1,4 +1,4 @@
-import { Rate } from 'interface/Interface'
+import { CarApi, CarCategory, Rate } from 'interface/Interface'
 import store from './Store'
 
 export type MapState = {
@@ -10,6 +10,8 @@ export type SwaggerState = {
   city: [string, string]
   point: [string, string]
   rate: Rate[]
+  carsAll: CarApi[]
+  categoryCars: CarCategory[]
 }
 
 export type RootState = ReturnType<typeof store.getState>

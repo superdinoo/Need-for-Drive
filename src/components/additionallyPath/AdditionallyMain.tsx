@@ -1,5 +1,6 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect } from 'react'
+import { AnyAction } from 'redux'
+import { ThunkDispatch } from 'redux-thunk'
 import './AdditionallyPath.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import {
@@ -12,34 +13,22 @@ import BreadCrambSkelet from '../cars/breadCrambsCar/BreadCrambSkelet'
 import { AdditionallyPathRentalDate } from './index'
 import { selectActiveCar } from '../cars/selectors'
 import { RootState } from '../../redux/rootState'
-import { fetchRateDate } from '../../redux/reducers/apiSwaggerReducer'
+import { fetchRateDate } from '../../redux/thunks/thunksLocation'
+import useAdditionally from './helpers'
 
 const AdditionallyMain: React.FC = () => {
-  const dispatch = useDispatch()
+  const dispatch: ThunkDispatch<RootState, unknown, AnyAction> = useDispatch()
+
   const { activePointColor, activePointOptions, activePointRate } =
     useSelector(getAdditionallyInfo)
   const activeCar = useSelector(selectActiveCar)
-
   const { rate } = useSelector((state: RootState) => state.apiSwagger)
 
-  const activeColors = activeCar.color.map(
-    (carColor: string, index: number) => ({
-      text: carColor,
-      marker: carColor,
-      id: index,
-    }),
-  )
-
-  const activeRate = rate.map((rateDataidPriceName) => ({
-    id: rateDataidPriceName.id,
-    price: Number(rateDataidPriceName.price),
-    text: `${rateDataidPriceName.rateTypeId.name}, ${rateDataidPriceName.price} ₽`,
-    marker: rateDataidPriceName.rateTypeId.name,
-  }))
+  const { activeColors, activeRate } = useAdditionally(activeCar, rate)
 
   useEffect(() => {
-    fetchRateDate()
-  }, [])
+    dispatch(fetchRateDate())
+  }, [dispatch])
 
   const handleActivePointRate = (marker: string, price = 0) => {
     dispatch(

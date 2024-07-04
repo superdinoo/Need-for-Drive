@@ -1,11 +1,13 @@
 import { useCallback, useEffect, useState } from 'react'
+import { ThunkDispatch } from 'redux-thunk'
+import { AnyAction } from 'redux'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../../redux/rootState'
 import { fetchCities, fetchPoints } from '../../../redux/thunks/thunksLocation'
 import setLocation from '../../../redux/actions/setLocation '
 
 const useLocationInput = () => {
-  const dispatch = useDispatch()
+  const dispatch: ThunkDispatch<RootState, unknown, AnyAction> = useDispatch()
   const { cities, points } = useSelector((state: RootState) => state.apiSwagger)
   const [inputValues, setInputValues] = useState({
     city: '',

@@ -29,7 +29,7 @@ export interface CarApi {
   priceMin: number
   name: 'string'
   description: 'string'
-  colors: ['string']
+  colors: string[]
   number: string
   categoryId: {
     idCategory: number
@@ -103,8 +103,8 @@ export interface RouteData {
   cityAndPoint: boolean
   activeCarConst: boolean
   startEnd: boolean
-  color: boolean
-  rate: boolean
+  color: string | undefined
+  rate: string | undefined
 }
 
 export interface InitialStateModalTotal {
@@ -130,8 +130,17 @@ export interface LocationsState {
   cities: City[]
   points: Point[]
   rate: Rate[]
+  carsAll: CarApi[]
+  categoryCars: CarCategory[]
   isLoading: boolean
   error: string | null
+}
+export interface RateDataidPriceName {
+  id: number
+  price: number
+  rateTypeId: {
+    name: string
+  }
 }
 
 export enum EPath {

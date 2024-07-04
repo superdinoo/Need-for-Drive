@@ -22,3 +22,36 @@ export const fetchPoints = createAsyncThunk(
     }
   },
 )
+
+export const fetchRateDate = createAsyncThunk(
+  'locations/fetchRateDate',
+  async (_, { rejectWithValue }) => {
+    try {
+      return await request(`/api/db/rate`)
+    } catch (error) {
+      return rejectWithValue('Ошибка при загрузке тарифа')
+    }
+  },
+)
+
+export const fetchCarApi = createAsyncThunk(
+  'locations/fetchCarApi',
+  async (_, { rejectWithValue }) => {
+    try {
+      return await request(`/api/db/car`)
+    } catch (error) {
+      return rejectWithValue('Ошибка при загрузке машин')
+    }
+  },
+)
+
+export const fetchCategory = createAsyncThunk(
+  'locations/fetchCategory',
+  async (_, { rejectWithValue }) => {
+    try {
+      return await request(`/api/db/category`)
+    } catch (error) {
+      return rejectWithValue('Ошибка при загрузке категорий')
+    }
+  },
+)

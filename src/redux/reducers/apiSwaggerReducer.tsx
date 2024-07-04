@@ -1,35 +1,34 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { request } from '../api/api'
+import { createSlice } from '@reduxjs/toolkit'
 import { LocationsState } from '../../interface/Interface'
 import apiSwaggerLocation from '../actions/apiSwaggerLocation'
-import { fetchCities, fetchPoints } from '../thunks/thunksLocation'
+import {
+  fetchCarApi,
+  fetchCategory,
+  fetchCities,
+  fetchPoints,
+  fetchRateDate,
+} from '../thunks/thunksLocation'
 
 const initialState: LocationsState = {
   cities: [],
   points: [],
   rate: [],
+  carsAll: [],
+  categoryCars: [],
   isLoading: false,
   error: null,
 }
 
-export const fetchRateDate = createAsyncThunk(
-  'locations/fetchRateDate',
-  async (_, { rejectWithValue }) => {
-    try {
-      return await request(`/api/db/rate`)
-    } catch (error) {
-      return rejectWithValue('Ошибка при загрузке тарифа')
-    }
-  },
-)
-
 const apiSwaggerSlice = createSlice({
-  name: 'locations',
+  name: 'apiSwagger',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     apiSwaggerLocation(fetchCities, 'cities')(builder)
     apiSwaggerLocation(fetchPoints, 'points')(builder)
+    apiSwaggerLocation(fetchRateDate, 'rate')(builder)
+    apiSwaggerLocation(fetchCarApi, 'carsAll')(builder)
+    apiSwaggerLocation(fetchCategory, 'categoryCars')(builder)
   },
 })
 

@@ -1,3 +1,5 @@
+/* eslint-disable guard-for-in */
+/* eslint-disable no-restricted-syntax */
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { CarApi, InitialStateCar } from '../../interface/Interface'
 
@@ -45,32 +47,37 @@ const carSlice = createSlice({
         filterCar: action.payload,
       }
       let filteredCars = newState.filterCar
-      if (newState.activePoint.eco) {
-        filteredCars = filteredCars.filter(
-          (car) => car.categoryId.name === 'Эконом',
-        )
-      } else if (newState.activePoint.premium) {
-        filteredCars = filteredCars.filter(
-          (car) => car.categoryId.name === 'Бизнес',
-        )
-      } else if (newState.activePoint.bike) {
-        filteredCars = filteredCars.filter(
-          (car) => car.categoryId.name === 'Мототехника',
-        )
-      } else if (newState.activePoint.sport) {
-        filteredCars = filteredCars.filter(
-          (car) => car.categoryId.name === 'Спорт',
-        )
+
+      for (const category in newState.activePoint) {
+        if (newState.activePoint[category]) {
+          if (category === 'Все модели' || !newState.activePoint[category]) {
+            filteredCars = newState.filterCar
+          } else {
+            filteredCars = filteredCars.filter(
+              (car) => car.categoryId.name === category,
+            )
+          }
+        }
       }
+
       return { ...state, filterCar: filteredCars }
     },
 
     setActiveCar: (state, action) => {
-      const { id, name, markNumber, img, priceMin, priceMax, color } =
+      const { id, name, number, thumbnail, priceMin, priceMax, colors } =
         action.payload
+      const imgPath = thumbnail ? thumbnail.path : ''
       return {
         ...state,
-        activeCar: { id, name, markNumber, img, priceMin, priceMax, color },
+        activeCar: {
+          id,
+          name,
+          markNumber: number,
+          img: imgPath,
+          priceMin,
+          priceMax,
+          color: colors as [],
+        },
       }
     },
     setResetActiveCar: (state) => {
