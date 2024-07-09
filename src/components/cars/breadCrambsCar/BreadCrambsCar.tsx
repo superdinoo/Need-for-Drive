@@ -7,8 +7,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setActivePoint } from '../../../redux/reducers/carSlice'
 import { getCarInfo } from '../selectors'
 import BreadCrambSkelet from './BreadCrambSkelet'
-import { fetchCategory } from '../../../redux/thunks/thunksLocation'
+
 import helpersBreadCrambsCar from './helpersBreadCrambsCar'
+import { fetchCategory } from '../../../redux/thunks'
 
 const BreadCrambsCar: React.FC = () => {
   const dispatch: ThunkDispatch<RootState, unknown, AnyAction> = useDispatch()

@@ -3,7 +3,7 @@ import {
   CarApi,
   CarCategory,
   City,
-  LocationsState,
+  ApiSwaggerState,
   Point,
   Rate,
 } from '../../interface/Interface'
@@ -20,7 +20,7 @@ const apiSwaggerLocation =
     thunk: ThunkType,
     paramName: 'cities' | 'points' | 'rate' | ' carsAll' | 'categoryCars',
   ) =>
-  (builder: ActionReducerMapBuilder<LocationsState>) => {
+  (builder: ActionReducerMapBuilder<ApiSwaggerState>) => {
     builder
       .addCase(thunk.pending, (state) => ({
         ...state,

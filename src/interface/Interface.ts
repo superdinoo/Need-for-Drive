@@ -49,7 +49,7 @@ export interface InitialStateCar {
   activePoint: {
     [key: string]: boolean
   }
-  filterCar: CarApi[]
+
   activeCar: {
     id: number | null
     name: string
@@ -126,7 +126,7 @@ export interface Point {
   address: string
 }
 
-export interface LocationsState {
+export interface ApiSwaggerState {
   cities: City[]
   points: Point[]
   rate: Rate[]

@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { LocationsState } from '../../interface/Interface'
+import { ApiSwaggerState } from '../../interface/Interface'
 import apiSwaggerLocation from '../actions/apiSwaggerLocation'
 import {
   fetchCarApi,
@@ -7,9 +7,9 @@ import {
   fetchCities,
   fetchPoints,
   fetchRateDate,
-} from '../thunks/thunksLocation'
+} from '../thunks'
 
-const initialState: LocationsState = {
+const initialState: ApiSwaggerState = {
   cities: [],
   points: [],
   rate: [],

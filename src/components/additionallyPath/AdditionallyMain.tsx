@@ -13,8 +13,8 @@ import BreadCrambSkelet from '../cars/breadCrambsCar/BreadCrambSkelet'
 import { AdditionallyPathRentalDate } from './index'
 import { selectActiveCar } from '../cars/selectors'
 import { RootState } from '../../redux/rootState'
-import { fetchRateDate } from '../../redux/thunks/thunksLocation'
 import useAdditionally from './helpers'
+import { fetchRateDate } from '../../redux/thunks'
 
 const AdditionallyMain: React.FC = () => {
   const dispatch: ThunkDispatch<RootState, unknown, AnyAction> = useDispatch()

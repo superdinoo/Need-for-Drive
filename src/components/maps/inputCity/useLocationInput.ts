@@ -3,8 +3,8 @@ import { ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../../redux/rootState'
-import { fetchCities, fetchPoints } from '../../../redux/thunks/thunksLocation'
 import setLocation from '../../../redux/actions/setLocation '
+import { fetchCities, fetchPoints } from '../../../redux/thunks'
 
 const useLocationInput = () => {
   const dispatch: ThunkDispatch<RootState, unknown, AnyAction> = useDispatch()

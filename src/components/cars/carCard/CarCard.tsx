@@ -1,7 +1,10 @@
 import React, { useEffect } from 'react'
+import { ThunkDispatch } from 'redux-thunk'
+import { RootState } from 'redux/rootState'
+import { AnyAction } from 'redux'
 import './CarCard.scss'
 import { useDispatch, useSelector } from 'react-redux'
-import { setActiveCar, setFilterCar } from '../../../redux/reducers/carSlice'
+import { setActiveCar } from '../../../redux/reducers/carSlice'
 import { getCarInfo } from '../selectors'
 import { CarApi } from '../../../interface/Interface'
 import {
@@ -11,13 +14,15 @@ import {
 } from '../../../redux/reducers/additionallySlice'
 import setRatesDate from '../../../redux/actions/setRentalDate'
 import CarShadow from './CarShadow'
-import { fetchCarApi } from '../../../redux/thunks/thunksLocation'
-import { RootState } from '../../../redux/rootState'
+import { fetchCarApi } from '../../../redux/thunks'
 
 const CarCard: React.FC = () => {
-  const dispatch = useDispatch()
-  const { activePoint, activeCar, filterCar } = useSelector(getCarInfo)
-  const { carsAll } = useSelector((state: RootState) => state.apiSwagger)
+  const dispatch: ThunkDispatch<RootState, unknown, AnyAction> = useDispatch()
+  const {
+    activePoint,
+    activeCar,
+    filterCar: filteredCars,
+  } = useSelector(getCarInfo)
 
   const handleActiveCar = (car: CarApi) => {
     dispatch(setActiveCar(car))
@@ -39,15 +44,14 @@ const CarCard: React.FC = () => {
 
   useEffect(() => {
     dispatch(fetchCarApi())
-    dispatch(setFilterCar(carsAll))
   }, [activePoint, dispatch])
 
   return (
     <div className="modelCartContainer">
       <div className="modelCartWrapper">
         <div className="allWraperCar">
-          {carsAll.length > 0 ? (
-            filterCar.map((car: CarApi) => (
+          {filteredCars.length > 0 ? (
+            filteredCars.map((car: CarApi) => (
               <div
                 role="button"
                 tabIndex={0}

@@ -1,13 +1,12 @@
 /* eslint-disable guard-for-in */
 /* eslint-disable no-restricted-syntax */
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { CarApi, InitialStateCar } from '../../interface/Interface'
+import { InitialStateCar } from '../../interface/Interface'
 
 const initialState: InitialStateCar = {
   activePoint: {
     pointText: false,
   },
-  filterCar: [],
   activeCar: {
     id: null,
     name: '',
@@ -41,28 +40,6 @@ const carSlice = createSlice({
       }
     },
 
-    setFilterCar: (state, action: PayloadAction<CarApi[]>) => {
-      const newState = {
-        ...state,
-        filterCar: action.payload,
-      }
-      let filteredCars = newState.filterCar
-
-      for (const category in newState.activePoint) {
-        if (newState.activePoint[category]) {
-          if (category === 'Все модели' || !newState.activePoint[category]) {
-            filteredCars = newState.filterCar
-          } else {
-            filteredCars = filteredCars.filter(
-              (car) => car.categoryId.name === category,
-            )
-          }
-        }
-      }
-
-      return { ...state, filterCar: filteredCars }
-    },
-
     setActiveCar: (state, action) => {
       const { id, name, number, thumbnail, priceMin, priceMax, colors } =
         action.payload
@@ -89,7 +66,7 @@ const carSlice = createSlice({
   },
 })
 
-export const { setActivePoint, setFilterCar, setActiveCar, setResetActiveCar } =
+export const { setActivePoint, setActiveCar, setResetActiveCar } =
   carSlice.actions
 
 export default carSlice.reducer

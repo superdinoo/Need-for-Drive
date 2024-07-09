@@ -37,7 +37,7 @@ export const coordinatesFromResponse = (data: GeoData): [number, number] => {
 }
 
 const apiSwagger = axios.create({
-  baseURL: `${process.env.API_BASE_URL}`,
+  baseURL: new URL(process.env.API_BASE_URL ?? '').toString(),
   headers: {
     'X-Api-Factory-Application-Id': `${process.env.API_KEY}`,
   },
