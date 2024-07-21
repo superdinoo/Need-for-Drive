@@ -1,32 +1,16 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
-import React, { useEffect, useState } from 'react'
-import './InputCity.scss'
-import { useDispatch } from 'react-redux'
+import React from 'react'
 import ApiMap from '../apiMap/ApiMap'
 import InputField from './form/InputField'
-import setLocation from '../../../redux/actions/setLocation '
+import useLocationInput from './useLocationInput'
 
 const InputCity: React.FC = () => {
-  const dispatch = useDispatch()
-  const [inputValues, setInputValues] = useState({
-    city: '',
-    point: '',
-  })
-
-  const handleInputChange = (name: string, value: string) => {
-    setInputValues((prevState) => ({ ...prevState, [name]: value }))
-  }
-
-  useEffect(() => {
-    dispatch(
-      setLocation({
-        city: inputValues.city,
-        point: inputValues.point,
-        option: '',
-      }),
-    )
-  }, [inputValues.city, inputValues.point, dispatch])
-
+  const {
+    inputValues,
+    cities,
+    handleInputChange,
+    filteredPoints,
+    addressPoint,
+  } = useLocationInput()
   return (
     <div className="inputCityContainerMain">
       <div className="inputCityContainer">
@@ -40,12 +24,15 @@ const InputCity: React.FC = () => {
             labels="Город"
             list="cities"
           />
+
           <datalist id="cities">
-            <option value="Ульяновск" />
-            <option value="Москва" />
-            <option value="Казань" />
-            <option value="Самара" />
+            {cities.map((city) => (
+              <option key={city.id} value={city.name}>
+                {city.name}
+              </option>
+            ))}
           </datalist>
+
           <InputField
             value={inputValues.point}
             onChange={(value) => handleInputChange('point', value)}
@@ -56,13 +43,20 @@ const InputCity: React.FC = () => {
             list="point"
           />
           <datalist id="point">
-            <option value="ул.Ленина" />
-            <option value="ул.Лесная" />
-            <option value="ул.Садовая" />
+            {filteredPoints.map((point) => (
+              <option key={point.id} value={point.name}>
+                {point.name}
+              </option>
+            ))}
           </datalist>
         </div>
         <div className="mapCityContainer">
-          <ApiMap city={inputValues.city} point={inputValues.point} option="" />
+          <ApiMap
+            city={inputValues.city}
+            point={inputValues.point}
+            option=""
+            address={addressPoint?.address ?? inputValues.point}
+          />
         </div>
       </div>
     </div>

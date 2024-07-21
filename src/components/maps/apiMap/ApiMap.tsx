@@ -8,12 +8,12 @@ import { InputCityProps } from '../../../interface/Interface'
 import fetchMapData from '../../../redux/actions/fetchMapData'
 import getMapInfo from './selectorsMap'
 
-const ApiMap: React.FC<InputCityProps> = ({ city, point }) => {
+const ApiMap: React.FC<InputCityProps> = ({ city, address }) => {
   const dispatch: any = useDispatch()
 
   useEffect(() => {
-    dispatch(fetchMapData(city, point, {}))
-  }, [city, point, dispatch])
+    dispatch(fetchMapData(city, address, {}))
+  }, [city, address, dispatch])
 
   const { mapCenter, mapPoint } = useSelector((state: RootState) =>
     getMapInfo(state),
@@ -33,7 +33,7 @@ const ApiMap: React.FC<InputCityProps> = ({ city, point }) => {
           <Placemark
             geometry={{ type: 'Point', coordinates: mapPoint }}
             properties={{
-              hintContent: point,
+              hintContent: address,
             }}
           />
         </Map>
