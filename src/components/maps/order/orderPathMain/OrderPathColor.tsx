@@ -7,25 +7,20 @@ const OrderPathColor: React.FC = () => {
   const activeColor = useSelector(selectActivePointColor)
   const activeCar = useSelector(selectActiveCar)
 
-  const acriveColorKey = Object.keys(activeColor).find(
-    (key) => activeColor[key],
-  )
+  let displayedColor = 'Любой'
 
-  const showActiveColor =
-    acriveColorKey && activeCar.color.includes(acriveColorKey)
+  if (activeColor !== 'Любой' && activeCar.color.includes(activeColor)) {
+    displayedColor = activeColor
+  }
 
   return (
     <div>
-      {showActiveColor ? (
-        <div className="textOrderContainer">
-          <p className="txtOrder">Цвет</p>
-          <div className="adressOrder">
-            <p className="cityOrder">{acriveColorKey}</p>
-          </div>
+      <div className="textOrderContainer">
+        <p className="txtOrder">Цвет</p>
+        <div className="adressOrder">
+          <p className="cityOrder">{displayedColor}</p>
         </div>
-      ) : (
-        ''
-      )}
+      </div>
     </div>
   )
 }

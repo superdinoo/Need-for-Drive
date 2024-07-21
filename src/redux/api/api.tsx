@@ -2,7 +2,8 @@
 import axios, { AxiosRequestConfig } from 'axios'
 import { GeoData } from '../../components/maps/apiMap/GeoDataInterface'
 import generateGeocodeUrl from './url'
-import { API_BASE_URL, API_KEY } from '../../components/utils'
+
+const { REACT_APP_API_BASE_URL, REACT_APP_API_KEY } = process.env
 
 export const fetchData = async (
   city: string,
@@ -35,9 +36,9 @@ export const coordinatesFromResponse = (data: GeoData): [number, number] => {
 }
 
 const apiSwagger = axios.create({
-  baseURL: API_BASE_URL,
+  baseURL: REACT_APP_API_BASE_URL,
   headers: {
-    'X-Api-Factory-Application-Id': API_KEY,
+    'X-Api-Factory-Application-Id': REACT_APP_API_KEY,
   },
 })
 

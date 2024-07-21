@@ -1,12 +1,26 @@
 import { ActionReducerMapBuilder, AsyncThunk } from '@reduxjs/toolkit'
-import { City, LocationsState, Point } from '../../interface/Interface'
+import {
+  CarApi,
+  CarCategory,
+  City,
+  ApiSwaggerState,
+  Point,
+  Rate,
+} from '../../interface/Interface'
 import { RootState } from '../rootState'
 
-type ThunkType = AsyncThunk<City[] | Point[], string, { state: RootState }>
+type ThunkType = AsyncThunk<
+  City[] | Point[] | Rate[] | CarApi[] | CarCategory[],
+  string | void | undefined,
+  { state: RootState }
+>
 
 const apiSwaggerLocation =
-  (thunk: ThunkType, paramName: 'cities' | 'points') =>
-  (builder: ActionReducerMapBuilder<LocationsState>) => {
+  (
+    thunk: ThunkType,
+    paramName: 'cities' | 'points' | 'rate' | ' carsAll' | 'categoryCars',
+  ) =>
+  (builder: ActionReducerMapBuilder<ApiSwaggerState>) => {
     builder
       .addCase(thunk.pending, (state) => ({
         ...state,
