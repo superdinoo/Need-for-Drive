@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
@@ -16,11 +17,7 @@ import {
   setActiveOptions,
   setActiveRate,
 } from '../../../../redux/reducers/additionallySlice'
-import {
-  setActivePoint,
-  setResetActiveCar,
-} from '../../../../redux/reducers/carSlice'
-import setRatesDate from '../../../../redux/actions/setRentalDate'
+import { setResetActiveCar } from '../../../../redux/reducers/carSlice'
 
 const OrderPathBtn: React.FC<OrderProps & NamesBtn> = ({
   currentPages,
@@ -28,22 +25,19 @@ const OrderPathBtn: React.FC<OrderProps & NamesBtn> = ({
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const { start, end } = useSelector(selectRentalDate)
-  const activeColor = useSelector(selectActivePointColor)
-  const activeRate = useSelector(selectActivePointRate)
+  const { any, red, blue } = useSelector(selectActivePointColor)
+  const { everyMinute, forADay } = useSelector(selectActivePointRate)
   const { city, point } = useSelector(selectLocation)
   const { confirm } = useSelector(selectModalTotal)
   const { pathname } = useLocation()
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const colorTrue = Object.keys(activeColor).find((key) => activeColor[key])
-  const rateTrue = Object.keys(activeRate).find((key) => activeRate[key])
-
   const cityAndPoint = city.length > 0 && point.length > 0
   const activeCarConst = activeCar.name.length > 0
   const startEnd = start.length > 0 && end.length > 0
-  const color = colorTrue
-  const rate = rateTrue
+  const color = any === true || red === true || blue === true
+  const rate = everyMinute === true || forADay === true
 
   const namesBtn: NamesBtn = {
     '/LocationPage': 'Выбрать модель',
@@ -71,22 +65,20 @@ const OrderPathBtn: React.FC<OrderProps & NamesBtn> = ({
 
   const handleCancelOrder = () => {
     dispatch(setResetConfirm())
-    dispatch(setActiveColor({ colorKey: '', reset: true }))
-    dispatch(setActiveRate({ rateKey: '', reset: true, price: 0 }))
+    dispatch(
+      setActiveColor({ colorKey: 'any' && 'blue' && 'red', reset: true }),
+    )
+    dispatch(
+      setActiveRate({ rateKey: 'everyMinute' && 'forADay', reset: true }),
+    )
     dispatch(
       setActiveOptions({
         optionsKey: 'all',
         reset: true,
       }),
     )
-    dispatch(
-      setRatesDate({
-        start: '',
-        end: '',
-      }),
-    )
     dispatch(setResetActiveCar())
-    dispatch(setActivePoint({ pointKey: '', reset: true }))
+
     navigate('/LocationPage')
   }
 

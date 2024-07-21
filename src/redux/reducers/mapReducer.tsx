@@ -9,7 +9,7 @@ import { MapState } from '../rootState'
 
 const initialState: MapState = {
   center: [0, 0],
-  address: [0, 0],
+  point: [0, 0],
 }
 
 const mapReducer = (
@@ -28,7 +28,7 @@ const mapReducer = (
       return {
         ...state,
         center: action.payload,
-        address: action.payload,
+        point: action.payload,
       }
     case FETCH_DATA_FAILURE:
       return state

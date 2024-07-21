@@ -1,26 +1,33 @@
+/* eslint-disable no-shadow */
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { selectActivePointColor } from 'components/additionallyPath/selectors'
-import { selectActiveCar } from 'components/cars/selectors'
+import { InitialStateAdditionally } from '../../../../interface/Interface'
+
+enum EPath {
+  Red = 'Красный',
+  Blue = 'Синий',
+  Any = 'Любой',
+}
 
 const OrderPathColor: React.FC = () => {
   const activeColor = useSelector(selectActivePointColor)
-  const activeCar = useSelector(selectActiveCar)
 
-  const acriveColorKey = Object.keys(activeColor).find(
-    (key) => activeColor[key],
-  )
-
-  const showActiveColor =
-    acriveColorKey && activeCar.color.includes(acriveColorKey)
+  const handleActiveColor = (
+    color: InitialStateAdditionally['activePointColor'],
+  ) => {
+    if (color.red) return EPath.Red
+    if (color.blue) return EPath.Blue
+    return EPath.Any
+  }
 
   return (
     <div>
-      {showActiveColor ? (
+      {activeColor.red || activeColor.any || activeColor.blue ? (
         <div className="textOrderContainer">
           <p className="txtOrder">Цвет</p>
           <div className="adressOrder">
-            <p className="cityOrder">{acriveColorKey}</p>
+            <p className="cityOrder">{handleActiveColor(activeColor)}</p>
           </div>
         </div>
       ) : (

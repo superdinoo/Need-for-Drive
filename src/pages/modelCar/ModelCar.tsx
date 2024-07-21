@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react'
 import './ModelCar.scss'
 import { Hamburger, Header } from '../../components/leftWrapper/leftComponent'

@@ -1,7 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { selectActiveCar } from 'components/cars/selectors'
 import { EPath, RouteData } from 'interface/Interface'
-import { useSelector } from 'react-redux'
 
 export const calculater = (
   startDatePrice: Date,
@@ -9,29 +7,17 @@ export const calculater = (
   activeOptions: any,
   activePointRate: any,
 ) => {
-  const { priceMin } = useSelector(selectActiveCar)
-
   const timeDifferenceMs = endDatePrice.getTime() - startDatePrice.getTime()
-  let totalPrice = priceMin
+  let totalPrice = 0
 
-  const price = activePointRate.ratePrice
-  const trueKey = Object.keys(activePointRate).find(
-    (key) => activePointRate[key] === true,
-  )
-
-  const hours = timeDifferenceMs / (1000 * 60 * 60)
-  const days = hours < 12 ? 1 : Math.ceil(hours / 24)
-  const weeks = Math.ceil(days / 7)
-  const months = Math.ceil(days / 30)
-
-  if (trueKey === 'Сутки') {
-    totalPrice += days * price
+  if (activePointRate.forADay) {
+    const hours = timeDifferenceMs / (1000 * 60 * 60)
+    const days = hours < 12 ? 1 : Math.ceil(hours / 24)
+    totalPrice += days * 1999
   }
-  if (trueKey === 'Неделя') {
-    totalPrice += weeks * price
-  }
-  if (trueKey === 'Месяц') {
-    totalPrice += months * price
+  if (activePointRate.everyMinute) {
+    const minutes = Math.ceil(timeDifferenceMs / (1000 * 60))
+    totalPrice += minutes * 7
   }
   if (activeOptions.tank) {
     totalPrice += 500

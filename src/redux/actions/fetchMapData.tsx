@@ -7,11 +7,11 @@ import {
 } from './apiAction'
 import { fetchData, coordinatesFromResponse } from '../api/api'
 
-const fetchMapData = (city: string, address: string, option: RequestInit) => {
+const fetchMapData = (city: string, point: string, option: RequestInit) => {
   return async (dispatch: Dispatch<RootAction>) => {
     dispatch(fetchDataRequest())
     try {
-      const data = await fetchData(city, address, option)
+      const data = await fetchData(city, point, option)
       const result = coordinatesFromResponse(data)
       dispatch(fetchDataSuccess(result))
     } catch (error) {

@@ -3,11 +3,13 @@ import { InitialStateAdditionally } from 'interface/Interface'
 
 const initialState: InitialStateAdditionally = {
   activePointColor: {
-    colorText: false,
+    any: false,
+    red: false,
+    blue: false,
   },
   activePointRate: {
-    rateText: false,
-    ratePrice: 0,
+    everyMinute: false,
+    forADay: false,
   },
   activePointOptions: {
     tank: false,
@@ -41,24 +43,17 @@ const additionallySlice = createSlice({
     setActiveRate: (
       state,
       action: PayloadAction<{
-        rateKey: keyof InitialStateAdditionally['activePointRate'] | ''
+        rateKey: 'everyMinute' | 'forADay' | ''
         reset: boolean
-        price: number
       }>,
     ) => {
       return {
         ...state,
         activePointRate: {
           ...initialState.activePointRate,
-          [action.payload
-            .rateKey as keyof InitialStateAdditionally['activePointRate']]:
-            action.payload.reset
-              ? false
-              : !state.activePointRate[
-                  action.payload
-                    .rateKey as keyof InitialStateAdditionally['activePointRate']
-                ],
-          ratePrice: action.payload.price,
+          [action.payload.rateKey]: action.payload.reset
+            ? false
+            : !state.activePointRate[action.payload.rateKey],
         },
       }
     },
