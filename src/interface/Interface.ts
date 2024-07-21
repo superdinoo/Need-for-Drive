@@ -113,13 +113,6 @@ export interface RouteData {
   rate: boolean
 }
 
-export interface InitialStateModalTotal {
-  activeButtonModal: {
-    confirm: boolean
-    back: boolean
-  }
-}
-
 export interface City {
   id: string
   name: string
@@ -166,8 +159,8 @@ export interface UseLocationInputProps {
 }
 
 export interface OrderPost {
-  id: 0
-  orderStatusId: 0
+  id: number
+  orderStatusId: number
   cityId: { id: number; name: string }
   pointId: { id: number; name: string }
   carId: { id: number; name: string }
@@ -179,6 +172,17 @@ export interface OrderPost {
   isFullTank: boolean
   isNeedChildChair: boolean
   isRightWheel: boolean
+}
+
+export interface InitialStateModalTotal {
+  activeButtonModal: {
+    confirm: boolean
+    back: boolean
+  }
+  postIdOrderCar: {
+    id: number
+  }
+  activeIdOrder: OrderPost
 }
 
 export enum EPath {

@@ -1,14 +1,14 @@
 import React from 'react'
 import './TotalPath.scss'
 import { useSelector } from 'react-redux'
-import { selectActiveCar } from '../cars/selectors'
-import { selectRentalDate } from '../maps/order/selectorsOrder'
 import { selectModalTotal } from './selectorsModalTotal'
 import { DateTimeFormatOptions } from '../../interface/Interface'
+import { selectActiveCar } from '../cars/selectors'
+import { selectRentalDate } from '../maps/order/selectorsOrder'
 
 const TotalPath: React.FC = () => {
   const { confirm } = useSelector(selectModalTotal)
-  const { markNumber, name, img } = useSelector(selectActiveCar)
+  const { img, markNumber, name } = useSelector(selectActiveCar)
   const { start } = useSelector(selectRentalDate)
 
   const date = new Date(start)
@@ -27,7 +27,7 @@ const TotalPath: React.FC = () => {
     <div className="totalPathContainer">
       <div className="leftPathTotal">
         {confirm && <h3 className="titleConfirm">Ваш заказ подтверждён</h3>}
-        <p className="titleLeftPathTotal">Hyndai, {name}</p>
+        <p className="titleLeftPathTotal">{name}</p>
         <div className="totalMark">
           <p className="markName">{markNumber}</p>
         </div>

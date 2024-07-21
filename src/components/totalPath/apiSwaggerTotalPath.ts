@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { useState } from 'react'
 import axios from 'axios'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { selectActiveCar } from 'components/cars/selectors'
 import {
   selectLocation,
@@ -16,9 +16,15 @@ import {
   selectActiveRentalPrice,
 } from 'components/additionallyPath/selectors'
 import { OrderPost } from '../../interface/Interface'
+import {
+  setOrderId,
+  setPostIdOrderCar,
+} from '../../redux/reducers/modalTotalSlice'
 
 const apiSwaggerTotalPath = () => {
+  const dispatch = useDispatch()
   const [orderPost, setOrderPost] = useState<OrderPost[]>([])
+  const [orderGet, setOrderGet] = useState<OrderPost[]>([])
 
   const carName = useSelector(selectActiveCar)
   const activeCityPoint = useSelector(selectLocation)
@@ -59,15 +65,32 @@ const apiSwaggerTotalPath = () => {
           },
         },
       )
-
-      setOrderPost(response.data.data)
-      console.log(response.data.data)
+      setOrderPost(response.data.data.id)
+      dispatch(setPostIdOrderCar({ id: response.data.data.id }))
     } catch (error) {
       console.error('Ошибка при загрузке данных заказа:', error)
     }
   }
 
-  return { fetchOrderPost, orderPost }
+  const fetchGetId = async (orderId: string) => {
+    try {
+      const response = await axios.get(
+        `${API_BASE_URL}/api/db/order/${orderId}`,
+        {
+          headers: {
+            'X-Api-Factory-Application-Id': API_KEY,
+            'Content-Type': 'application/json',
+          },
+        },
+      )
+      setOrderGet(response.data.data)
+      dispatch(setOrderId(response.data.data))
+    } catch (error) {
+      console.error('Ошибка при загрузке данных', error)
+    }
+  }
+
+  return { fetchOrderPost, orderPost, fetchGetId, orderGet }
 }
 
 export default apiSwaggerTotalPath

@@ -6,7 +6,7 @@ const OrderPathModel: React.FC<OrderProps> = ({ activeCar }) => {
     <div className="textOrderContainer">
       <p className="txtOrder">Модель</p>
       <div className="adressOrder">
-        <p className="cityOrder"> {activeCar.name} </p>
+        <p className="cityOrder">{activeCar.name}</p>
       </div>
     </div>
   )

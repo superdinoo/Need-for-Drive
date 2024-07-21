@@ -10,6 +10,7 @@ import { selectRentalDate } from '../selectorsOrder'
 import { calculater } from './helpers'
 import { setRentalPrice } from '../../../../redux/reducers/additionallySlice'
 import { selectActiveCar } from '../../../cars/selectors'
+import { selectPostIdorderCar } from '../../../totalPath/selectorsModalTotal'
 
 const OrderPathPrice: React.FC<OrderProps> = ({ activeCar }) => {
   const dispatch = useDispatch()
@@ -18,6 +19,7 @@ const OrderPathPrice: React.FC<OrderProps> = ({ activeCar }) => {
   const activeOptions = useSelector(selectActivePointOptions)
   const { activePointRate } = useSelector(getAdditionallyInfo)
   const { priceMin } = useSelector(selectActiveCar)
+  const { id } = useSelector(selectPostIdorderCar)
 
   const startDatePrice = new Date(start)
   const endDatePrice = new Date(end)
@@ -38,7 +40,9 @@ const OrderPathPrice: React.FC<OrderProps> = ({ activeCar }) => {
     <div className="priceOrderContainer">
       <h3 className="priceOrder">Цена: </h3>
       <p className="priceOrderWidth">
-        {pathname === '/Additionally' || pathname === '/Total'
+        {pathname === '/Additionally' ||
+        pathname === '/Total' ||
+        pathname === `/Total/${id}`
           ? `${rentalPrice} ₽`
           : `${activeCar.priceMin} ₽`}
       </p>
