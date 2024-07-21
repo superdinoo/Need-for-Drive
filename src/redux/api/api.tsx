@@ -3,8 +3,7 @@ import axios, { AxiosRequestConfig } from 'axios'
 import { GeoData } from '../../components/maps/apiMap/GeoDataInterface'
 import generateGeocodeUrl from './url'
 
-const { REACT_APP_API_KEY } = process.env
-const { REACT_APP_API_BASE_URL } = process.env
+const { REACT_APP_API_BASE_URL, REACT_APP_API_KEY } = process.env
 
 export const fetchData = async (
   city: string,
