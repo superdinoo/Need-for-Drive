@@ -1,11 +1,12 @@
+/* eslint-disable guard-for-in */
+/* eslint-disable no-restricted-syntax */
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { CarApi, InitialStateCar } from '../../interface/Interface'
+import { InitialStateCar } from '../../interface/Interface'
 
 const initialState: InitialStateCar = {
   activePoint: {
     pointText: false,
   },
-  filterCar: [],
   activeCar: {
     id: null,
     name: '',
@@ -39,45 +40,20 @@ const carSlice = createSlice({
       }
     },
 
-    setFilterCar: (state, action: PayloadAction<CarApi[]>) => {
-      const newState = {
-        ...state,
-        filterCar: action.payload,
-      }
-      let filteredCars = newState.filterCar
-      if (newState.activePoint.eco) {
-        filteredCars = filteredCars.filter(
-          (car) => car.categoryId.name === 'Эконом',
-        )
-      } else if (newState.activePoint.premium) {
-        filteredCars = filteredCars.filter(
-          (car) => car.categoryId.name === 'Бизнес',
-        )
-      } else if (newState.activePoint.bike) {
-        filteredCars = filteredCars.filter(
-          (car) => car.categoryId.name === 'Мототехника',
-        )
-      } else if (newState.activePoint.sport) {
-        filteredCars = filteredCars.filter(
-          (car) => car.categoryId.name === 'Спорт',
-        )
-      }
-      return { ...state, filterCar: filteredCars }
-    },
-
     setActiveCar: (state, action) => {
-      const { id, name, markNumber, img, priceMin, priceMax, color } =
+      const { id, name, number, thumbnail, priceMin, priceMax, colors } =
         action.payload
+      const imgPath = thumbnail ? thumbnail.path : ''
       return {
         ...state,
         activeCar: {
           id,
           name,
-          markNumber,
-          img,
+          markNumber: number,
+          img: imgPath,
           priceMin,
           priceMax,
-          color,
+          color: colors as [],
         },
       }
     },
@@ -90,7 +66,7 @@ const carSlice = createSlice({
   },
 })
 
-export const { setActivePoint, setFilterCar, setActiveCar, setResetActiveCar } =
+export const { setActivePoint, setActiveCar, setResetActiveCar } =
   carSlice.actions
 
 export default carSlice.reducer

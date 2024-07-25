@@ -29,14 +29,12 @@ const OrderPathBtn: React.FC<OrderProps & NamesBtn> = ({
   const startEnd = start.length > 0 && end.length > 0
   const color = colorTrue
   const rate = rateTrue
-
   const namesBtn: NamesBtn = {
     '/LocationPage': 'Выбрать модель',
     '/ModelCar': 'Дополнительно',
     '/Additionally': 'Итого',
     '/Total': 'Заказать',
   }
-
   const routeData = {
     pathname,
     cityAndPoint,
