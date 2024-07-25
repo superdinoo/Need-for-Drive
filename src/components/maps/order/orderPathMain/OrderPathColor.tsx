@@ -8,9 +8,12 @@ const OrderPathColor: React.FC = () => {
   const activeCar = useSelector(selectActiveCar)
 
   let displayedColor = 'Любой'
+  const activeColorKey = Object.keys(activeColor).find(
+    (key) => activeColor[key],
+  )
 
-  if (activeColor !== 'Любой' && activeCar.color.includes(activeColor)) {
-    displayedColor = activeColor
+  if (activeColorKey !== 'Любой' && activeCar.color.includes(activeColorKey)) {
+    displayedColor = String(activeColorKey)
   }
 
   return (
