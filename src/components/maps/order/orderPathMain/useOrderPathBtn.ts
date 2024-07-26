@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 import {
@@ -8,7 +8,6 @@ import {
 } from 'components/additionallyPath/selectors'
 import { selectModalTotal } from 'components/totalPath/selectorsModalTotal'
 import { selectLocation, selectRentalDate } from '../selectorsOrder'
-import apiSwaggerTotalPath from '../../../totalPath/apiSwaggerTotalPath'
 import setRatesDate from '../../../../redux/actions/setRentalDate'
 import {
   setActivePoint,
@@ -20,6 +19,7 @@ import {
   setActiveRate,
 } from '../../../../redux/reducers/additionallySlice'
 import { setResetConfirm } from '../../../../redux/reducers/modalTotalSlice'
+import { fetchOrderPost } from '../../../../redux/thunks'
 
 const useOrderPathBtn = (currentPages: string) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -28,7 +28,7 @@ const useOrderPathBtn = (currentPages: string) => {
   const activeRate = useSelector(selectActivePointRate)
   const { city, point } = useSelector(selectLocation)
   const { confirm } = useSelector(selectModalTotal)
-  const { fetchOrderPost } = apiSwaggerTotalPath()
+
   const { pathname } = useLocation()
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -63,15 +63,11 @@ const useOrderPathBtn = (currentPages: string) => {
     navigate('/LocationPage')
   }
 
-  const memoizedFetchOrderPost = useCallback(() => {
-    fetchOrderPost()
-  }, [])
-
   useEffect(() => {
     if (confirm === true) {
-      memoizedFetchOrderPost()
+      dispatch(fetchOrderPost())
     }
-  }, [confirm, memoizedFetchOrderPost])
+  }, [confirm, dispatch])
 
   return {
     confirm,

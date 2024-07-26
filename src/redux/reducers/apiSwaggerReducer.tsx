@@ -5,6 +5,7 @@ import {
   fetchCarApi,
   fetchCategory,
   fetchCities,
+  fetchOrderPost,
   fetchPoints,
   fetchRateDate,
 } from '../thunks'
@@ -15,6 +16,7 @@ const initialState: ApiSwaggerState = {
   rate: [],
   carsAll: [],
   categoryCars: [],
+  orderPost: [],
   isLoading: false,
   error: null,
 }
@@ -29,6 +31,7 @@ const apiSwaggerSlice = createSlice({
     apiSwaggerLocation(fetchRateDate, 'rate')(builder)
     apiSwaggerLocation(fetchCarApi, 'carsAll')(builder)
     apiSwaggerLocation(fetchCategory, 'categoryCars')(builder)
+    apiSwaggerLocation(fetchOrderPost, 'orderPost')(builder)
   },
 })
 

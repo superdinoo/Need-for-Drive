@@ -179,6 +179,7 @@ export interface ApiSwaggerState {
   rate: Rate[]
   carsAll: CarApi[]
   categoryCars: CarCategory[]
+  orderPost: OrderPost[]
   isLoading: boolean
   error: string | null
 }
