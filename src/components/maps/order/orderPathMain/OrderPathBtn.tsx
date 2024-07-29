@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { OrderProps, NamesBtn } from '../../../../interface/Interface'
 import ModalTotal from '../../../totalPath/ModalTotal'
@@ -22,6 +22,7 @@ const OrderPathBtn: React.FC<OrderProps & NamesBtn> = ({
     end,
     city,
     point,
+    handleSubmit,
   } = useOrderPathBtn(currentPages)
 
   const cityAndPoint = city.length > 0 && point.length > 0
@@ -44,6 +45,10 @@ const OrderPathBtn: React.FC<OrderProps & NamesBtn> = ({
     rate,
   }
   const { nextPath, isActive } = nextPathLoc(routeData)
+
+  useEffect(() => {
+    handleSubmit()
+  }, [handleSubmit])
 
   return (
     <div className="btnContainerOrder">

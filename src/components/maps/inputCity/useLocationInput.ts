@@ -17,38 +17,41 @@ const useLocationInput = () => {
     pointId: null as string | null,
   })
 
-  const handleInputChange = useCallback((name: string, value: string) => {
-    const truncatedValue = value.substring(0, 150).replace(/^\s+/, '')
-    setInputValues((prevState) => {
-      if (name === 'city') {
-        const selectedCity = cities.find(
-          (city: City) => city.name === truncatedValue,
-        )
+  const handleInputChange = useCallback(
+    (name: string, value: string) => {
+      const truncatedValue = value.substring(0, 150).replace(/^\s+/, '')
+      setInputValues((prevState) => {
+        if (name === 'city') {
+          const selectedCity = cities.find(
+            (city: City) => city.name === truncatedValue,
+          )
+
+          return {
+            ...prevState,
+            city: truncatedValue,
+            cityId: selectedCity ? selectedCity.id : null,
+          }
+        }
+
+        if (name === 'point' && prevState.city) {
+          const selectedPoint = points.find(
+            (point: Point) => point.name === truncatedValue,
+          )
+          return {
+            ...prevState,
+            point: truncatedValue,
+            pointId: selectedPoint ? selectedPoint.id : null,
+          }
+        }
 
         return {
           ...prevState,
-          city: truncatedValue,
-          cityId: selectedCity ? selectedCity.id : null,
+          [name]: truncatedValue,
         }
-      }
-
-      if (name === 'point' && prevState.city) {
-        const selectedPoint = points.find(
-          (point: Point) => point.name === truncatedValue,
-        )
-        return {
-          ...prevState,
-          point: truncatedValue,
-          pointId: selectedPoint ? selectedPoint.id : null,
-        }
-      }
-
-      return {
-        ...prevState,
-        [name]: truncatedValue,
-      }
-    })
-  }, [])
+      })
+    },
+    [cities, points],
+  )
 
   const filteredPoints = points.filter(
     (point: Point) => point.cityId?.name === inputValues.city,

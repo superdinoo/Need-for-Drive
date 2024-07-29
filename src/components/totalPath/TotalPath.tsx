@@ -27,7 +27,7 @@ const TotalPath: React.FC = () => {
     <div className="totalPathContainer">
       <div className="leftPathTotal">
         {confirm && <h3 className="titleConfirm">Ваш заказ подтверждён</h3>}
-        <p className="titleLeftPathTotal">Hyndai, {name}</p>
+        <p className="titleLeftPathTotal">{name}</p>
         <div className="totalMark">
           <p className="markName">{markNumber}</p>
         </div>
