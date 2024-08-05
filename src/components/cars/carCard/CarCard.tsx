@@ -4,7 +4,6 @@ import { RootState } from 'redux/rootState'
 import { AnyAction } from 'redux'
 import './CarCard.scss'
 import { useDispatch, useSelector } from 'react-redux'
-import { setActiveCar } from '../../../redux/reducers/carSlice'
 import { getCarInfo } from '../selectors'
 import { CarApi } from '../../../interface/Interface'
 import {
@@ -15,6 +14,7 @@ import {
 import setRatesDate from '../../../redux/actions/setRentalDate'
 import CarShadow from './CarShadow'
 import { fetchCarApi } from '../../../redux/thunks'
+import { setActiveCar } from '../../../redux/reducers/carSlice'
 
 const CarCard: React.FC = () => {
   const dispatch: ThunkDispatch<RootState, unknown, AnyAction> = useDispatch()
@@ -27,7 +27,7 @@ const CarCard: React.FC = () => {
   const handleActiveCar = (car: CarApi) => {
     dispatch(setActiveCar(car))
     dispatch(setActiveColor({ colorKey: '', reset: true }))
-    dispatch(setActiveRate({ rateKey: '', reset: true, price: 0 }))
+    dispatch(setActiveRate({ rateKey: '', reset: true, price: 0, id: 0 }))
     dispatch(
       setActiveOptions({
         optionsKey: 'all',

@@ -2,6 +2,8 @@
 export interface InputCityProps {
   city: string
   point: string
+  cityId: number
+  pointId: number
   address: string
   option: string
 }
@@ -73,12 +75,16 @@ export interface InitialStateAdditionally {
   activePointRate: {
     rateText: boolean
     ratePrice: number
+    rateId: number
   }
   activePointOptions: {
     tank: boolean
     seat: boolean
     wheel: boolean
     [key: string]: boolean
+  }
+  activeRentalPrice: {
+    rentalPrice: number
   }
 }
 
@@ -126,12 +132,54 @@ export interface Point {
   address: string
 }
 
+export interface DateTimeFormatOptions {
+  year?: 'numeric' | '2-digit'
+  month?: 'numeric' | '2-digit' | 'narrow' | 'short' | 'long'
+  day?: 'numeric' | '2-digit'
+  hour?: 'numeric' | '2-digit'
+  minute?: 'numeric' | '2-digit'
+}
+
+export interface InputProps {
+  value: string
+  onChange: (value: string) => void
+  name: string
+  placeholder: string
+  onReset: () => void
+  labels: string
+  list: string
+}
+
+export interface UseLocationInputProps {
+  cities: City[]
+  points: Point[]
+  fetchCities: (query: string) => void
+  fetchPoints: (query: string) => void
+}
+
+export interface OrderPost {
+  id: 0
+  orderStatusId: 0
+  cityId: { id: number; name: string }
+  pointId: { id: number; name: string }
+  carId: { id: number; name: string }
+  color: string
+  dateFrom: number
+  dateTo: number
+  rateId: { id: number; name: string }
+  price: number
+  isFullTank: boolean
+  isNeedChildChair: boolean
+  isRightWheel: boolean
+}
+
 export interface ApiSwaggerState {
   cities: City[]
   points: Point[]
   rate: Rate[]
   carsAll: CarApi[]
   categoryCars: CarCategory[]
+  orderPost: OrderPost[]
   isLoading: boolean
   error: string | null
 }

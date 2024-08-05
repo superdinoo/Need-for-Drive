@@ -1,7 +1,9 @@
 import React from 'react'
+import './InputCity.scss'
 import ApiMap from '../apiMap/ApiMap'
 import InputField from './form/InputField'
 import useLocationInput from './useLocationInput'
+import { City, Point } from '../../../interface/Interface'
 
 const InputCity: React.FC = () => {
   const {
@@ -26,7 +28,7 @@ const InputCity: React.FC = () => {
           />
 
           <datalist id="cities">
-            {cities.map((city) => (
+            {cities.map((city: City) => (
               <option key={city.id} value={city.name}>
                 {city.name}
               </option>
@@ -43,7 +45,7 @@ const InputCity: React.FC = () => {
             list="point"
           />
           <datalist id="point">
-            {filteredPoints.map((point) => (
+            {filteredPoints.map((point: Point) => (
               <option key={point.id} value={point.name}>
                 {point.name}
               </option>
@@ -56,6 +58,8 @@ const InputCity: React.FC = () => {
             point={inputValues.point}
             option=""
             address={addressPoint?.address ?? inputValues.point}
+            cityId={Number(inputValues.cityId ?? 0)}
+            pointId={Number(inputValues.pointId ?? 0)}
           />
         </div>
       </div>

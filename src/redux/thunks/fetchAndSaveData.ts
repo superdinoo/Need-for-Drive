@@ -5,7 +5,6 @@ import {
   fetchDataSuccess,
   fetchDataFailure,
 } from '../actions/apiAction'
-import { fetchData } from '../api/api'
 
 const fetchAndSaveData = (city: string, point: string) => {
   return async (dispatch: any, getState: any, extraArgument: any) => {

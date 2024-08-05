@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { request } from '../api/api'
 
 const fetchCarApi = createAsyncThunk(
-  'locations/fetchCarApi',
+  'apiSwagger/fetchCarApi',
   async (_, { rejectWithValue }) => {
     try {
       return await request(`/api/db/car`)

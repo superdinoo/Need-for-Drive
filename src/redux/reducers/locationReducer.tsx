@@ -4,6 +4,8 @@ import setLocation from '../actions/setLocation '
 const initialState = {
   city: '',
   point: '',
+  cityId: 0,
+  pointId: 0,
 }
 
 const locationReducer = createReducer(initialState, (builder) => {
@@ -12,6 +14,8 @@ const locationReducer = createReducer(initialState, (builder) => {
       ...state,
       city: action.payload.city,
       point: action.payload.point,
+      cityId: action.payload.cityId,
+      pointId: action.payload.pointId,
     }
   })
 })

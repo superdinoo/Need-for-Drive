@@ -1,17 +1,7 @@
 import React from 'react'
-
 import '../InputCity.scss'
 import { RxCross2 } from 'react-icons/rx'
-
-interface InputProps {
-  value: string
-  onChange: (value: string) => void
-  name: string
-  placeholder: string
-  onReset: () => void
-  labels: string
-  list: string
-}
+import { InputProps } from '../../../../interface/Interface'
 
 const InputField: React.FC<InputProps> = ({
   value,

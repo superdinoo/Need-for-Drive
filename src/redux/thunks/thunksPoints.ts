@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { request } from '../api/api'
 
 const fetchPoints = createAsyncThunk(
-  'locations/fetchPoints',
+  'apiSwagger/fetchPoints',
   async (query: string, { rejectWithValue }) => {
     try {
       return await request(`/api/db/point?q=${query}`)

@@ -13,11 +13,26 @@ export const selectActivePointOptions = (state: {
   additionally: { activePointOptions: any }
 }) => state.additionally.activePointOptions
 
+export const selectActiveRentalPrice = (state: {
+  additionally: { activeRentalPrice: any }
+}) => state.additionally.activeRentalPrice
+
 export const getAdditionallyInfo = createSelector(
-  [selectActivePointColor, selectActivePointRate, selectActivePointOptions],
-  (activePointColor, activePointRate, activePointOptions) => ({
+  [
+    selectActivePointColor,
+    selectActivePointRate,
+    selectActivePointOptions,
+    selectActiveRentalPrice,
+  ],
+  (
+    activePointColor,
+    activePointRate,
+    activePointOptions,
+    activeRentalPrice,
+  ) => ({
     activePointColor,
     activePointOptions,
     activePointRate,
+    activeRentalPrice,
   }),
 )

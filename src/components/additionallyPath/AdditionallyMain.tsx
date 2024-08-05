@@ -30,12 +30,17 @@ const AdditionallyMain: React.FC = () => {
     dispatch(fetchRateDate())
   }, [dispatch])
 
-  const handleActivePointRate = (marker: string, price = 0) => {
+  const handleActivePointRate = (
+    marker: string,
+    price?: number,
+    id?: number,
+  ) => {
     dispatch(
       setActiveRate({
         rateKey: marker as 'rateText' | 'ratePrice',
         reset: false,
-        price,
+        price: price ?? 0,
+        id: id ?? 0,
       }),
     )
   }
@@ -62,9 +67,7 @@ const AdditionallyMain: React.FC = () => {
           />
         </div>
       </div>
-
       <AdditionallyPathRentalDate />
-
       <div className="centerPath">
         <BreadCrambSkelet
           initialPath="rate"
@@ -75,7 +78,6 @@ const AdditionallyMain: React.FC = () => {
           type="radio"
         />
       </div>
-
       <div className="centerPath">
         <BreadCrambSkelet
           initialPath="options"
@@ -93,5 +95,4 @@ const AdditionallyMain: React.FC = () => {
     </>
   )
 }
-
 export default AdditionallyMain

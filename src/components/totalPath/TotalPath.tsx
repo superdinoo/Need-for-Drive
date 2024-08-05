@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import { selectActiveCar } from '../cars/selectors'
 import { selectRentalDate } from '../maps/order/selectorsOrder'
 import { selectModalTotal } from './selectorsModalTotal'
+import { DateTimeFormatOptions } from '../../interface/Interface'
 
 const TotalPath: React.FC = () => {
   const { confirm } = useSelector(selectModalTotal)
@@ -12,12 +13,12 @@ const TotalPath: React.FC = () => {
 
   const date = new Date(start)
 
-  const options = {
+  const options: DateTimeFormatOptions = {
     year: 'numeric',
-    month: 'numeric',
-    day: 'numeric',
-    hour: 'numeric',
-    minute: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
   }
 
   const formateDate = date.toLocaleDateString('ru-Ru', options)
@@ -26,7 +27,7 @@ const TotalPath: React.FC = () => {
     <div className="totalPathContainer">
       <div className="leftPathTotal">
         {confirm && <h3 className="titleConfirm">Ваш заказ подтверждён</h3>}
-        <p className="titleLeftPathTotal">Hyndai, {name}</p>
+        <p className="titleLeftPathTotal">{name}</p>
         <div className="totalMark">
           <p className="markName">{markNumber}</p>
         </div>
@@ -40,7 +41,7 @@ const TotalPath: React.FC = () => {
         </div>
       </div>
       <div className="rightPathTotal">
-        <img src={img} alt="car" />
+        <img className="rightPathTotalImg" src={img} alt="car" />
       </div>
     </div>
   )

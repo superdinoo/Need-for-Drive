@@ -1,19 +1,23 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { OrderProps } from 'interface/Interface'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import {
   getAdditionallyInfo,
   selectActivePointOptions,
 } from '../../../additionallyPath/selectors'
 import { selectRentalDate } from '../selectorsOrder'
 import { calculater } from './helpers'
+import { setRentalPrice } from '../../../../redux/reducers/additionallySlice'
+import { selectActiveCar } from '../../../cars/selectors'
 
 const OrderPathPrice: React.FC<OrderProps> = ({ activeCar }) => {
+  const dispatch = useDispatch()
   const { start, end } = useSelector(selectRentalDate)
   const { pathname } = useLocation()
   const activeOptions = useSelector(selectActivePointOptions)
   const { activePointRate } = useSelector(getAdditionallyInfo)
+  const { priceMin } = useSelector(selectActiveCar)
 
   const startDatePrice = new Date(start)
   const endDatePrice = new Date(end)
@@ -23,7 +27,12 @@ const OrderPathPrice: React.FC<OrderProps> = ({ activeCar }) => {
     endDatePrice,
     activeOptions,
     activePointRate,
+    priceMin,
   )
+
+  useEffect(() => {
+    dispatch(setRentalPrice({ rentalPrice }))
+  }, [rentalPrice, dispatch])
 
   return (
     <div className="priceOrderContainer">

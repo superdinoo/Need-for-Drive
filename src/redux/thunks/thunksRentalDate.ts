@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { request } from '../api/api'
 
 const fetchRateDate = createAsyncThunk(
-  'locations/fetchRateDate',
+  'apiSwagger/fetchRateDate',
   async (_, { rejectWithValue }) => {
     try {
       return await request(`/api/db/rate`)
