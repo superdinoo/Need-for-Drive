@@ -109,15 +109,8 @@ export interface RouteData {
   cityAndPoint: boolean
   activeCarConst: boolean
   startEnd: boolean
-  color: string | undefined
-  rate: string | undefined
-}
-
-export interface InitialStateModalTotal {
-  activeButtonModal: {
-    confirm: boolean
-    back: boolean
-  }
+  color: boolean
+  rate: boolean
 }
 
 export interface City {
@@ -158,8 +151,8 @@ export interface UseLocationInputProps {
 }
 
 export interface OrderPost {
-  id: 0
-  orderStatusId: 0
+  id: number
+  orderStatusId: number
   cityId: { id: number; name: string }
   pointId: { id: number; name: string }
   carId: { id: number; name: string }
@@ -172,6 +165,20 @@ export interface OrderPost {
   isNeedChildChair: boolean
   isRightWheel: boolean
 }
+export interface GetId {
+  id: number
+}
+
+export interface InitialStateModalTotal {
+  activeButtonModal: {
+    confirm: boolean
+    back: boolean
+  }
+  postIdOrderCar: {
+    id: number
+  }
+  activeIdOrder: OrderPost
+}
 
 export interface ApiSwaggerState {
   cities: City[]
@@ -180,6 +187,7 @@ export interface ApiSwaggerState {
   carsAll: CarApi[]
   categoryCars: CarCategory[]
   orderPost: OrderPost[]
+  getId: GetId[]
   isLoading: boolean
   error: string | null
 }

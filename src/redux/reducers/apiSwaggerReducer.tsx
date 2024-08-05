@@ -5,6 +5,7 @@ import {
   fetchCarApi,
   fetchCategory,
   fetchCities,
+  fetchGetId,
   fetchOrderPost,
   fetchPoints,
   fetchRateDate,
@@ -17,6 +18,7 @@ const initialState: ApiSwaggerState = {
   carsAll: [],
   categoryCars: [],
   orderPost: [],
+  getId: [],
   isLoading: false,
   error: null,
 }
@@ -32,6 +34,7 @@ const apiSwaggerSlice = createSlice({
     apiSwaggerLocation(fetchCarApi, 'carsAll')(builder)
     apiSwaggerLocation(fetchCategory, 'categoryCars')(builder)
     apiSwaggerLocation(fetchOrderPost, 'orderPost')(builder)
+    apiSwaggerLocation(fetchGetId, 'getId')(builder)
   },
 })
 

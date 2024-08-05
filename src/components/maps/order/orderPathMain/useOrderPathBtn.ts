@@ -20,11 +20,14 @@ import {
   setActiveOptions,
   setActiveRate,
 } from '../../../../redux/reducers/additionallySlice'
-import { setResetConfirm } from '../../../../redux/reducers/modalTotalSlice'
+import {
+  setResetConfirm,
+  setResetOrderData,
+} from '../../../../redux/reducers/modalTotalSlice'
 import { fetchOrderPost } from '../../../../redux/thunks'
 import { selectActiveCar } from '../../../cars/selectors'
 
-const useOrderPathBtn = (currentPages: string) => {
+const useOrderPathBtn = (currentPages?: string) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const { start, end } = useSelector(selectRentalDate)
   const activeColor = useSelector(selectActivePointColor)
@@ -74,6 +77,7 @@ const useOrderPathBtn = (currentPages: string) => {
 
   const handleCancelOrder = () => {
     dispatch(setResetConfirm())
+    dispatch(setResetOrderData())
     dispatch(setActiveColor({ colorKey: '', reset: true }))
     dispatch(setActiveRate({ rateKey: '', reset: true, price: 0, id: 0 }))
     dispatch(

@@ -86,8 +86,8 @@ export const nextPathLoc = (
     nextPath = EPath['/Additionally']
   }
   if (pathname === '/Total') {
-    nextPath = EPath['/Additionally']
     isActive = true
+    nextPath = EPath['/Total']
   }
 
   return { nextPath, isActive }

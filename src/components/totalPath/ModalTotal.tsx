@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import './TotalPath.scss'
@@ -33,6 +34,7 @@ const ModalTotal: React.FC<PopupTotal> = ({ onClose }) => {
               Подтвердить
             </button>
           </div>
+
           <div className="btnSecondContainer">
             <button
               type="button"

@@ -7,11 +7,12 @@ import {
   Point,
   Rate,
   OrderPost,
+  GetId,
 } from '../../interface/Interface'
 import { RootState } from '../rootState'
 
 type ThunkType = AsyncThunk<
-  City[] | Point[] | Rate[] | CarApi[] | CarCategory[] | OrderPost[],
+  City[] | Point[] | Rate[] | CarApi[] | CarCategory[] | OrderPost[] | GetId[],
   string | void | undefined,
   { state: RootState }
 >
@@ -25,7 +26,8 @@ const apiSwaggerLocation =
       | 'rate'
       | ' carsAll'
       | 'categoryCars'
-      | 'orderPost',
+      | 'orderPost'
+      | 'getId',
   ) =>
   (builder: ActionReducerMapBuilder<ApiSwaggerState>) => {
     builder

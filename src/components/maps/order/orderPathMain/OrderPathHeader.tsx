@@ -14,7 +14,7 @@ const OrderPathHeader: React.FC = () => {
         <p className="txtOrder">Пункт выдачи</p>
         <div className="adressOrder">
           <p className="cityOrder">{city} </p>
-          <p className="streetOrder"> {point}</p>
+          <p className="streetOrder">{point}</p>
         </div>
       </div>
     </div>

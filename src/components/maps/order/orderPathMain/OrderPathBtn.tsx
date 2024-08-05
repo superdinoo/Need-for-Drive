@@ -48,7 +48,7 @@ const OrderPathBtn: React.FC<OrderProps & NamesBtn> = ({
 
   useEffect(() => {
     handleSubmit()
-  }, [handleSubmit])
+  }, [confirm])
 
   return (
     <div className="btnContainerOrder">

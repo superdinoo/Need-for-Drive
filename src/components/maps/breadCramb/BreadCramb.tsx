@@ -4,12 +4,15 @@ import { IoMdArrowDropright } from 'react-icons/io'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import breadMap from './dataMapLink'
-import { selectModalTotal } from '../../totalPath/selectorsModalTotal'
+import {
+  selectModalTotal,
+  selectPostIdorderCar,
+} from '../../totalPath/selectorsModalTotal'
 import useBreadcrumbHelpers from './helpersBreadCramb'
 
 const BreadCramb: React.FC = () => {
   const { confirm } = useSelector(selectModalTotal)
-
+  const { id } = useSelector(selectPostIdorderCar)
   const { getLinkTo, colorClass } = useBreadcrumbHelpers(breadMap)
 
   return (
@@ -17,7 +20,7 @@ const BreadCramb: React.FC = () => {
       <div className="containerBread">
         <div className="iconContainer">
           {confirm === true && (
-            <p className="oilName">Заказ номер RU58491823</p>
+            <p className="oilName">{`Заказ номер RU${id}`}</p>
           )}
           {!confirm &&
             breadMap.map((crumbs, index) => (
