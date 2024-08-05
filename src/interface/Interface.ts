@@ -31,7 +31,7 @@ export interface CarApi {
   priceMin: number
   name: 'string'
   description: 'string'
-  colors: ['string']
+  colors: string[]
   number: string
   categoryId: {
     idCategory: number
@@ -51,7 +51,7 @@ export interface InitialStateCar {
   activePoint: {
     [key: string]: boolean
   }
-  filterCar: CarApi[]
+
   activeCar: {
     id: number | null
     name: string
@@ -133,14 +133,6 @@ export interface DateTimeFormatOptions {
   minute?: 'numeric' | '2-digit'
 }
 
-export interface RateDataidPriceName {
-  id: number
-  price: number
-  rateTypeId: {
-    name: string
-  }
-}
-
 export interface InputProps {
   value: string
   onChange: (value: string) => void
@@ -173,6 +165,9 @@ export interface OrderPost {
   isNeedChildChair: boolean
   isRightWheel: boolean
 }
+export interface GetId {
+  id: number
+}
 
 export interface InitialStateModalTotal {
   activeButtonModal: {
@@ -183,6 +178,25 @@ export interface InitialStateModalTotal {
     id: number
   }
   activeIdOrder: OrderPost
+}
+
+export interface ApiSwaggerState {
+  cities: City[]
+  points: Point[]
+  rate: Rate[]
+  carsAll: CarApi[]
+  categoryCars: CarCategory[]
+  orderPost: OrderPost[]
+  getId: GetId[]
+  isLoading: boolean
+  error: string | null
+}
+export interface RateDataidPriceName {
+  id: number
+  price: number
+  rateTypeId: {
+    name: string
+  }
 }
 
 export enum EPath {

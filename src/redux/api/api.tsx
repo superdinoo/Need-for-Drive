@@ -1,6 +1,9 @@
 /* eslint-disable no-console */
+import axios, { AxiosRequestConfig } from 'axios'
 import { GeoData } from '../../components/maps/apiMap/GeoDataInterface'
 import generateGeocodeUrl from './url'
+
+const { REACT_APP_API_BASE_URL, REACT_APP_API_KEY } = process.env
 
 export const fetchData = async (
   city: string,
@@ -30,4 +33,24 @@ export const coordinatesFromResponse = (data: GeoData): [number, number] => {
     return [latitude, longitude]
   }
   return [54.313201387022815, 48.3490699991779]
+}
+
+const apiSwagger = axios.create({
+  baseURL: REACT_APP_API_BASE_URL,
+  headers: {
+    'X-Api-Factory-Application-Id': REACT_APP_API_KEY,
+  },
+})
+
+export const request = async (
+  url: string,
+  options: AxiosRequestConfig = {},
+) => {
+  try {
+    const response = await apiSwagger(url, options)
+    return response.data.data
+  } catch (error) {
+    console.error(`Ошибка запроса к ${url}`, error)
+    throw error
+  }
 }

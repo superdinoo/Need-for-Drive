@@ -1,26 +1,29 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect } from 'react'
+import { ThunkDispatch } from 'redux-thunk'
+import { RootState } from 'redux/rootState'
+import { AnyAction } from 'redux'
 import './BreadCrambsCar.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { setActivePoint } from '../../../redux/reducers/carSlice'
 import { getCarInfo } from '../selectors'
 import BreadCrambSkelet from './BreadCrambSkelet'
-import apiSwaggerCar from '../apiSwaggerCar'
-import helpersBreadCrambCar from './helpersBreadCrambCar'
+
+import helpersBreadCrambsCar from './helpersBreadCrambsCar'
+import { fetchCategory } from '../../../redux/thunks'
 
 const BreadCrambsCar: React.FC = () => {
-  const dispatch = useDispatch()
+  const dispatch: ThunkDispatch<RootState, unknown, AnyAction> = useDispatch()
   const { activePoint } = useSelector(getCarInfo)
-  const { category, fetchCategory } = apiSwaggerCar()
-  const { items } = helpersBreadCrambCar(category)
-
-  const handleActivePoint = (marker: any) => {
+  const handleActivePoint = (marker: string) => {
     dispatch(setActivePoint({ pointKey: marker }))
   }
 
+  const items = useSelector(helpersBreadCrambsCar)
+
   useEffect(() => {
-    fetchCategory()
+    dispatch(fetchCategory())
   }, [])
+
   return (
     <>
       <BreadCrambSkelet

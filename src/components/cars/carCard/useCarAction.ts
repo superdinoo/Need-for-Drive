@@ -8,12 +8,11 @@ import {
 } from '../../../redux/reducers/additionallySlice'
 import setRatesDate from '../../../redux/actions/setRentalDate'
 import { getCarInfo } from '../selectors'
-import apiSwaggerCar from '../apiSwaggerCar'
+import { fetchCarApi } from '../../../redux/thunks'
 
 const useCarAction = () => {
   const dispatch = useDispatch()
   const { activePoint } = useSelector(getCarInfo)
-  const { fetchCarApi } = apiSwaggerCar()
 
   const handleActiveCar = useCallback(
     (

@@ -1,25 +1,36 @@
+import { createSelector } from '@reduxjs/toolkit'
 import { RateDataidPriceName } from '../../interface/Interface'
 
-const helpers = (
+export const selectColorItems = createSelector(
+  (activeCar: { color: string[] }) => activeCar.color,
+  (colors) =>
+    colors.map((color, id) => ({
+      id,
+      text: color,
+      marker: color,
+      price: undefined,
+    })),
+)
+
+export const selectRateItems = createSelector(
+  (rateDateApi: RateDataidPriceName[]) => rateDateApi,
+  (rateDateApi) =>
+    rateDateApi.map((rateData) => ({
+      id: rateData.id,
+      price: Number(rateData.price),
+      text: `${rateData.rateTypeId.name}, ${rateData.price} ₽`,
+      marker: rateData.rateTypeId.name,
+    })),
+)
+
+const useAdditionally = (
   activeCar: { color: string[] },
   rateDateApi: RateDataidPriceName[],
 ) => {
-  const activeColors = activeCar.color.map(
-    (carColor: string, index: number) => ({
-      text: carColor,
-      marker: carColor,
-      id: index,
-    }),
-  )
-
-  const activeRate = rateDateApi.map((rateDataidPriceName) => ({
-    id: rateDataidPriceName.id,
-    price: Number(rateDataidPriceName.price),
-    text: `${rateDataidPriceName.rateTypeId.name}, ${rateDataidPriceName.price} ₽`,
-    marker: rateDataidPriceName.rateTypeId.name,
-  }))
+  const activeColors = selectColorItems(activeCar)
+  const activeRate = selectRateItems(rateDateApi)
 
   return { activeRate, activeColors }
 }
 
-export default helpers
+export default useAdditionally

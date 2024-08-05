@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react'
+import { AnyAction } from 'redux'
+import { ThunkDispatch } from 'redux-thunk'
 import './AdditionallyPath.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import {
@@ -10,20 +12,46 @@ import { getAdditionallyInfo } from './selectors'
 import BreadCrambSkelet from '../cars/breadCrambsCar/BreadCrambSkelet'
 import { AdditionallyPathRentalDate } from './index'
 import { selectActiveCar } from '../cars/selectors'
-import apiSwaggerRate from './apiSwaggerRate'
-import helpers from './helpers'
+import { RootState } from '../../redux/rootState'
+import useAdditionally from './helpers'
+import { fetchRateDate } from '../../redux/thunks'
 
 const AdditionallyMain: React.FC = () => {
-  const dispatch = useDispatch()
+  const dispatch: ThunkDispatch<RootState, unknown, AnyAction> = useDispatch()
+
   const { activePointColor, activePointOptions, activePointRate } =
     useSelector(getAdditionallyInfo)
   const activeCar = useSelector(selectActiveCar)
-  const { fetchRateDate, rateDateApi } = apiSwaggerRate()
-  const { activeRate, activeColors } = helpers(activeCar, rateDateApi)
+  const { rate } = useSelector((state: RootState) => state.apiSwagger)
+
+  const { activeColors, activeRate } = useAdditionally(activeCar, rate)
 
   useEffect(() => {
-    fetchRateDate()
-  }, [])
+    dispatch(fetchRateDate())
+  }, [dispatch])
+
+  const handleActivePointRate = (
+    marker: string,
+    price?: number,
+    id?: number,
+  ) => {
+    dispatch(
+      setActiveRate({
+        rateKey: marker as 'rateText' | 'ratePrice',
+        reset: false,
+        price: price ?? 0,
+        id: id ?? 0,
+      }),
+    )
+  }
+
+  const handleActivePointColor = (marker: string) => {
+    dispatch(setActiveColor({ colorKey: marker, reset: false }))
+  }
+
+  const handleActivePointOptions = (marker: string) => {
+    dispatch(setActiveOptions({ optionsKey: marker, reset: false }))
+  }
 
   return (
     <>
@@ -34,9 +62,7 @@ const AdditionallyMain: React.FC = () => {
             activePoint={activePointColor}
             title="Цвет"
             items={activeColors}
-            handleActivePoint={(marker: string) =>
-              dispatch(setActiveColor({ colorKey: marker, reset: false }))
-            }
+            handleActivePoint={handleActivePointColor}
             type="radio"
           />
         </div>
@@ -48,16 +74,7 @@ const AdditionallyMain: React.FC = () => {
           activePoint={activePointRate}
           title="Тариф"
           items={activeRate}
-          handleActivePoint={(marker: string, price?: number, id?: number) =>
-            dispatch(
-              setActiveRate({
-                rateKey: marker as 'rateText' | 'ratePrice',
-                reset: false,
-                price: price ?? 0,
-                id: id ?? 0,
-              }),
-            )
-          }
+          handleActivePoint={handleActivePointRate}
           type="radio"
         />
       </div>
@@ -71,9 +88,7 @@ const AdditionallyMain: React.FC = () => {
             { text: 'Детское кресло, 200р', marker: 'seat', id: 10 },
             { text: 'Правый руль, 1600р', marker: 'wheel', id: 11 },
           ]}
-          handleActivePoint={(marker: string) =>
-            dispatch(setActiveOptions({ optionsKey: marker, reset: false }))
-          }
+          handleActivePoint={handleActivePointOptions}
           type="checkbox"
         />
       </div>

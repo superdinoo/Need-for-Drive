@@ -1,19 +1,15 @@
 import { useCallback, useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
-import {
-  setActivePoint,
-  setResetActiveCar,
-} from '../../../redux/reducers/carSlice'
+import { ThunkDispatch } from 'redux-thunk'
+import { AnyAction } from 'redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '../../../redux/rootState'
 import setLocation from '../../../redux/actions/setLocation '
-import { UseLocationInputProps } from '../../../interface/Interface'
+import { fetchCities, fetchPoints } from '../../../redux/thunks'
+import { City, Point } from '../../../interface/Interface'
 
-const useLocationinput = ({
-  cities,
-  points,
-  fetchCities,
-  fetchPoints,
-}: UseLocationInputProps) => {
-  const dispatch = useDispatch()
+const useLocationInput = () => {
+  const dispatch: ThunkDispatch<RootState, unknown, AnyAction> = useDispatch()
+  const { cities, points } = useSelector((state: RootState) => state.apiSwagger)
   const [inputValues, setInputValues] = useState({
     city: '',
     point: '',
@@ -24,45 +20,56 @@ const useLocationinput = ({
   const handleInputChange = useCallback(
     (name: string, value: string) => {
       const truncatedValue = value.substring(0, 150).replace(/^\s+/, '')
+      setInputValues((prevState) => {
+        if (name === 'city') {
+          const selectedCity = cities.find(
+            (city: City) => city.name === truncatedValue,
+          )
 
-      if (name === 'city') {
-        const selectedCity = cities.find((city) => city.name === truncatedValue)
-        setInputValues((prevState) => ({
-          ...prevState,
-          city: truncatedValue,
-          cityId: selectedCity ? selectedCity.id : null,
-        }))
-        fetchCities(truncatedValue)
-      }
+          return {
+            ...prevState,
+            city: truncatedValue,
+            cityId: selectedCity ? selectedCity.id : null,
+          }
+        }
 
-      if (name === 'point' && inputValues.city) {
-        const selectedPoint = points.find(
-          (point) => point.name === truncatedValue,
-        )
-        setInputValues((prevState) => ({
+        if (name === 'point' && prevState.city) {
+          const selectedPoint = points.find(
+            (point: Point) => point.name === truncatedValue,
+          )
+          return {
+            ...prevState,
+            point: truncatedValue,
+            pointId: selectedPoint ? selectedPoint.id : null,
+          }
+        }
+
+        return {
           ...prevState,
-          point: truncatedValue,
-          pointId: selectedPoint ? selectedPoint.id : null,
-        }))
-        fetchPoints(truncatedValue)
-      }
+          [name]: truncatedValue,
+        }
+      })
     },
-    [cities, points, fetchCities, fetchPoints],
+    [cities, points],
   )
 
-  const filteredPoints = !inputValues.city
-    ? []
-    : points.filter((point) => point.cityId?.name === inputValues.city)
+  const filteredPoints = points.filter(
+    (point: Point) => point.cityId?.name === inputValues.city,
+  )
 
   const addressPoint = filteredPoints.find(
-    (point) => point.name === inputValues.point,
+    (point: Point) => point.name === inputValues.point,
   )
 
   useEffect(() => {
-    fetchCities(inputValues.city)
-    fetchPoints(inputValues.point)
-
+    if (inputValues.city) {
+      dispatch(fetchCities(inputValues.city))
+    }
+    if (inputValues.city && inputValues.point) {
+      dispatch(fetchPoints(inputValues.point))
+    }
     const cityIdNumber = inputValues.cityId ? Number(inputValues.cityId) : 0
+
     const pointIdNumber = inputValues.pointId ? Number(inputValues.pointId) : 0
     dispatch(
       setLocation({
@@ -74,11 +81,14 @@ const useLocationinput = ({
         option: '',
       }),
     )
-    dispatch(setActivePoint({ pointKey: '', reset: true }))
-    dispatch(setResetActiveCar())
-  }, [inputValues.city, inputValues.point, dispatch, fetchCities, fetchPoints])
-
-  return { handleInputChange, inputValues, filteredPoints, addressPoint }
+  }, [inputValues.city, inputValues.point, addressPoint, dispatch])
+  return {
+    inputValues,
+    cities,
+    handleInputChange,
+    filteredPoints,
+    addressPoint,
+  }
 }
 
-export default useLocationinput
+export default useLocationInput

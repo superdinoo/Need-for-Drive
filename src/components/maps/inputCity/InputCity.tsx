@@ -2,20 +2,17 @@ import React from 'react'
 import './InputCity.scss'
 import ApiMap from '../apiMap/ApiMap'
 import InputField from './form/InputField'
-import apiSwagger from './apiSwaggerLocation'
-import useLocationinput from './useLocationInput'
+import useLocationInput from './useLocationInput'
+import { City, Point } from '../../../interface/Interface'
 
 const InputCity: React.FC = () => {
-  const { fetchCities, fetchPoints, cities, points } = apiSwagger()
-
-  const { handleInputChange, inputValues, filteredPoints, addressPoint } =
-    useLocationinput({
-      cities,
-      points,
-      fetchCities,
-      fetchPoints,
-    })
-
+  const {
+    inputValues,
+    cities,
+    handleInputChange,
+    filteredPoints,
+    addressPoint,
+  } = useLocationInput()
   return (
     <div className="inputCityContainerMain">
       <div className="inputCityContainer">
@@ -31,7 +28,7 @@ const InputCity: React.FC = () => {
           />
 
           <datalist id="cities">
-            {cities.map((city) => (
+            {cities.map((city: City) => (
               <option key={city.id} value={city.name}>
                 {city.name}
               </option>
@@ -48,7 +45,7 @@ const InputCity: React.FC = () => {
             list="point"
           />
           <datalist id="point">
-            {filteredPoints.map((point) => (
+            {filteredPoints.map((point: Point) => (
               <option key={point.id} value={point.name}>
                 {point.name}
               </option>

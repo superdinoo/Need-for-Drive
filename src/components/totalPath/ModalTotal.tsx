@@ -1,35 +1,16 @@
 /* eslint-disable no-console */
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import React from 'react'
+import { useDispatch } from 'react-redux'
 import './TotalPath.scss'
 import { PopupTotal } from '../../interface/Interface'
 import { setActiveButton } from '../../redux/reducers/modalTotalSlice'
-import apiSwaggerTotalPath from './apiSwaggerTotalPath'
-import { selectPostIdorderCar } from './selectorsModalTotal'
 
 const ModalTotal: React.FC<PopupTotal> = ({ onClose }) => {
   const dispatch = useDispatch()
-  const { fetchOrderPost, fetchGetId } = apiSwaggerTotalPath()
-  const { id } = useSelector(selectPostIdorderCar)
 
-  const navigate = useNavigate()
-
-  useEffect(() => {
-    fetchOrderPost()
-  }, [])
-
-  const handlerConfirm = async () => {
+  const handlerConfirm = () => {
     dispatch(setActiveButton('confirm'))
     onClose()
-    try {
-      await fetchGetId(String(id))
-      if (id > 0) {
-        navigate(`/Total/${id}`)
-      }
-    } catch (error) {
-      console.error('Ошибка при загрузке данных с сервера', error)
-    }
   }
 
   const handleBack = () => {

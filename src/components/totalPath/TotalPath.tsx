@@ -1,15 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './TotalPath.scss'
 import { useSelector } from 'react-redux'
-import { selectModalTotal } from './selectorsModalTotal'
+import { useNavigate } from 'react-router-dom'
+import { selectModalTotal, selectPostIdorderCar } from './selectorsModalTotal'
 import { DateTimeFormatOptions } from '../../interface/Interface'
 import { selectActiveCar } from '../cars/selectors'
 import { selectRentalDate } from '../maps/order/selectorsOrder'
 
 const TotalPath: React.FC = () => {
-  const { confirm } = useSelector(selectModalTotal)
   const { img, markNumber, name } = useSelector(selectActiveCar)
   const { start } = useSelector(selectRentalDate)
+  const { id } = useSelector(selectPostIdorderCar)
+  const { confirm } = useSelector(selectModalTotal)
+
+  const navigate = useNavigate()
 
   const date = new Date(start)
 
@@ -22,6 +26,12 @@ const TotalPath: React.FC = () => {
   }
 
   const formateDate = date.toLocaleDateString('ru-Ru', options)
+
+  useEffect(() => {
+    if (id !== undefined || id > 0) {
+      navigate(`/Total/${id}`)
+    }
+  }, [confirm, id])
 
   return (
     <div className="totalPathContainer">
