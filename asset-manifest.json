@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/HomePage/static/css/main.10e5ee4d.css",
-    "main.js": "/HomePage/static/js/main.848ad187.js",
+    "main.css": "/HomePage/static/css/main.b5e5a06a.css",
+    "main.js": "/HomePage/static/js/main.55057ea3.js",
     "static/media/insta.svg": "/HomePage/static/media/insta.0efde67dbca9308bec1e99ebd9baca89.svg",
     "static/media/telega.svg": "/HomePage/static/media/telega.f3c467cdf7c1eb1e2a571d8375b3a90e.svg",
     "static/media/facebook.svg": "/HomePage/static/media/facebook.cbc2ceea921e42793677c4d772dd37ed.svg",
     "index.html": "/HomePage/index.html",
     "static/media/vector.svg": "/HomePage/static/media/vector.599a4157a9af0498854eb184d749c344.svg",
-    "main.10e5ee4d.css.map": "/HomePage/static/css/main.10e5ee4d.css.map",
-    "main.848ad187.js.map": "/HomePage/static/js/main.848ad187.js.map"
+    "main.b5e5a06a.css.map": "/HomePage/static/css/main.b5e5a06a.css.map",
+    "main.55057ea3.js.map": "/HomePage/static/js/main.55057ea3.js.map"
   },
   "entrypoints": [
-    "static/css/main.10e5ee4d.css",
-    "static/js/main.848ad187.js"
+    "static/css/main.b5e5a06a.css",
+    "static/js/main.55057ea3.js"
   ]
 }
