@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/Need-for-Drive/static/css/main.499aefc7.css",
-    "main.js": "/Need-for-Drive/static/js/main.f88c0c1e.js",
-    "static/media/insta.svg": "/Need-for-Drive/static/media/insta.0efde67dbca9308bec1e99ebd9baca89.svg",
-    "static/media/telega.svg": "/Need-for-Drive/static/media/telega.f3c467cdf7c1eb1e2a571d8375b3a90e.svg",
-    "static/media/facebook.svg": "/Need-for-Drive/static/media/facebook.cbc2ceea921e42793677c4d772dd37ed.svg",
-    "index.html": "/Need-for-Drive/index.html",
-    "static/media/vector.svg": "/Need-for-Drive/static/media/vector.599a4157a9af0498854eb184d749c344.svg",
-    "main.499aefc7.css.map": "/Need-for-Drive/static/css/main.499aefc7.css.map",
-    "main.f88c0c1e.js.map": "/Need-for-Drive/static/js/main.f88c0c1e.js.map"
+    "main.css": "/Need-for-Drive/HomePage/static/css/main.4229bedf.css",
+    "main.js": "/Need-for-Drive/HomePage/static/js/main.40ea718d.js",
+    "static/media/insta.svg": "/Need-for-Drive/HomePage/static/media/insta.0efde67dbca9308bec1e99ebd9baca89.svg",
+    "static/media/telega.svg": "/Need-for-Drive/HomePage/static/media/telega.f3c467cdf7c1eb1e2a571d8375b3a90e.svg",
+    "static/media/facebook.svg": "/Need-for-Drive/HomePage/static/media/facebook.cbc2ceea921e42793677c4d772dd37ed.svg",
+    "index.html": "/Need-for-Drive/HomePage/index.html",
+    "static/media/vector.svg": "/Need-for-Drive/HomePage/static/media/vector.599a4157a9af0498854eb184d749c344.svg",
+    "main.4229bedf.css.map": "/Need-for-Drive/HomePage/static/css/main.4229bedf.css.map",
+    "main.40ea718d.js.map": "/Need-for-Drive/HomePage/static/js/main.40ea718d.js.map"
   },
   "entrypoints": [
-    "static/css/main.499aefc7.css",
-    "static/js/main.f88c0c1e.js"
+    "static/css/main.4229bedf.css",
+    "static/js/main.40ea718d.js"
   ]
 }
