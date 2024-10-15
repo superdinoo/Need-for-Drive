@@ -2,16 +2,18 @@ import { createSelector } from '@reduxjs/toolkit'
 import { RateDataidPriceName } from '../../interface/Interface'
 
 export const selectColorItems = createSelector(
-  (activeCar: { color: string[] }) => activeCar.color,
-  (colors) =>
-    colors.map((color, id) => ({
+  (activeCar: { color: string | string[] }) => {
+    return Array.isArray(activeCar.color) ? activeCar.color : [activeCar.color]
+  },
+  (colors) => {
+    return colors.map((color, id) => ({
       id,
       text: color,
       marker: color,
       price: undefined,
-    })),
+    }))
+  },
 )
-
 export const selectRateItems = createSelector(
   (rateDateApi: RateDataidPriceName[]) => rateDateApi,
   (rateDateApi) =>
