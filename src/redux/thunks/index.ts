@@ -4,7 +4,6 @@ import fetchCities from './thunksLocation'
 import fetchPoints from './thunksPoints'
 import fetchRateDate from './thunksRentalDate'
 import fetchOrderPost from './thunksPostOrder'
-import fetchGetId from './thunksGetOrderId'
 
 export {
   fetchCarApi,
@@ -13,5 +12,4 @@ export {
   fetchPoints,
   fetchRateDate,
   fetchOrderPost,
-  fetchGetId,
 }

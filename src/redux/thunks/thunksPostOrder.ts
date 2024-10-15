@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { request } from '../api/api'
 import { OrderPost } from '../../interface/Interface'
 import { setPostIdOrderCar } from '../reducers/modalTotalSlice'
-import fetchGetId from './thunksGetOrderId'
+// import fetchGetId from './thunksGetOrderId'
 
 export const fetchOrderPost = createAsyncThunk(
   'apiSwagger/fetchOrderPost',
@@ -13,7 +13,8 @@ export const fetchOrderPost = createAsyncThunk(
         data: orderData,
       })
       dispatch(setPostIdOrderCar({ id: response.id }))
-      return dispatch(fetchGetId(response.id))
+      return response
+      // return dispatch(fetchGetId(response.id))
     } catch (error) {
       return rejectWithValue('Ошибка при отправке данных')
     }
