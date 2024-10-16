@@ -1,7 +1,7 @@
 {
   "name": "simbirsoft",
   "version": "0.1.0",
-  "homepage": "https://superdinoo.github.io/HomePage",
+  "homepage": "https://superdinoo.github.io/Need-for-Drive/static",
   "private": true,
   "dependencies": {
     "@pbe/react-yandex-maps": "^1.2.5",
