@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/HomePage/static/css/main.b5e5a06a.css",
-    "main.js": "/HomePage/static/js/main.55057ea3.js",
-    "static/media/insta.svg": "/HomePage/static/media/insta.0efde67dbca9308bec1e99ebd9baca89.svg",
-    "static/media/telega.svg": "/HomePage/static/media/telega.f3c467cdf7c1eb1e2a571d8375b3a90e.svg",
-    "static/media/facebook.svg": "/HomePage/static/media/facebook.cbc2ceea921e42793677c4d772dd37ed.svg",
-    "index.html": "/HomePage/index.html",
-    "static/media/vector.svg": "/HomePage/static/media/vector.599a4157a9af0498854eb184d749c344.svg",
-    "main.b5e5a06a.css.map": "/HomePage/static/css/main.b5e5a06a.css.map",
-    "main.55057ea3.js.map": "/HomePage/static/js/main.55057ea3.js.map"
+    "main.css": "/Need-for-Drive/static/static/css/main.2ac1c636.css",
+    "main.js": "/Need-for-Drive/static/static/js/main.c8a59c9d.js",
+    "static/media/insta.svg": "/Need-for-Drive/static/static/media/insta.0efde67dbca9308bec1e99ebd9baca89.svg",
+    "static/media/telega.svg": "/Need-for-Drive/static/static/media/telega.f3c467cdf7c1eb1e2a571d8375b3a90e.svg",
+    "static/media/facebook.svg": "/Need-for-Drive/static/static/media/facebook.cbc2ceea921e42793677c4d772dd37ed.svg",
+    "index.html": "/Need-for-Drive/static/index.html",
+    "static/media/vector.svg": "/Need-for-Drive/static/static/media/vector.599a4157a9af0498854eb184d749c344.svg",
+    "main.2ac1c636.css.map": "/Need-for-Drive/static/static/css/main.2ac1c636.css.map",
+    "main.c8a59c9d.js.map": "/Need-for-Drive/static/static/js/main.c8a59c9d.js.map"
   },
   "entrypoints": [
-    "static/css/main.b5e5a06a.css",
-    "static/js/main.55057ea3.js"
+    "static/css/main.2ac1c636.css",
+    "static/js/main.c8a59c9d.js"
   ]
 }
